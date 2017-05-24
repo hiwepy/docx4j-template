@@ -1,0 +1,871 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.vindell</groupId>
+	<artifactId>docx4j-template</artifactId>
+	<version>3.3.3</version>
+	
+	<description>基于Docx4j的扩展实现</description>
+	
+	<licenses>
+        <license>
+            <name>The Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+	<!-- 组织信息  -->
+  	<organization>
+    	<name>Jeefw</name>
+    	<url>www.jeefw.com</url>
+  	</organization>
+  
+  	<!-- 开发者信息  -->
+    <developers>
+        <developer>
+        	<id>001</id>
+            <name>vindell</name>
+            <email>hnxyhcwdl1003@163.com</email>
+        </developer>
+    </developers> 
+	
+	<!-- 配置部署的远程仓库:让Maven知道当我要发布release版本或者snapshot版本是需要发布到哪个地址 --> 
+	<distributionManagement>  
+	    <repository>
+	     	<id>nexus-releases</id>
+	     	<name>Nexus Release Repository</name>
+	     	<url>http://121.43.110.87:8081/nexus/content/repositories/releases/</url>
+	     	<!-- <url>http://localhost:8082/nexus/content/repositories/releases/</url> -->
+	   	</repository>
+       	<snapshotRepository>  
+            <id>nexus-snapshots</id>  
+            <name>Nexus Snapshot Repository</name>  
+            <url>http://121.43.110.87:8081/nexus/content/repositories/snapshots/</url>
+            <!-- <url>http://localhost:8082/nexus/content/repositories/snapshots/</url> -->
+            <!-- 表示是否为Snapshot版本分配一个包含时间戳的构建号 --> 
+            <uniqueVersion>true</uniqueVersion>  
+        </snapshotRepository>  
+    </distributionManagement>
+    
+    <build>
+		<!-- 主资源目录 -->  
+        <resources>  
+            <resource>  
+                <!-- 设定主资源目录  -->  
+                <directory>src/main/resources</directory>
+                  
+                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，只处理如下配置中包含的资源类型   
+                <includes>  
+                    <include>*.xml</include>  
+                </includes>  
+                 -->  
+                   
+                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，不处理如下配置中包含的资源类型（剔除下如下配置中包含的资源类型）   
+                <excludes>  
+                    <exclude>*.xml</exclude>  
+                </excludes>  
+                -->  
+                  
+                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，指定处理后的资源文件输出目录，默认是${build.outputDirectory}指定的目录  
+                <targetPath>d:/</targetPath>  
+                   -->  
+                    
+                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，是否对主资源目录开启资源过滤 
+                <filtering>true</filtering>  
+                  -->  
+            </resource>  
+        </resources> 
+		<filters>  
+	        <!-- 过滤文件,通常是一个属性文件（名值对的形式） 
+	        <filter>src/main/webapp/META-INF/auto-config.properties</filter>  -->  
+	        <!-- 
+	            <filter>${user.home}/antx.properties</filter> 
+	        -->  
+	    </filters> 
+		<pluginManagement>
+			<plugins>
+				<!-- 编译插件：编译主代码至主输出目录 -->  
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.5.1</version> 
+					<!-- 设置源文件编码方式 -->  
+					<configuration>
+						<defaultLibBundleDir>lib</defaultLibBundleDir>
+						<!-- 源代码编译版本 -->
+						<source>1.7</source>
+						<!-- 目标平台编译版本 -->
+						<target>1.7</target>
+						<!-- 字符集编码 -->
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<!--  -->
+						<maxmem>512M</maxmem>
+					</configuration>
+				</plugin>
+				<!-- 资源插件：复制主资源文件至主输出目录 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.7</version>
+					<!-- 解决资源文件的编码问题 -->  
+					<configuration>
+						<!-- 字符集编码 -->
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+					<!-- 复制测试资源文件至测试输出目录复制resources到test-classess -->
+					<executions>
+						<execution>
+							<id>copy-resources</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${basedir}/target/test-classes</outputDirectory>
+								<resources>
+									<resource>
+										<directory>src/main/resources</directory>
+										<!--<filtering>true</filtering>
+									--></resource>
+								</resources>
+							</configuration>
+						</execution>
+					</executions>
+					<dependencies>
+			            <dependency>
+			                <groupId>org.apache.maven.shared</groupId>
+			                <artifactId>maven-filtering</artifactId>
+			                <version>1.3</version>
+			            </dependency>
+			         </dependencies>
+				</plugin>
+				<!-- 单元测试插件 ：执行测试用例-->  
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.19.1</version>
+					<configuration>
+						<!-- 跳过单元测试 -->
+						<skip>true</skip>
+						<skipTests>true</skipTests>
+						<!--
+							forkMode 可设置值有 “never”， “once”， “always” 和 “pertest”。
+							pretest： 每一个测试创建一个新进程，为每个测试创建新的JVM是单独测试的最彻底方式，但也是最慢的，不适合hudson上持续回归。
+							once：在一个进程中进行所有测试。once为默认设置，在Hudson上持续回归时建议使用默认设置。
+							always：在一个进程中并行的运行脚本，Junit4.7以上版本才可以使用，surefire的版本要在2.6以上提供这个功能，其中 threadCount：执行时，指定可分配的线程数量。只和参数parallel配合使用有效。默认：5。
+						 -->
+						<forkMode>once</forkMode>
+						<argLine>-Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=256m</argLine>  
+						<additionalClasspathElements>  
+			                <additionalClasspathElement>  
+			                    ${basedir}/target/test-classes  
+			                </additionalClasspathElement>  
+			            </additionalClasspathElements>  
+			            <includes>  
+			                <include>**/*Test.java</include> 
+			            </includes> 
+                        <excludes>
+                            <exclude>**/TestBean.java</exclude>
+                        </excludes>
+					</configuration>					
+				</plugin>
+				<!-- jar包生成插件 ：创建项目jar包--> 
+				<plugin>  					 
+					<groupId>org.apache.maven.plugins</groupId>  
+					<artifactId>maven-jar-plugin</artifactId>  
+					<version>2.6</version>  
+					<!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->  
+					<configuration>  
+	                    <archive>  
+	                        <manifest>  
+	                            <addClasspath>true</addClasspath>  
+	                            <classpathPrefix>lib/</classpathPrefix>  
+	                            <mainClass>.....Main</mainClass>  
+	                        </manifest>  
+	                    </archive>  
+	                </configuration>  
+				</plugin> 
+				<!-- 安装插件：将项目输出构件安装到本地仓库 --> 
+				<plugin>  					 
+					<groupId>org.apache.maven.plugins</groupId>  
+					<artifactId>maven-install-plugin</artifactId>  
+					<version>2.5.2</version>  
+				</plugin> 
+				<!-- 发布插件 ：将项目输出构件部署到远程仓库--> 
+				<plugin>  
+		            <groupId>org.apache.maven.plugins</groupId>  
+		            <artifactId>maven-deploy-plugin</artifactId>  
+		            <version>2.8.2</version>  
+		        </plugin>
+		        <!-- release插件: 自动进行工程版本升级 -->
+	            <plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-release-plugin</artifactId>
+	                <version>2.5.3</version>
+	                <configuration>
+	                    <!-- 设置分支跟里程碑的url -->
+	                    <branchBase>svn://121.43.110.87/jeefw/jeefw-desktop/branches</branchBase>
+	                    <tagBase>svn://121.43.110.87/jeefw/jeefw-desktop/tags</tagBase>
+	                </configuration>
+	            </plugin>	
+		        <!-- 签名插件 ：自动完成GPG签名--> 
+		        <plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>1.6</version>
+					<executions>
+					    <execution>
+							<id>sign-artifacts</id>
+							<phase>verify</phase>
+							<goals>
+							     <goal>sign</goal>
+							</goals>
+					    </execution>
+					</executions>
+				</plugin>	
+				<!-- 源码插件:发布时自动将源码同时发布 -->				
+				<plugin>
+					 <groupId>org.apache.maven.plugins</groupId>
+					 <artifactId>maven-source-plugin</artifactId>
+					 <version>3.0.0</version> 
+					 <!-- 打包source文件为jar文件 -->
+					 <configuration>  
+					 	 <testFailureIgnore>true</testFailureIgnore>
+	                     <attach>true</attach>  
+	                     <encoding>UTF-8</encoding>  
+	                 </configuration> 
+					 <executions>
+						 <execution>
+							 <id>attach-sources</id>
+							 <phase>package</phase>
+							 <goals>
+								<goal>jar-no-fork</goal>
+							 </goals>
+						 </execution>
+					 </executions>
+				</plugin>
+				<!-- 文档插件:发布时自动生成文档 -->	
+				<plugin>  
+		            <groupId>org.apache.maven.plugins</groupId>  
+		            <artifactId>maven-javadoc-plugin</artifactId>  
+		            <version>2.10.3</version> 
+					<configuration>  
+	                    <aggregate>true</aggregate>  
+                       	<charset>UTF-8</charset> 
+                        <encoding>UTF-8</encoding> 
+                        <docencoding>UTF-8</docencoding> 
+	                </configuration>
+					<executions>
+						<execution>
+							<id>attach-javadocs</id>
+							<phase>package</phase>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>				
+		        </plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!-- 资源插件：复制主资源文件至主输出目录 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+			<!-- 编译插件：编译主代码至主输出目录 -->  
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<!-- 单元测试插件 ：执行测试用例 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin> 
+			<!-- jar包生成插件 ：创建项目jar包 -->
+			<plugin>  					 
+				<groupId>org.apache.maven.plugins</groupId>  
+				<artifactId>maven-jar-plugin</artifactId>  
+			</plugin> 
+			<!-- 安装插件：将项目输出构件安装到本地仓库 --> 
+			<plugin>  					 
+				<groupId>org.apache.maven.plugins</groupId>  
+				<artifactId>maven-install-plugin</artifactId>  
+			</plugin> 
+			<!-- 发布插件 ：将项目输出构件部署到远程仓库--> 
+			<plugin>  
+	            <groupId>org.apache.maven.plugins</groupId>  
+	            <artifactId>maven-deploy-plugin</artifactId>  
+	        </plugin>	
+			<!-- 源码插件:发布时自动将源码同时发布 -->				
+			<plugin>
+				 <groupId>org.apache.maven.plugins</groupId>
+				 <artifactId>maven-source-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
+    <properties>
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 		<batik.version>1.8</batik.version>
+    	<commons-beanutils.version>1.9.3</commons-beanutils.version>
+    	<commons-lang3.version>3.4</commons-lang3.version>
+		<commons-logging.version>1.2</commons-logging.version>
+		<commons-io.version>2.5</commons-io.version>
+ 		<docx4j.version>3.3.3</docx4j.version>
+ 		<jackson.version>2.6.4</jackson.version>
+ 		<jeekit.version>1.0.0-SNAPSHOT</jeekit.version>
+ 		<jsoup.version>1.10.1</jsoup.version>
+ 		<junit.version>4.12</junit.version>
+ 		<log4j.version>1.2.17</log4j.version>
+ 		<servlet-api.version>3.0.1</servlet-api.version>
+ 		<slf4j.version>1.7.21</slf4j.version>
+ 		<slf4j-over.version>1.7.22</slf4j-over.version>
+ 		<httpunit.version>1.7.2</httpunit.version>
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+			
+			<!-- ######################测试工具包###################### -->
+			
+			<!--junit : Junit测试是程序员测试，即白盒测试 -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+			<!--
+				httpunit：HttpUnit是SourceForge下面的一个开源项目，它是基于JUnit的一个测试框架，主要关注于测试Web应用；
+				解决使用JUnit框架无法对远程Web内容进行测试的弊端
+			-->
+			<dependency>
+				<groupId>org.httpunit</groupId>
+				<artifactId>httpunit</artifactId>
+				<version>${httpunit.version}</version>
+			</dependency>
+			
+			<!-- ######################Servlet相关基础包###################### -->
+			
+			<!-- servlet 基础依赖包 -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet-api.version}</version>
+			</dependency>
+			
+			<!-- ######################日志组件工具包###################### -->
+			
+			<!-- 
+				实现各个日志组件之间的桥接并最终输出到log4j2 ：
+				
+				实现方案：
+	
+					第一步：将日志系统全部无缝先切换到slf4j
+						1、去掉commons-logging（其实去不去都可以），使用jcl-over-slf4j将commons-logging的底层日志输出切换到slf4j
+				        2、使用jul-to-slf4j，将jul的日志输出切换到slf4j
+				       	3、 去掉log4j1(必须去掉),使用log4j-slf4j-impl,将slf4j的日志输出切换到log4j2
+					第二步：使slf4j选择log4j2来作为底层日志输出
+						加入以下jar包：
+					    slf4j-api
+					    log4j-api
+					    log4j-core
+			-->
+			
+			<!--
+				Jakarta Commons Logging (JCL) 提供的是一个日志 (Log) 接口 (interface)
+				，同时兼顾轻量级和不依赖于具体的日志实现工具 。 它提供给中间件 /
+				日志工具开发者一个简单的日志操作抽象，允许程序开发人员使用不同的具体日志实现工具。用户被假定已熟悉某种日志实现工具的更高级别的细节。
+				JCL 提供的接口，对其它一些日志工具，包括 Log4J, Avalon LogKit, and JDK 1.4
+				等，进行了简单的包装，此接口更接近于 Log4J 和 LogKit 的实现。
+			-->
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons-logging.version}</version>
+			</dependency>
+			<!-- commons-logging到 slf4j的桥接器 -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${slf4j-over.version}</version>
+			</dependency>
+			<!-- SLF4J，即简单日志门面（Simple Logging Facade for Java），不是具体的日志解决方案，它只服务于各种各样
+			 的日志系统。按照官方的说法，SLF4J是一个用于日志系统的简单Facade，允许最终用户在部署其应用时使用其所希望的日志系统。 -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<!-- 
+			Log4j是Apache的一个开放源代码项目，通过使用Log4j，我们可以控制日志信息输送的目的地是控制台、文件、GUI组件，
+			甚至是套接口服务器、NT的事件记录器、UNIX Syslog守护进程等
+			-->
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<!-- log4j到 slf4j的桥接器 -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			
+			<!-- ######################基础常用工具包###################### -->
+			
+			<!-- 常用功能包括类型转换和动态bean的创建 -->
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>${commons-beanutils.version}</version>
+			</dependency>
+			<!-- Commons项目中用来处理Java基本对象方法的工具类包， 可以简化很多平时经常要用到的写法， 例如判断字符串是否为空等等 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+			<!-- Commons项目中用来处理IO的一些工具类包 -->
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
+			</dependency>
+			
+			<!-- ######################org.apache.xmlgraphics ###################### -->
+			
+			<!-- Batik是使用svg格式图片来实现各种功能的应用程序以及Applet提供的一个基于java的工具包。 -->
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-transcoder</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-util</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-ext</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-awt-util</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-svggen</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-dom</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-svg-dom</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-css</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-bridge</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-gvt</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-xml</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-codec</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-parser</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-anim</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-script</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-rasterizer</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-swing</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-gui-util</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-js</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-extension</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-ttf2svg</artifactId>
+				<version>${batik.version}</version>
+			</dependency>
+			
+			<!-- ###################### 词法分析、HTML、CSS 解析工具包###################### -->
+			
+			<!--
+				jsoup 是一款Java的HTML解析器，可直接解析某个URL地址、HTML文本内容。
+				它提供了一套非常省力的API，可通过DOM，CSS以及类似于jQuery的操作方法来取出和操作数据。
+			-->
+			<dependency>
+				<groupId>org.jsoup</groupId>
+				<artifactId>jsoup</artifactId>
+				<version>${jsoup.version}</version>
+			</dependency>
+			
+			<!-- ###################### Docx4j ###################### -->
+			
+			 <!-- 
+				docx4j是一个开源的(Apache许可证v2)Java库，专门用来创建、编辑和保存Microsoft Open XML文档（包括Word docx, Powerpoint pptx和Excel xlsx）的Java类库。
+				docx4j最初是由Plutext Pty Ltd于2008年创建。
+				docx4j与微软的OpenXML SDK类似，但是是面向Java的。它使用JAXB在内存中创建Java对象。它的功能强大，对于支持的文档的格式，你可以用docx4j做出你想要的效果。它的功能有：
+				
+				1、 打开已存在的docx/pptx/xlsx(从文件系统, SMB/CIFS, 使用VFS从WebDAV等)
+				2、创建新的docx文档
+				3、用程序来处理docx文档
+				4、CustomXML绑定(使用OpenDoPE插件来处理重复绑定和条件绑定)
+				5、将文件保存成HTML或PDF
+				6、Diff/比较文档、段落
+				7、导入二进制文档(使用Apache POI的HWPF)
+				8、处理Word 2007的xmlPackage(pkg)格式
+				9、将docx保存成docx(压缩格式)或者JCR（未压缩格式）
+				10、字体支持（字体替换，使用文档中嵌入的任何字体）
+				
+				但首先你需要花时间理解JAXB和Open XML文件结构。你可以使用在线的webapp来查看docx/xlsx/pptx的文件结构，或者下载到本地的应用Word AddIn来查看docx的文件结构。
+				
+				http://www.docx4java.org/downloads.html
+			-->
+			
+			<!-- docx4j is a library which helps you to work with the Office Open XML file format as used in docx documents, pptx presentations, and xlsx spreadsheets. -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j</artifactId>
+			    <version>${docx4j.version}</version>
+			</dependency>
+			<!-- Modified flyingsaucer XML/XHTML and CSS 2.1 renderer, to support docx (and eventually pptx) output  -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>xhtmlrenderer</artifactId>
+			    <version>3.0.0</version>
+			</dependency>
+			<!-- docx4j-ImportXHTML converts XHTML to OpenXML WordML (docx) using docx4j  -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-ImportXHTML</artifactId>
+			    <version>3.3.1</version>
+			</dependency>
+			<!-- jaxb.properties files specifying that docx4j should use the EclipseLink MOXy (JAXB) runtime  -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-MOXy-JAXBContext</artifactId>
+			    <version>${docx4j.version}</version>
+			</dependency>
+			<!-- Export docx to PDF via XSL FO, using Apache FOP  -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-export-fo</artifactId>
+			    <version>3.3.1</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.eclipse.persistence</groupId>
+				<artifactId>eclipselink</artifactId>
+				<version>2.5.2</version>
+			</dependency>
+			
+			<!-- ###################### 模板框架 ###################### -->
+		
+			<!-- beetl模板 -->
+			<dependency>
+			    <groupId>org.beetl</groupId>
+			    <artifactId>beetl-core</artifactId>
+			    <version>2.2.3</version>
+			</dependency>
+			<!-- freemarker模板 -->
+			<dependency>
+			    <groupId>org.freemarker</groupId>
+			    <artifactId>freemarker</artifactId>
+			    <version>2.3.23</version>
+			</dependency>
+			<!-- httl模板 -->
+			<dependency>
+			    <groupId>com.github.httl</groupId>
+			    <artifactId>httl</artifactId>
+			    <version>1.0.11</version>
+			</dependency>
+			<!-- jetbrick模板 -->
+			<dependency>
+			    <groupId>com.github.subchen</groupId>
+			    <artifactId>jetbrick-template</artifactId>
+			    <version>2.1.3</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.antlr</groupId>
+			    <artifactId>antlr4-runtime</artifactId>
+			    <version>4.3</version>
+			</dependency>
+			<!-- rythm模板-->
+			<dependency>
+			    <groupId>org.rythmengine</groupId>
+			    <artifactId>rythm-engine</artifactId>
+			    <version>1.1.5</version>
+			</dependency>
+			<!-- thymeleaf模板-->
+			<dependency>
+			    <groupId>org.thymeleaf</groupId>
+			    <artifactId>thymeleaf</artifactId>
+			    <version>3.0.3.RELEASE</version>
+			</dependency>
+			<!-- velocity模板-->
+			<dependency>
+			    <groupId>org.apache.velocity</groupId>
+			    <artifactId>velocity</artifactId>
+			    <version>1.7</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.velocity</groupId>
+			    <artifactId>velocity-tools</artifactId>
+			    <version>2.0</version>
+			</dependency>
+			<!-- webit模板-->
+			<dependency>
+			    <groupId>com.github.zqq90.webit-script</groupId>
+			    <artifactId>webit-script</artifactId>
+			    <version>1.5.2</version>
+			</dependency>
+			 
+		</dependencies>
+	</dependencyManagement>	
+	
+	<dependencies>
+	
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.httpunit</groupId>
+			<artifactId>httpunit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+    		<artifactId>jcl-over-slf4j</artifactId>
+    		<groupId>org.slf4j</groupId>
+    		<scope>test</scope>
+    	</dependency>
+    	<dependency>
+    		<artifactId>slf4j-log4j12</artifactId>
+    		<groupId>org.slf4j</groupId>
+    		<scope>test</scope>
+    	</dependency>
+    	<dependency>
+    		<artifactId>log4j</artifactId>
+    		<groupId>log4j</groupId>
+    		<scope>test</scope>
+    	</dependency>
+		
+		<!-- ###################### 词法分析、HTML、CSS 解析工具包###################### -->
+		
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+		</dependency>
+		
+		<!-- ###################### Docx4j ###################### -->
+		
+		<!-- docx4j核心库 -->
+		<dependency>
+		    <groupId>org.docx4j</groupId>
+		    <artifactId>docx4j</artifactId>
+		    <exclusions>
+		    	<exclusion>
+		    		<artifactId>jcl-over-slf4j</artifactId>
+		    		<groupId>org.slf4j</groupId>
+		    	</exclusion>
+		    	<exclusion>
+		    		<artifactId>slf4j-log4j12</artifactId>
+		    		<groupId>org.slf4j</groupId>
+		    	</exclusion>
+		    	<exclusion>
+		    		<artifactId>log4j</artifactId>
+		    		<groupId>log4j</groupId>
+		    	</exclusion>
+		    </exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>org.docx4j</groupId>
+		    <artifactId>xhtmlrenderer</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.docx4j</groupId>
+		    <artifactId>docx4j-ImportXHTML</artifactId>
+		    <exclusions>
+		    	<exclusion>
+		    		<artifactId>jcl-over-slf4j</artifactId>
+		    		<groupId>org.slf4j</groupId>
+		    	</exclusion>
+		    	<exclusion>
+		    		<artifactId>slf4j-log4j12</artifactId>
+		    		<groupId>org.slf4j</groupId>
+		    	</exclusion>
+		    	<exclusion>
+		    		<artifactId>log4j</artifactId>
+		    		<groupId>log4j</groupId>
+		    	</exclusion>
+		    </exclusions>
+		</dependency>
+		<!-- docx4j扩展库 
+		<dependency>
+		    <groupId>org.docx4j</groupId>
+		    <artifactId>docx4j-MOXy-JAXBContext</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.docx4j</groupId>
+		    <artifactId>docx4j-export-fo</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<scope>provided</scope>
+		</dependency>-->
+		
+		<!-- <dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>jeekit-lang3</artifactId>
+			<version>${jeekit.version}</version>
+		</dependency> -->
+		
+		<!-- ###################### 模板框架 ###################### -->
+		
+		<dependency>
+		    <groupId>org.beetl</groupId>
+		    <artifactId>beetl-core</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.freemarker</groupId>
+		    <artifactId>freemarker</artifactId>
+		   <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.github.httl</groupId>
+		    <artifactId>httl</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.github.subchen</groupId>
+		    <artifactId>jetbrick-template</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.github.subchen</groupId>
+		    <artifactId>jetbrick-template</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.rythmengine</groupId>
+		    <artifactId>rythm-engine</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.thymeleaf</groupId>
+		    <artifactId>thymeleaf</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.velocity</groupId>
+		    <artifactId>velocity</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.velocity</groupId>
+		    <artifactId>velocity-tools</artifactId>
+		    <scope>provided</scope>
+		    <exclusions>
+		    	<exclusion>
+		    		<artifactId>struts-core</artifactId>
+		    		<groupId>org.apache.struts</groupId>
+		    	</exclusion>
+		    	<exclusion>
+		    		<artifactId>struts-taglib</artifactId>
+		    		<groupId>org.apache.struts</groupId>
+		    	</exclusion>
+		    	<exclusion>
+		    		<artifactId>struts-tiles</artifactId>
+		    		<groupId>org.apache.struts</groupId>
+		    	</exclusion>
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.github.zqq90.webit-script</groupId>
+		    <artifactId>webit-script</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+	
+</project>
