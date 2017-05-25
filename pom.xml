@@ -93,9 +93,9 @@
 					<configuration>
 						<defaultLibBundleDir>lib</defaultLibBundleDir>
 						<!-- 源代码编译版本 -->
-						<source>1.7</source>
+						<source>1.6</source>
 						<!-- 目标平台编译版本 -->
-						<target>1.7</target>
+						<target>1.6</target>
 						<!-- 字符集编码 -->
 						<encoding>${project.build.sourceEncoding}</encoding>
 						<!--  -->
@@ -601,7 +601,7 @@
 			<dependency>
 			    <groupId>org.docx4j</groupId>
 			    <artifactId>docx4j-MOXy-JAXBContext</artifactId>
-			    <version>${docx4j.version}</version>
+			    <version>3.3.2</version>
 			</dependency>
 			<!-- Export docx to PDF via XSL FO, using Apache FOP  -->
 			<dependency>
@@ -768,7 +768,7 @@
 		    	</exclusion>
 		    </exclusions>
 		</dependency>
-		<!-- docx4j扩展库 
+		<!-- docx4j扩展库 -->
 		<dependency>
 		    <groupId>org.docx4j</groupId>
 		    <artifactId>docx4j-MOXy-JAXBContext</artifactId>
@@ -783,7 +783,7 @@
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>eclipselink</artifactId>
 			<scope>provided</scope>
-		</dependency>-->
+		</dependency>
 		
 		<!-- <dependency>
 			<groupId>${project.groupId}</groupId>
