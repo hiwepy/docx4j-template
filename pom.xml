@@ -8,80 +8,28 @@
 	<description>基于Docx4j的扩展实现</description>
 	
 	<licenses>
-        <license>
-            <name>The Apache License 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-        </license>
-    </licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
-	<!-- 组织信息  -->
-  	<organization>
-    	<name>Jeefw</name>
-    	<url>www.jeefw.com</url>
-  	</organization>
-  
-  	<!-- 开发者信息  -->
-    <developers>
-        <developer>
-        	<id>001</id>
-            <name>vindell</name>
-            <email>hnxyhcwdl1003@163.com</email>
-        </developer>
-    </developers> 
+	<scm>
+		<connection>scm:git:git@github.com:vindell/${project.artifactId}.git</connection>
+		<developerConnection>scm:git:git@github.com:vindell/${project.artifactId}.git</developerConnection>
+		<url>git@github.com:vindell/${project.artifactId}.git</url>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>vindell</id>
+			<name>万大龙</name>
+			<email>hnxyhcwdl1003@163.com</email>
+		</developer>
+	</developers>
 	
-	<!-- 配置部署的远程仓库:让Maven知道当我要发布release版本或者snapshot版本是需要发布到哪个地址 --> 
-	<distributionManagement>  
-	    <repository>
-	     	<id>nexus-releases</id>
-	     	<name>Nexus Release Repository</name>
-	     	<url>http://121.43.110.87:8081/nexus/content/repositories/releases/</url>
-	     	<!-- <url>http://localhost:8082/nexus/content/repositories/releases/</url> -->
-	   	</repository>
-       	<snapshotRepository>  
-            <id>nexus-snapshots</id>  
-            <name>Nexus Snapshot Repository</name>  
-            <url>http://121.43.110.87:8081/nexus/content/repositories/snapshots/</url>
-            <!-- <url>http://localhost:8082/nexus/content/repositories/snapshots/</url> -->
-            <!-- 表示是否为Snapshot版本分配一个包含时间戳的构建号 --> 
-            <uniqueVersion>true</uniqueVersion>  
-        </snapshotRepository>  
-    </distributionManagement>
-    
     <build>
-		<!-- 主资源目录 -->  
-        <resources>  
-            <resource>  
-                <!-- 设定主资源目录  -->  
-                <directory>src/main/resources</directory>
-                  
-                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，只处理如下配置中包含的资源类型   
-                <includes>  
-                    <include>*.xml</include>  
-                </includes>  
-                 -->  
-                   
-                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，不处理如下配置中包含的资源类型（剔除下如下配置中包含的资源类型）   
-                <excludes>  
-                    <exclude>*.xml</exclude>  
-                </excludes>  
-                -->  
-                  
-                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，指定处理后的资源文件输出目录，默认是${build.outputDirectory}指定的目录  
-                <targetPath>d:/</targetPath>  
-                   -->  
-                    
-                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，是否对主资源目录开启资源过滤 
-                <filtering>true</filtering>  
-                  -->  
-            </resource>  
-        </resources> 
-		<filters>  
-	        <!-- 过滤文件,通常是一个属性文件（名值对的形式） 
-	        <filter>src/main/webapp/META-INF/auto-config.properties</filter>  -->  
-	        <!-- 
-	            <filter>${user.home}/antx.properties</filter> 
-	        -->  
-	    </filters> 
 		<pluginManagement>
 			<plugins>
 				<!-- 编译插件：编译主代码至主输出目录 -->  
@@ -197,32 +145,6 @@
 		            <artifactId>maven-deploy-plugin</artifactId>  
 		            <version>2.8.2</version>  
 		        </plugin>
-		        <!-- release插件: 自动进行工程版本升级 -->
-	            <plugin>
-	                <groupId>org.apache.maven.plugins</groupId>
-	                <artifactId>maven-release-plugin</artifactId>
-	                <version>2.5.3</version>
-	                <configuration>
-	                    <!-- 设置分支跟里程碑的url -->
-	                    <branchBase>svn://121.43.110.87/jeefw/jeefw-desktop/branches</branchBase>
-	                    <tagBase>svn://121.43.110.87/jeefw/jeefw-desktop/tags</tagBase>
-	                </configuration>
-	            </plugin>	
-		        <!-- 签名插件 ：自动完成GPG签名--> 
-		        <plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-gpg-plugin</artifactId>
-					<version>1.6</version>
-					<executions>
-					    <execution>
-							<id>sign-artifacts</id>
-							<phase>verify</phase>
-							<goals>
-							     <goal>sign</goal>
-							</goals>
-					    </execution>
-					</executions>
-				</plugin>	
 				<!-- 源码插件:发布时自动将源码同时发布 -->				
 				<plugin>
 					 <groupId>org.apache.maven.plugins</groupId>
