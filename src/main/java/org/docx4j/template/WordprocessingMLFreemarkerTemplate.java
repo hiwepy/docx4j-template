@@ -60,25 +60,27 @@ public class WordprocessingMLFreemarkerTemplate extends WordprocessingMLTemplate
 	protected List<TemplateLoader> preTemplateLoaders;
 	protected List<TemplateLoader> postTemplateLoaders;
 	protected TemplateModel templateModel;
-    protected String templateKey;
-	protected boolean altChunk = false ;
+	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
+
+	public WordprocessingMLFreemarkerTemplate(boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	}
 	
-	public WordprocessingMLFreemarkerTemplate(String template,boolean altChunk) {
-		this.templateKey = template;
-		this.altChunk = altChunk;
+	public WordprocessingMLFreemarkerTemplate(WordprocessingMLHtmlTemplate template) {
+		this.mlHtmlTemplate = template;
 	}
 
 	@Override
-	public WordprocessingMLPackage process(Map<String, Object> variables)  throws Exception{
+	public WordprocessingMLPackage process(String template,Map<String, Object> variables)  throws Exception{
 		variables.put("String", this.templateModel);
 		// 创建模板输出内容接收对象
 		StringWriter output = new StringWriter();
 		// 使用Freemarker模板引擎渲染模板
-		getEngine().getTemplate(templateKey).process(variables, output);
+		getEngine().getTemplate(template).process(variables, output);
 		//获取模板渲染后的结果
 		String html = output.toString();
 		//使用HtmlTemplate进行渲染
-		return new WordprocessingMLHtmlTemplate(html , altChunk).process(variables);
+		return mlHtmlTemplate.process(html, variables);
 	}
 	
 	public Configuration getEngine() throws IOException, TemplateException {

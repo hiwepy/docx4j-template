@@ -47,18 +47,26 @@ public class WordprocessingMLJspTemplate extends WordprocessingMLTemplate {
     protected final String name;
     protected final String requestURL;
     protected JspEngine engine;
-	protected boolean altChunk = false ;
+    protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
     
 	public WordprocessingMLJspTemplate(HttpServletRequest request,HttpServletResponse response,String name, String requestURL,boolean altChunk) {
 		this.request = request;
         this.response = response;
         this.name = name;
         this.requestURL = requestURL;
-        this.altChunk = altChunk;
+        this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	}
+	
+	public WordprocessingMLJspTemplate(HttpServletRequest request,HttpServletResponse response,String name, String requestURL, WordprocessingMLHtmlTemplate template) {
+		this.request = request;
+        this.response = response;
+        this.name = name;
+        this.requestURL = requestURL;
+		this.mlHtmlTemplate = template;
 	}
 
 	@Override
-	public WordprocessingMLPackage process(Map<String, Object> variables) throws Exception {
+	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
 		// 创建模板输出内容接收对象
 		StringWriter output = new StringWriter();
 		// 使用Jsp模板引擎渲染模板
@@ -66,7 +74,7 @@ public class WordprocessingMLJspTemplate extends WordprocessingMLTemplate {
 		//获取模板渲染后的结果
 		String html = output.toString();
 		//使用HtmlTemplate进行渲染
-		return new WordprocessingMLHtmlTemplate(html , altChunk).process(variables);
+		return mlHtmlTemplate.process(html, variables);
 	}
 	
 	public JspEngine getEngine() throws IOException {

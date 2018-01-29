@@ -52,7 +52,7 @@ public class WordprocessingMLDocxTemplate extends WordprocessingMLTemplate {
 	}
 
 	@Override
-	public WordprocessingMLPackage process(Map<String, Object> variables) throws Exception {
+	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
 		//初始化参数
 		configuration();
 		/*
@@ -71,7 +71,7 @@ public class WordprocessingMLDocxTemplate extends WordprocessingMLTemplate {
 			throw new FileNotFoundException(contentXmlFile.getAbsolutePath());
 		}
 		//进行变量替换
-		String template = FileUtils.readFileToString(contentXmlFile, this.inputEncoding );
+		//String template = FileUtils.readFileToString(contentXmlFile, this.inputEncoding );
 		for (Map.Entry<String, Object> entry : variables.entrySet()) {
 			//替换变量
 			template = StringUtils.replace(template, this.placeholderStart + entry.getKey() + this.placeholderEnd, String.valueOf(entry.getValue()));

@@ -16,13 +16,11 @@
 package org.docx4j.template;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
-import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.template.handler.DocumentHandler;
 import org.docx4j.template.handler.def.XHTMLDocumentHandler;
@@ -41,7 +39,6 @@ public class WordprocessingMLHtmlTemplate extends WordprocessingMLTemplate {
 	protected DocumentHandler docHandler = new XHTMLDocumentHandler();
 	protected WordprocessingMLPackageBuilder wordMLPackageBuilder = new WordprocessingMLPackageBuilder();
 	protected File htmlFile;
-	protected String html;
 	protected URL url;
 	protected String urlstr;
 	protected DataMap dataMap;
@@ -49,33 +46,32 @@ public class WordprocessingMLHtmlTemplate extends WordprocessingMLTemplate {
 	protected Document doc;
 	protected boolean altChunk;
 	
-	public WordprocessingMLHtmlTemplate(File htmlFile,boolean altChunk) throws IOException, Docx4JException{
+	public WordprocessingMLHtmlTemplate(File htmlFile,boolean altChunk){
 		this.htmlFile = htmlFile;
 		this.altChunk = altChunk;
 	}
 	
-	public WordprocessingMLHtmlTemplate(String html,boolean altChunk) throws IOException, Docx4JException{
-		this.html = html;
+	public WordprocessingMLHtmlTemplate(boolean altChunk) {
 		this.altChunk = altChunk;
 	}
 	
-	public WordprocessingMLHtmlTemplate(URL url,boolean altChunk) throws IOException, Docx4JException{
+	public WordprocessingMLHtmlTemplate(URL url,boolean altChunk){
 		this.url = url;
 		this.altChunk = altChunk;
 	}
 	
-	public WordprocessingMLHtmlTemplate(String url, DataMap dataMap,boolean altChunk) throws IOException, Docx4JException{
+	public WordprocessingMLHtmlTemplate(String url, DataMap dataMap,boolean altChunk){
 		this.urlstr = url;
 		this.dataMap = dataMap;
 		this.altChunk = altChunk;
 	}
 	
-	public WordprocessingMLHtmlTemplate(InputStream input,boolean altChunk) throws IOException, Docx4JException{
+	public WordprocessingMLHtmlTemplate(InputStream input,boolean altChunk){
 		this.input = input;
 		this.altChunk = altChunk;
 	}
 	
-	public WordprocessingMLHtmlTemplate(Document doc,boolean altChunk) throws IOException, Docx4JException{
+	public WordprocessingMLHtmlTemplate(Document doc,boolean altChunk){
 		this.doc = doc;
 		this.altChunk = altChunk;
 	}
@@ -84,24 +80,24 @@ public class WordprocessingMLHtmlTemplate extends WordprocessingMLTemplate {
 	 * 将 {@link org.jsoup.nodes.Document} 对象转为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage}
 	 */
 	@Override
-	public WordprocessingMLPackage process(Map<String, Object> variables) throws Exception {
+	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
 		WordprocessingMLPackage wordMLPackage = null;
 		if (htmlFile != null) {
 			wordMLPackage = wordMLPackageBuilder.buildWhithHtml(htmlFile, altChunk);
-		}else  if (html != null) {
-			wordMLPackage = wordMLPackageBuilder.buildWhithHtml(html, altChunk);
-		}else  if (url != null) {
+		} else  if (url != null) {
 			wordMLPackage = wordMLPackageBuilder.buildWhithURL(url, altChunk);
-		}else  if (urlstr != null) {
+		} else  if (urlstr != null) {
 			wordMLPackage = wordMLPackageBuilder.buildWhithURL(urlstr, dataMap , altChunk);
-		}else  if (input != null) {
+		} else  if (input != null) {
 			try {
 				wordMLPackage = wordMLPackageBuilder.buildWhithDoc(docHandler.handle(input), altChunk);
 			} finally {
 				IOUtils.closeQuietly(input);
 			}
-		}else  if (doc != null) {
+		} else  if (doc != null) {
 			wordMLPackage = wordMLPackageBuilder.buildWhithDoc(doc, altChunk);
+		} else {
+			wordMLPackage = wordMLPackageBuilder.buildWhithHtml(template, altChunk);
 		}
 		//返回WordprocessingMLPackage对象
 		return wordMLPackage;

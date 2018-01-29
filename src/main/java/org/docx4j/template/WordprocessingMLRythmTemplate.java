@@ -37,24 +37,26 @@ import org.rythmengine.RythmEngine;
 public class WordprocessingMLRythmTemplate extends WordprocessingMLTemplate {
 	
 	protected RythmEngine engine;
-	protected String templateKey;
-	protected boolean altChunk = false ;
+	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
 
-	public WordprocessingMLRythmTemplate(String template,boolean altChunk) {
-		this.templateKey = template;
-		this.altChunk = altChunk;
+	public WordprocessingMLRythmTemplate(boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	}
+	
+	public WordprocessingMLRythmTemplate(WordprocessingMLHtmlTemplate template) {
+		this.mlHtmlTemplate = template;
 	}
 
 	@Override
-	public WordprocessingMLPackage process(Map<String, Object> variables) throws Exception {
+	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
 		// 创建模板输出内容接收对象
 		StringWriter output = new StringWriter();
 		// 使用Rythm模板引擎渲染模板
-		getEngine().getTemplate(templateKey , variables).render(output);
+		getEngine().getTemplate(template , variables).render(output);
 		//获取模板渲染后的结果
 		String html = output.toString();
 		//使用HtmlTemplate进行渲染
-		return new WordprocessingMLHtmlTemplate(html , altChunk).process(variables);
+		return mlHtmlTemplate.process(html, variables);
 	}
 	
 	public RythmEngine getEngine() throws IOException {

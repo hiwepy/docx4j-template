@@ -36,24 +36,26 @@ import webit.script.Engine;
 public class WordprocessingMLWebitTemplate extends WordprocessingMLTemplate {
 	
 	protected Engine engine;
-	protected String templateKey;
-	protected boolean altChunk = false ;
+	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
 	
-	public WordprocessingMLWebitTemplate(String template,boolean altChunk) {
-		this.templateKey = template;
-		this.altChunk = altChunk;
+	public WordprocessingMLWebitTemplate(boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	}
+	
+	public WordprocessingMLWebitTemplate(WordprocessingMLHtmlTemplate template) {
+		this.mlHtmlTemplate = template;
 	}
 
 	@Override
-	public WordprocessingMLPackage process(Map<String, Object> variables) throws Exception {
+	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
 		//创建模板输出内容接收对象
 		StringWriter output = new StringWriter();
 		//使用Webit模板引擎渲染模板
-		getEngine().getTemplate(templateKey).merge(variables,output);
+		getEngine().getTemplate(template).merge(variables, output);
 		//获取模板渲染后的结果
 		String html = output.toString();
 		//使用HtmlTemplate进行渲染
-		return new WordprocessingMLHtmlTemplate(html , altChunk).process(variables);
+		return mlHtmlTemplate.process(html, variables);
 	}
 	
 	public Engine getEngine() throws IOException {

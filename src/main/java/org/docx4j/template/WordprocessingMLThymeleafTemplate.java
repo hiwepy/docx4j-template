@@ -42,27 +42,29 @@ public class WordprocessingMLThymeleafTemplate extends WordprocessingMLTemplate 
 	
 	protected TemplateEngine engine;
 	protected AbstractConfigurableTemplateResolver templateResolver;
-	protected String templateKey;
-	protected boolean altChunk = false ;
+	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
 
-	public WordprocessingMLThymeleafTemplate(String template,boolean altChunk) {
-		this.templateKey = template;
-		this.altChunk = altChunk;
+	public WordprocessingMLThymeleafTemplate(boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	}
+	
+	public WordprocessingMLThymeleafTemplate(WordprocessingMLHtmlTemplate template) {
+		this.mlHtmlTemplate = template;
 	}
 
 	@Override
-	public WordprocessingMLPackage process(Map<String, Object> variables) throws Exception {
+	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
 		// 创建模板输出内容接收对象
 		StringWriter output = new StringWriter();
 		//设置上下文参数
 		Context ctx = new Context();
         ctx.setVariables(variables);
 		// 使用Thymeleaf模板引擎渲染模板
-		getEngine().process(templateKey , ctx , output);
+		getEngine().process(template , ctx , output);
 		//获取模板渲染后的结果
 		String html = output.toString();
 		//使用HtmlTemplate进行渲染
-		return new WordprocessingMLHtmlTemplate(html , altChunk).process(variables);
+		return mlHtmlTemplate.process(html, variables);
 	}
 	
 	public TemplateEngine getEngine() throws IOException {

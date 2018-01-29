@@ -29,6 +29,6 @@ import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
  */
 public abstract class WordprocessingMLTemplate {
 	
-	public abstract WordprocessingMLPackage process(Map<String, Object> variables) throws Exception;
+	public abstract WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception;
 	
 }

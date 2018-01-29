@@ -35,23 +35,25 @@ import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 public class WordprocessingMLBeetlTemplate extends WordprocessingMLTemplate {
 	
 	protected GroupTemplate engine;
-	protected String templateKey;
-	protected boolean altChunk = false ;
+	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
+
+	public WordprocessingMLBeetlTemplate(boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	}
 	
-	public WordprocessingMLBeetlTemplate(String template,boolean altChunk) {
-		this.templateKey = template;
-		this.altChunk = altChunk;
+	public WordprocessingMLBeetlTemplate(WordprocessingMLHtmlTemplate template) {
+		this.mlHtmlTemplate = template;
 	}
 
 	@Override
-	public WordprocessingMLPackage process(Map<String, Object> variables) throws Exception {
+	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
 		//使用Beetl模板引擎渲染模板
-		Template template = getEngine().getTemplate(templateKey);
-		template.binding(variables);
+		Template beeTemplate = getEngine().getTemplate(template);
+		beeTemplate.binding(variables);
 		//获取模板渲染后的结果
-		String html = template.render();
+		String html = beeTemplate.render();
 		//使用HtmlTemplate进行渲染
-		return new WordprocessingMLHtmlTemplate(html , altChunk).process(variables);
+		return mlHtmlTemplate.process(html, variables);
 	}
 
 	public GroupTemplate getEngine() throws IOException {
