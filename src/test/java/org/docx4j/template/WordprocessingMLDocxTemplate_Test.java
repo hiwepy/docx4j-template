@@ -41,7 +41,7 @@ public class WordprocessingMLDocxTemplate_Test {
 		variables.put("title", "变量替换测试");
 		variables.put("content", "测试效果不错");
 		
-		docxTemplate.process(variables);
+		docxTemplate.process("", variables);
 		
 	}
 	

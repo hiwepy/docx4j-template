@@ -134,14 +134,6 @@
 								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 							</manifest>
-							<!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖  -->
-							<!-- <manifestEntries>
-								<addClasspath>true</addClasspath>  
-	                            <classpathPrefix>lib/</classpathPrefix>  
-								<Main-Class>.....Main</Main-Class>
-								<Premain-Class>.....Main</Premain-Class>
-								<Agent-Class>.....Main</Agent-Class>
-							</manifestEntries> -->
 	                    </archive>  
 	                </configuration>  
 				</plugin> 
@@ -250,21 +242,28 @@
 	
     <properties>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
- 		<batik.version>1.8</batik.version>
     	<commons-beanutils.version>1.9.3</commons-beanutils.version>
     	<commons-lang3.version>3.4</commons-lang3.version>
 		<commons-logging.version>1.2</commons-logging.version>
-		<commons-io.version>2.5</commons-io.version>
- 		<docx4j.version>3.3.6</docx4j.version>
- 		<jackson.version>2.6.4</jackson.version>
- 		<jeekit.version>1.0.0-SNAPSHOT</jeekit.version>
- 		<jsoup.version>1.10.1</jsoup.version>
+		<commons-io.version>2.6</commons-io.version>
+		<jackson.version>2.6.4</jackson.version>
+ 		<jsoup.version>1.11.2</jsoup.version>
  		<junit.version>4.12</junit.version>
  		<log4j.version>1.2.17</log4j.version>
  		<servlet-api.version>3.0.1</servlet-api.version>
  		<slf4j.version>1.7.21</slf4j.version>
  		<slf4j-over.version>1.7.22</slf4j-over.version>
- 		<httpunit.version>1.7.2</httpunit.version>
+		<!-- Docx4j Core -->
+ 		<docx4j.version>3.3.7</docx4j.version>
+ 		<!-- Docx4j ImportXHTML -->
+ 		<docx4j-ImportXHTML.version>3.3.6-1</docx4j-ImportXHTML.version>
+ 		<docx4j-XhtmlRenderer.version>3.0.0</docx4j-XhtmlRenderer.version>
+ 		<!-- Docx4j MOXy -->
+ 		<docx4j-moxy-jaxbcontext.version>3.3.6</docx4j-moxy-jaxbcontext.version>
+ 		<persistence.version>2.7.1</persistence.version>
+ 		<javax-activation.version>1.1.1</javax-activation.version>
+ 		<javax.mail-api.version>1.6.1</javax.mail-api.version>
+ 		
 	</properties>
 	
 	<dependencyManagement>
@@ -278,17 +277,6 @@
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
 			</dependency>
-			<!--
-				httpunit：HttpUnit是SourceForge下面的一个开源项目，它是基于JUnit的一个测试框架，主要关注于测试Web应用；
-				解决使用JUnit框架无法对远程Web内容进行测试的弊端
-			-->
-			<dependency>
-				<groupId>org.httpunit</groupId>
-				<artifactId>httpunit</artifactId>
-				<version>${httpunit.version}</version>
-			</dependency>
-			
-			<!-- ######################Servlet相关基础包###################### -->
 			
 			<!-- servlet 基础依赖包 -->
 			<dependency>
@@ -297,57 +285,12 @@
 				<version>${servlet-api.version}</version>
 			</dependency>
 			
-			<!-- ######################日志组件工具包###################### -->
-			
-			<!-- 
-				实现各个日志组件之间的桥接并最终输出到log4j2 ：
-				
-				实现方案：
-	
-					第一步：将日志系统全部无缝先切换到slf4j
-						1、去掉commons-logging（其实去不去都可以），使用jcl-over-slf4j将commons-logging的底层日志输出切换到slf4j
-				        2、使用jul-to-slf4j，将jul的日志输出切换到slf4j
-				       	3、 去掉log4j1(必须去掉),使用log4j-slf4j-impl,将slf4j的日志输出切换到log4j2
-					第二步：使slf4j选择log4j2来作为底层日志输出
-						加入以下jar包：
-					    slf4j-api
-					    log4j-api
-					    log4j-core
-			-->
-			
-			<!--
-				Jakarta Commons Logging (JCL) 提供的是一个日志 (Log) 接口 (interface)
-				，同时兼顾轻量级和不依赖于具体的日志实现工具 。 它提供给中间件 /
-				日志工具开发者一个简单的日志操作抽象，允许程序开发人员使用不同的具体日志实现工具。用户被假定已熟悉某种日志实现工具的更高级别的细节。
-				JCL 提供的接口，对其它一些日志工具，包括 Log4J, Avalon LogKit, and JDK 1.4
-				等，进行了简单的包装，此接口更接近于 Log4J 和 LogKit 的实现。
-			-->
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-				<version>${commons-logging.version}</version>
-			</dependency>
-			<!-- commons-logging到 slf4j的桥接器 -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>jcl-over-slf4j</artifactId>
-				<version>${slf4j-over.version}</version>
-			</dependency>
 			<!-- SLF4J，即简单日志门面（Simple Logging Facade for Java），不是具体的日志解决方案，它只服务于各种各样
 			 的日志系统。按照官方的说法，SLF4J是一个用于日志系统的简单Facade，允许最终用户在部署其应用时使用其所希望的日志系统。 -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
-			</dependency>
-			<!-- 
-			Log4j是Apache的一个开放源代码项目，通过使用Log4j，我们可以控制日志信息输送的目的地是控制台、文件、GUI组件，
-			甚至是套接口服务器、NT的事件记录器、UNIX Syslog守护进程等
-			-->
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>${log4j.version}</version>
 			</dependency>
 			<!-- log4j到 slf4j的桥接器 -->
 			<dependency>
@@ -377,120 +320,13 @@
 				<version>${commons-io.version}</version>
 			</dependency>
 			
-			<!-- ######################org.apache.xmlgraphics ###################### -->
-			
-			<!-- Batik是使用svg格式图片来实现各种功能的应用程序以及Applet提供的一个基于java的工具包。 -->
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-transcoder</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-util</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-ext</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-awt-util</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-svggen</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-dom</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-svg-dom</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-css</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-bridge</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-gvt</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-xml</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-codec</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-parser</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-anim</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-script</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-rasterizer</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-swing</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-gui-util</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-js</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-extension</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlgraphics</groupId>
-				<artifactId>batik-ttf2svg</artifactId>
-				<version>${batik.version}</version>
-			</dependency>
-			
-			<!-- ###################### 词法分析、HTML、CSS 解析工具包###################### -->
-			
+			<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
 			<!--
-				jsoup 是一款Java的HTML解析器，可直接解析某个URL地址、HTML文本内容。
-				它提供了一套非常省力的API，可通过DOM，CSS以及类似于jQuery的操作方法来取出和操作数据。
+				Jsoup is a Java library for working with real-world HTML. 
+				It provides a very convenient API for extracting and manipulating data, 
+				using the best of DOM, CSS, and jquery-like methods. 
+				jsoup implements the WHATWG HTML5 specification, 
+				and parses HTML to the same DOM as modern browsers do. 
 			-->
 			<dependency>
 				<groupId>org.jsoup</groupId>
@@ -521,108 +357,92 @@
 				http://www.docx4java.org/downloads.html
 			-->
 			
+			<!-- Docx4j Core -->
+			
 			<!-- docx4j is a library which helps you to work with the Office Open XML file format as used in docx documents, pptx presentations, and xlsx spreadsheets. -->
 			<dependency>
 			    <groupId>org.docx4j</groupId>
 			    <artifactId>docx4j</artifactId>
 			    <version>${docx4j.version}</version>
+			    <exclusions>
+			    	<exclusion>
+			    		<groupId>org.slf4j</groupId>
+			    		<artifactId>jcl-over-slf4j</artifactId>
+			    	</exclusion>
+			    	<exclusion>
+			    		<groupId>org.slf4j</groupId>
+			    		<artifactId>slf4j-log4j12</artifactId>
+			    	</exclusion>
+			    	<exclusion>
+			    		<groupId>log4j</groupId>
+			    		<artifactId>log4j</artifactId>
+			    	</exclusion>
+			    </exclusions>
+			</dependency>
+			
+			<!-- Docx4j ImportXHTML -->
+			
+			<!-- docx4j-ImportXHTML converts XHTML to OpenXML WordML (docx) using docx4j  -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-ImportXHTML</artifactId>
+			    <version>${docx4j-ImportXHTML.version}</version>
 			</dependency>
 			<!-- Modified flyingsaucer XML/XHTML and CSS 2.1 renderer, to support docx (and eventually pptx) output  -->
 			<dependency>
 			    <groupId>org.docx4j</groupId>
 			    <artifactId>xhtmlrenderer</artifactId>
-			    <version>3.0.0</version>
+			    <version>${docx4j-XhtmlRenderer.version}</version>
 			</dependency>
-			<!-- docx4j-ImportXHTML converts XHTML to OpenXML WordML (docx) using docx4j  -->
-			<dependency>
-			    <groupId>org.docx4j</groupId>
-			    <artifactId>docx4j-ImportXHTML</artifactId>
-			    <version>3.3.6-1</version>
-			</dependency>
+			
+			<!-- Docx4j MOXy -->
+			
 			<!-- jaxb.properties files specifying that docx4j should use the EclipseLink MOXy (JAXB) runtime  -->
 			<dependency>
 			    <groupId>org.docx4j</groupId>
 			    <artifactId>docx4j-MOXy-JAXBContext</artifactId>
-			    <version>${docx4j.version}</version>
+			    <version>${docx4j-moxy-jaxbcontext.version}</version>
 			</dependency>
-			<!-- Export docx to PDF via XSL FO, using Apache FOP  -->
 			<dependency>
-			    <groupId>org.docx4j</groupId>
-			    <artifactId>docx4j-export-fo</artifactId>
-			    <version>${docx4j.version}</version>
+			    <groupId>javax.activation</groupId>
+			    <artifactId>activation</artifactId>
+			    <version>${javax-activation.version}</version>
 			</dependency>
-			
+			<dependency>
+			    <groupId>javax.mail</groupId>
+			    <artifactId>javax.mail-api</artifactId>
+			    <version>${javax.mail-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.persistence</groupId>
+				<artifactId>org.eclipse.persistence.antlr</artifactId>
+				<version>${persistence.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.eclipse.persistence</groupId>
 				<artifactId>eclipselink</artifactId>
-				<version>2.7.1</version>
-			</dependency>
-			
-			<!-- ###################### 模板框架 ###################### -->
-		
-			<!-- beetl模板 -->
-			<!-- https://mvnrepository.com/artifact/com.ibeetl/beetl -->
-			<dependency>
-			    <groupId>com.ibeetl</groupId>
-			    <artifactId>beetl</artifactId>
-			    <version>2.7.26</version>
-			</dependency>
-			<!-- freemarker模板 -->
-			<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
-			<dependency>
-			    <groupId>org.freemarker</groupId>
-			    <artifactId>freemarker</artifactId>
-			    <version>2.3.23</version>
-			</dependency>
-			<!-- httl模板 -->
-			<dependency>
-			    <groupId>com.github.httl</groupId>
-			    <artifactId>httl</artifactId>
-			    <version>1.0.11</version>
-			</dependency>
-			<!-- jetbrick模板 -->
-			<!-- https://mvnrepository.com/artifact/com.github.subchen/jetbrick-template -->
-			<dependency>
-			    <groupId>com.github.subchen</groupId>
-			    <artifactId>jetbrick-template</artifactId>
-			    <version>2.1.5</version>
-			</dependency>
-			<!-- https://mvnrepository.com/artifact/org.antlr/antlr4-runtime -->
-			<dependency>
-			    <groupId>org.antlr</groupId>
-			    <artifactId>antlr4-runtime</artifactId>
-			    <version>4.7.1</version>
-			</dependency>
-			<!-- rythm模板-->
-			<!-- https://mvnrepository.com/artifact/org.rythmengine/rythm-engine -->
-			<dependency>
-			    <groupId>org.rythmengine</groupId>
-			    <artifactId>rythm-engine</artifactId>
-			    <version>1.2.2</version>
-			</dependency>
-			<!-- thymeleaf模板-->
-			<!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
-			<dependency>
-			    <groupId>org.thymeleaf</groupId>
-			    <artifactId>thymeleaf</artifactId>
-			    <version>3.0.9.RELEASE</version>
-			</dependency>
-			<!-- velocity模板-->
-			<dependency>
-			    <groupId>org.apache.velocity</groupId>
-			    <artifactId>velocity</artifactId>
-			    <version>1.7</version>
+				<version>${persistence.version}</version>
 			</dependency>
 			<dependency>
-			    <groupId>org.apache.velocity</groupId>
-			    <artifactId>velocity-tools</artifactId>
-			    <version>2.0</version>
+				<groupId>org.eclipse.persistence</groupId>
+				<artifactId>org.eclipse.persistence.asm</artifactId>
+				<version>${persistence.version}</version>
 			</dependency>
-			<!-- webit模板-->
 			<dependency>
-			    <groupId>com.github.zqq90.webit-script</groupId>
-			    <artifactId>webit-script</artifactId>
-			    <version>1.5.2</version>
+				<groupId>org.eclipse.persistence</groupId>
+				<artifactId>org.eclipse.persistence.core</artifactId>
+				<version>${persistence.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.persistence</groupId>
+				<artifactId>org.eclipse.persistence.moxy</artifactId>
+				<version>${persistence.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.persistence</groupId>
+				<artifactId>eclipselink</artifactId>
+				<version>${persistence.version}</version>
+				<scope>test</scope>
 			</dependency>
 			 
 		</dependencies>
@@ -636,11 +456,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.httpunit</groupId>
-			<artifactId>httpunit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<scope>provided</scope>
@@ -650,23 +465,22 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-    		<artifactId>jcl-over-slf4j</artifactId>
-    		<groupId>org.slf4j</groupId>
-    		<scope>test</scope>
-    	</dependency>
     	<dependency>
     		<artifactId>slf4j-log4j12</artifactId>
     		<groupId>org.slf4j</groupId>
     		<scope>test</scope>
     	</dependency>
+    	
     	<dependency>
-    		<artifactId>log4j</artifactId>
-    		<groupId>log4j</groupId>
-    		<scope>test</scope>
-    	</dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
 		
-		<!-- ###################### 词法分析、HTML、CSS 解析工具包###################### -->
+		<!-- ###################### HTML、CSS 解析工具包###################### -->
 		
 		<dependency>
 			<groupId>org.jsoup</groupId>
@@ -675,25 +489,12 @@
 		
 		<!-- ###################### Docx4j ###################### -->
 		
-		<!-- docx4j核心库 -->
+		<!-- Docx4j Core -->
 		<dependency>
 		    <groupId>org.docx4j</groupId>
 		    <artifactId>docx4j</artifactId>
-		    <exclusions>
-		    	<exclusion>
-		    		<artifactId>jcl-over-slf4j</artifactId>
-		    		<groupId>org.slf4j</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>slf4j-log4j12</artifactId>
-		    		<groupId>org.slf4j</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>log4j</artifactId>
-		    		<groupId>log4j</groupId>
-		    	</exclusion>
-		    </exclusions>
 		</dependency>
+ 		<!-- Docx4j ImportXHTML -->
 		<dependency>
 		    <groupId>org.docx4j</groupId>
 		    <artifactId>xhtmlrenderer</artifactId>
@@ -701,117 +502,32 @@
 		<dependency>
 		    <groupId>org.docx4j</groupId>
 		    <artifactId>docx4j-ImportXHTML</artifactId>
-		    <exclusions>
-		    	<exclusion>
-		    		<artifactId>jcl-over-slf4j</artifactId>
-		    		<groupId>org.slf4j</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>slf4j-log4j12</artifactId>
-		    		<groupId>org.slf4j</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>log4j</artifactId>
-		    		<groupId>log4j</groupId>
-		    	</exclusion>
-		    </exclusions>
 		</dependency>
-		<!-- docx4j扩展库 -->
+		<!-- Docx4j MOXy -->
 		<dependency>
 		    <groupId>org.docx4j</groupId>
 		    <artifactId>docx4j-MOXy-JAXBContext</artifactId>
-		    <scope>provided</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.docx4j</groupId>
-		    <artifactId>docx4j-export-fo</artifactId>
-		    <scope>provided</scope>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.antlr</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.asm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.moxy</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>eclipselink</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
-		<!-- <dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>jeekit-lang3</artifactId>
-			<version>${jeekit.version}</version>
-		</dependency> -->
-		
-		<!-- ###################### 模板框架 ###################### -->
-		
-		<dependency>
-		    <groupId>com.ibeetl</groupId>
-		    <artifactId>beetl</artifactId>
-		    <scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.freemarker</groupId>
-		    <artifactId>freemarker</artifactId>
-		   <scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-		    <groupId>com.github.httl</groupId>
-		    <artifactId>httl</artifactId>
-		    <scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-		    <groupId>com.github.subchen</groupId>
-		    <artifactId>jetbrick-template</artifactId>
-		    <scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-		    <groupId>com.github.subchen</groupId>
-		    <artifactId>jetbrick-template</artifactId>
-		    <scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.rythmengine</groupId>
-		    <artifactId>rythm-engine</artifactId>
-		    <scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.thymeleaf</groupId>
-		    <artifactId>thymeleaf</artifactId>
-		    <scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.apache.velocity</groupId>
-		    <artifactId>velocity</artifactId>
-		    <scope>provided</scope>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.velocity</groupId>
-		    <artifactId>velocity-tools</artifactId>
-		    <scope>provided</scope>
-		    <exclusions>
-		    	<exclusion>
-		    		<artifactId>struts-core</artifactId>
-		    		<groupId>org.apache.struts</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>struts-taglib</artifactId>
-		    		<groupId>org.apache.struts</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>struts-tiles</artifactId>
-		    		<groupId>org.apache.struts</groupId>
-		    	</exclusion>
-		    </exclusions>
-		</dependency>
-		
-		<dependency>
-		    <groupId>com.github.zqq90.webit-script</groupId>
-		    <artifactId>webit-script</artifactId>
-		    <scope>provided</scope>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>

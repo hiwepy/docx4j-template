@@ -17,8 +17,11 @@ package org.docx4j.template;
 
 import java.math.BigInteger;
 
+import javax.xml.bind.JAXBException;
+
 import org.docx4j.XmlUtils;
 import org.docx4j.jaxb.Context;
+import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.wml.Jc;
@@ -44,7 +47,7 @@ public class Docx4j_Helper {
 	protected static String inputfilepath = "e:/test_tmp/0904/test_p.docx";  
 	protected static String outputfilepath = "e:/test_tmp/0904/test_p2.docx";  
 	  
-	public static void name() {
+	public static void name() throws Exception {
 	  
 	    WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(new java.io.File(inputfilepath));  
 	    MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();  
@@ -94,7 +97,7 @@ public class Docx4j_Helper {
 	    tbl.getContent().add(tr);  
 	    documentPart.getContent().add(9, tbl);  
 	      
-	    Docx4j_Helper.saveWordPackage(wordMLPackage, outputfilepath);  
+	    //Docx4j_Helper.saveWordPackage(wordMLPackage, outputfilepath);  
 	}
 	
     public void testDocx4jSetPageSize() throws Exception {  
@@ -147,7 +150,7 @@ public class Docx4j_Helper {
         p = createParagraphWithHAlign();  
         setParagraphContent(p, rpr,str2);  
         mdp.addObject(p);  
-        Docx4j_Helper.saveWordPackage(wordMLPackage, outputfilepath);  
+       // Docx4j_Helper.saveWordPackage(wordMLPackage, outputfilepath);  
     }  
   
     /** 
@@ -169,7 +172,7 @@ public class Docx4j_Helper {
     /** 
      * 设置段落内容 
      */  
-    private void setParagraphContent(P p, RPr rpr,String content) {  
+    private static void setParagraphContent(P p, RPr rpr,String content) {  
         Text t = Docx4j_Helper.factory.createText();  
         t.setSpace("preserve");  
         t.setValue(content);  

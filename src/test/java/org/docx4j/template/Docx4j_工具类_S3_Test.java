@@ -32,8 +32,10 @@ import org.docx4j.TextUtils;
 import org.docx4j.XmlUtils;
 import org.docx4j.dml.wordprocessingDrawing.Inline;
 import org.docx4j.model.properties.table.tr.TrHeight;
+import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 import org.docx4j.openpackaging.packages.OpcPackage;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.PartName;
 import org.docx4j.openpackaging.parts.Parts;
 import org.docx4j.openpackaging.parts.WordprocessingML.BinaryPartAbstractImage;
@@ -57,7 +59,6 @@ import org.docx4j.wml.CTVerticalJc;
 import org.docx4j.wml.Color;
 import org.docx4j.wml.Comments;
 import org.docx4j.wml.Comments.Comment;
-import org.docx4j.wml.ContentAccessor;
 import org.docx4j.wml.Drawing;
 import org.docx4j.wml.Highlight;
 import org.docx4j.wml.HpsMeasure;
@@ -83,6 +84,7 @@ import org.docx4j.wml.STPageOrientation;
 import org.docx4j.wml.STShd;
 import org.docx4j.wml.STVerticalAlignRun;
 import org.docx4j.wml.STVerticalJc;
+import org.docx4j.wml.SdtContent;
 import org.docx4j.wml.SectPr;
 import org.docx4j.wml.SectPr.PgBorders;
 import org.docx4j.wml.SectPr.PgMar;
@@ -105,7 +107,6 @@ import org.docx4j.wml.Tr;
 import org.docx4j.wml.TrPr;
 import org.docx4j.wml.U;
 import org.docx4j.wml.UnderlineEnumeration;
-import org.docx4j.openpackaging.parts.Part;
 
 //代码基于docx4j-3.2.0
 public class Docx4j_工具类_S3_Test {
@@ -176,8 +177,8 @@ public class Docx4j_工具类_S3_Test {
             obj = ((JAXBElement<?>) obj).getValue();
         if (obj.getClass().equals(toSearch))
             result.add(obj);
-        else if (obj instanceof ContentAccessor) {
-            List<?> children = ((ContentAccessor) obj).getContent();
+        else if (obj instanceof SdtContent) {
+            List<?> children = ((SdtContent) obj).getContent();
             for (Object child : children) {
                 result.addAll(getAllElementFromObject(child, toSearch));
             }
@@ -1762,7 +1763,7 @@ public class Docx4j_工具类_S3_Test {
                 .getPageDimensions().getWritableWidthTwips();
     }
     
-    public int getComments(WordprocessingMLPackage wordMLPackage){
+    public int getComments(WordprocessingMLPackage wordMLPackage) throws Exception{
     	 Parts parts = wordMLPackage.getParts();  
 	    HashMap<PartName, Part> partMap = parts.getParts();  
 	    CommentsPart commentPart = (CommentsPart) partMap.get(new CommentsPart().getPartName());  
@@ -1774,9 +1775,10 @@ public class Docx4j_工具类_S3_Test {
 	        sb.append(" 作者:").append(comment.getAuthor());  
 	        sb.append(" 时间: ").append(comment.getDate().toGregorianCalendar().getTime());  
 	        sb.append(" 内容:").append(comment.getContent());  
-	        sb.append(" 文中内容:").append(docCmtMap.get(comment.getId().toString()));  
+	        //sb.append(" 文中内容:").append(docCmtMap.get(comment.getId().toString()));  
 	        System.out.println(sb.toString());  
 	    }  
+	    return 0;
     }
     
     

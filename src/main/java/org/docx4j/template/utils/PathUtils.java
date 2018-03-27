@@ -20,13 +20,9 @@
 package org.docx4j.template.utils;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.util.LinkedList;
-
-import jetbrick.io.resource.Resource;
 
 public final class PathUtils {
 
@@ -40,44 +36,6 @@ public final class PathUtils {
         } catch (MalformedURLException e) {
             throw new IllegalStateException(e);
         }
-    }
-
-    public static File urlAsFile(URL url) {
-        if (url == null) return null;
-        return new File(urlAsPath(url));
-    }
-
-    public static String urlAsPath(URL url) {
-        if (url == null) return null;
-
-        String protocol = url.getProtocol();
-        String file = url.getPath();
-        try {
-            file = URLDecoder.decode(file, "utf-8");
-        } catch (UnsupportedEncodingException e) {
-        }
-
-        if (Resource.URL_PROTOCOL_FILE.equals(protocol)) {
-            return file;
-        } else if (Resource.URL_PROTOCOL_JAR.equals(protocol) || Resource.URL_PROTOCOL_ZIP.equals(protocol)) {
-            int ipos = file.indexOf(Resource.URL_SEPARATOR_JAR);
-            if (ipos > 0) {
-                file = file.substring(0, ipos);
-            }
-            if (file.startsWith(Resource.URL_PREFIX_FILE)) {
-                file = file.substring(Resource.URL_PREFIX_FILE.length());
-            }
-            return file;
-        } else if (Resource.URL_PROTOCOL_VFS.equals(protocol)) {
-            int ipos = file.indexOf(Resource.URL_SEPARATOR_JAR);
-            if (ipos > 0) {
-                file = file.substring(0, ipos);
-            } else if (file.endsWith("/")) {
-                file = file.substring(0, file.length() - 1);
-            }
-            return file;
-        }
-        return file;
     }
 
     /**

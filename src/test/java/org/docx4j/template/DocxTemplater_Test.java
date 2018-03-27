@@ -15,15 +15,14 @@
  */
 package org.docx4j.template;
 
-import java.io.File;   
+import java.io.File;
 import java.util.HashMap;
 
-import org.docx4j.template.template.DocxTemplater;
 
 //例子来自Github,原地址忘了,代码被我改过一部分   
 public class DocxTemplater_Test {   
     public static void main(String[] args) {   
-        DocxTemplater templater = new DocxTemplater("f:/saveFile/temp/test_c");   
+       /* DocxTemplater templater = new DocxTemplater("f:/saveFile/temp/test_c");   
         File f = new File("f:/saveFile/temp/doc_template.docx");   
         HashMap<String, Object> map = new HashMap<String, Object>();   
         map.put("TITLE", "这是替换后的文档");   
@@ -33,6 +32,6 @@ public class DocxTemplater_Test {
         map.put("WORD", "问世间情为何物");   
         map.put("DATA", "2014-9-28");   
         map.put("BOSS", "Github");   
-        templater.process(f, map);   
+        templater.process(f, map);   */
     }   
 }  

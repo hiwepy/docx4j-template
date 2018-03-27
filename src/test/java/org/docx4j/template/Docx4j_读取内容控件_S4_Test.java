@@ -31,7 +31,7 @@ import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.wml.Body;  
 import org.docx4j.wml.CTLock;  
 import org.docx4j.wml.CTSdtCell;  
-import org.docx4j.wml.ContentAccessor;  
+import org.docx4j.wml.SdtContent;  
 import org.docx4j.wml.Document;  
 import org.docx4j.wml.Id;  
 import org.docx4j.wml.RPr;  
@@ -62,20 +62,20 @@ public class Docx4j_读取内容控件_S4_Test {
                 SdtRun sdtRun = (SdtRun) sdtChild;  
                 SdtPr sdtPr = sdtRun.getSdtPr();  
                 printSdtPrContent(sdtPr);  
-                ContentAccessor sdtContent = sdtRun.getSdtContent();  
-                System.out.println("-----------p content="+ getContentAccessorContent(sdtContent));  
+                SdtContent sdtContent = sdtRun.getSdtContent();  
+                System.out.println("-----------p content="+ getSdtContentContent(sdtContent));  
             } else if (sdtChild instanceof CTSdtCell) {  
                 CTSdtCell sdtCell = (CTSdtCell) sdtChild;  
                 SdtPr sdtPr = sdtCell.getSdtPr();  
                 printSdtPrContent(sdtPr);  
-                ContentAccessor sdtContent = sdtCell.getSdtContent();  
-                System.out.println("-----------table content="+ getContentAccessorContent(sdtContent));  
+                SdtContent sdtContent = sdtCell.getSdtContent();  
+                System.out.println("-----------table content="+ getSdtContentContent(sdtContent));  
             } else if (sdtChild instanceof SdtBlock) {  
                 SdtBlock sdtBlock = (SdtBlock) sdtChild;  
                 SdtPr sdtPr = sdtBlock.getSdtPr();  
                 printSdtPrContent(sdtPr);  
-                ContentAccessor sdtContent = sdtBlock.getSdtContent();  
-                System.out.println("-----------sdtblock content="+ getContentAccessorContent(sdtContent));  
+                SdtContent sdtContent = sdtBlock.getSdtContent();  
+                System.out.println("-----------sdtblock content="+ getSdtContentContent(sdtContent));  
             }  
         }  
     }  
@@ -152,7 +152,7 @@ public class Docx4j_读取内容控件_S4_Test {
         System.out.println(sb.toString());  
     }  
   
-    public String getContentAccessorContent(ContentAccessor contentAcc)  
+    public String getSdtContentContent(SdtContent contentAcc)  
             throws Exception {  
         StringWriter stringWriter = new StringWriter();  
         TextUtils.extractText(contentAcc, stringWriter);  

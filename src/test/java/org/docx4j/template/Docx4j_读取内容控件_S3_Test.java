@@ -34,7 +34,8 @@ import org.docx4j.wml.CTSdtCell;
 import org.docx4j.wml.ContentAccessor;  
 import org.docx4j.wml.Document;  
 import org.docx4j.wml.Id;  
-import org.docx4j.wml.SdtBlock;  
+import org.docx4j.wml.SdtBlock;
+import org.docx4j.wml.SdtContent;
 import org.docx4j.wml.SdtPr;  
 import org.docx4j.wml.SdtPr.Alias;  
 import org.docx4j.wml.SdtRun;  
@@ -66,21 +67,21 @@ public class Docx4j_读取内容控件_S3_Test {
                 printSdtPrContent(sdtPr);  
                 // System.out.println(XmlUtils.marshaltoString(sdtPr, true,  
                 // true));  
-                ContentAccessor sdtContent = sdtRun.getSdtContent();  
+                SdtContent sdtContent = sdtRun.getSdtContent();  
                 System.out.println("-----------p content="  
                         + getContentAccessorContent(sdtContent));  
             } else if (sdtChild instanceof CTSdtCell) {  
                 CTSdtCell sdtCell = (CTSdtCell) sdtChild;  
                 SdtPr sdtPr = sdtCell.getSdtPr();  
                 printSdtPrContent(sdtPr);  
-                ContentAccessor sdtContent = sdtCell.getSdtContent();  
+                SdtContent sdtContent = sdtCell.getSdtContent();  
                 System.out.println("-----------table content="  
                         + getContentAccessorContent(sdtContent));  
             } else if (sdtChild instanceof SdtBlock) {  
                 SdtBlock sdtBlock = (SdtBlock) sdtChild;  
                 SdtPr sdtPr = sdtBlock.getSdtPr();  
                 printSdtPrContent(sdtPr);  
-                ContentAccessor sdtContent = sdtBlock.getSdtContent();  
+                SdtContent sdtContent = sdtBlock.getSdtContent();  
                 System.out.println("-----------sdtblock content="  
                         + getContentAccessorContent(sdtContent));  
             }  
@@ -126,7 +127,7 @@ public class Docx4j_读取内容控件_S3_Test {
         System.out.println(sb.toString());  
     }  
   
-    public String getContentAccessorContent(ContentAccessor contentAcc)  
+    public String getContentAccessorContent(SdtContent contentAcc)  
             throws Exception {  
         StringWriter stringWriter = new StringWriter();  
         TextUtils.extractText(contentAcc, stringWriter);  
