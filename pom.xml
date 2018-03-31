@@ -42,15 +42,15 @@
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 		<repository>
-			<id>ossrh</id>
+		    <id>ossrh</id>
 			<name>Maven Central Staging Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
+		    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		  </repository>
 	</distributionManagement>
 	
 	<modules>
 		<module>docx4j-template-beetl</module>
-		<module>docx4j-template-fonts</module>
+		<!-- <module>docx4j-template-fonts</module> -->
 		<module>docx4j-template-freemarker</module>
 		<module>docx4j-template-httl</module>
 		<module>docx4j-template-jetbrick</module>
@@ -171,7 +171,6 @@
 					<executions>
 						<execution>
 							<id>attach-sources</id>
-							<phase>package</phase>
 							<goals>
 								<goal>jar-no-fork</goal>
 							</goals>
@@ -250,8 +249,8 @@
 						<serverId>ossrh</serverId>
 						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 						<autoReleaseAfterClose>false</autoReleaseAfterClose>
-						<sslAllowAll>true</sslAllowAll>
-						<stagingProgressPauseDurationSeconds>20</stagingProgressPauseDurationSeconds>
+						<!-- <sslAllowAll>true</sslAllowAll> -->
+						<stagingProgressPauseDurationSeconds>60</stagingProgressPauseDurationSeconds>
 						<stagingProgressTimeoutMinutes>20</stagingProgressTimeoutMinutes>
 						<detectBuildFailures>true</detectBuildFailures>
 					</configuration>
@@ -289,11 +288,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
-			<!-- 签名插件：对构建的jar、javadoc、source使用gpg来签名 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-			</plugin>
 			<!-- 安装插件：将项目输出构件安装到本地仓库 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -303,10 +297,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
