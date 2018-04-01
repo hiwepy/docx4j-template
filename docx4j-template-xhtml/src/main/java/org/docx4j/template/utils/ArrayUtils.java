@@ -20,15 +20,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 
- * @className	： ArrayUtils
- * @description	： TODO(描述这个类的作用)
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:27:12
- * @version 	V1.0
+ * TODO
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class ArrayUtils extends org.apache.commons.lang3.ArrayUtils {
 
+	@SafeVarargs
 	public static <T> Set<T> asSet(T... element) {
 		HashSet<T> elements = new HashSet<T>(element.length);
 		Collections.addAll(elements, element);

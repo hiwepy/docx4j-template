@@ -20,15 +20,18 @@ import java.util.Map;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 
 /**
- * 
- * @className	： WordprocessingMLTemplate
- * @description	： TODO(描述这个类的作用)
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:30:59
- * @version 	V1.0
+ * TODO
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public abstract class WordprocessingMLTemplate {
 	
+	/**
+	 * 
+	 * @param template
+	 * @param variables
+	 * @return
+	 * @throws Exception
+	 */
 	public abstract WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception;
 	
 }

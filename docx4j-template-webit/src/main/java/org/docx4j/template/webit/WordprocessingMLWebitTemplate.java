@@ -29,11 +29,8 @@ import webit.script.CFG;
 import webit.script.Engine;
 
 /**
- * @className	： WordprocessingMLWebitTemplate
- * @description	： 该模板仅负责使用Webit模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:31:48
- * @version 	V1.0
+ * 该模板仅负责使用Webit模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class WordprocessingMLWebitTemplate extends WordprocessingMLTemplate {
 	

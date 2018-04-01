@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.vindell</groupId>
 	<artifactId>docx4j-template</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Building doc documents based on xhtml templates using docx4j</description>
 	<url>https://github.com/vindell/${project.artifactId}</url>
@@ -50,7 +50,6 @@
 	
 	<modules>
 		<module>docx4j-template-beetl</module>
-		<!-- <module>docx4j-template-fonts</module> -->
 		<module>docx4j-template-freemarker</module>
 		<module>docx4j-template-httl</module>
 		<module>docx4j-template-jetbrick</module>
@@ -76,6 +75,10 @@
 						<target>${java.version}</target>
 						<encoding>${project.build.sourceEncoding}</encoding>
 						<maxmem>512M</maxmem>
+						<compilerArguments>
+							<Xlint:unchecked/>
+							<Xlint:deprecation/>
+						</compilerArguments>
 					</configuration>
 				</plugin>
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
@@ -226,6 +229,7 @@
 					<configuration>
 						<aggregate>true</aggregate>
 						<argLine>-Dfile.encoding=UTF-8</argLine>
+						<additionalparam>-Xdoclint:none</additionalparam>
 						<charset>${project.build.sourceEncoding}</charset>
 						<encoding>${project.build.sourceEncoding}</encoding>
 						<docencoding>${project.build.sourceEncoding}</docencoding>
@@ -303,6 +307,15 @@
 
 	<profiles>
 		<profile>
+			<id>disable-javadoc-doclint</id>
+				<activation>
+					<jdk>[1.8,)</jdk>
+				</activation>
+			<properties>
+				<additionalparam>-Xdoclint:none -Xlint:unchecked</additionalparam>
+			</properties>
+		</profile>
+		<profile>
 			<id>release</id>
 			<build>
 				<plugins>
@@ -335,6 +348,11 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
+					</plugin>
+					<!-- javadoc -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
 					</plugin>
 					<!-- 安装插件：将项目输出构件安装到本地仓库 -->
 					<plugin>

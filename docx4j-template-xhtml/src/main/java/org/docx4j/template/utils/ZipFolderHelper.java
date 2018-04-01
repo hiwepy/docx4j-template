@@ -23,6 +23,7 @@ import java.util.zip.ZipOutputStream;
 
 /**
  * 处理文件压缩
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 class ZipFolderHelper {   
 	

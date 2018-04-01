@@ -29,11 +29,8 @@ import org.docx4j.template.WordprocessingMLHtmlTemplate;
 import org.docx4j.template.WordprocessingMLTemplate;
 
 /**
- * @className	： WordprocessingMLBeetlTemplate
- * @description	：该模板仅负责使用Beetl模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:29:04
- * @version 	V1.0
+ * 该模板仅负责使用Beetl模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class WordprocessingMLBeetlTemplate extends WordprocessingMLTemplate {
 	

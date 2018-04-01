@@ -25,6 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.docx4j.Docx4J;
+import org.docx4j.convert.out.FOSettings;
 import org.docx4j.jaxb.Context;
 import org.docx4j.openpackaging.contenttype.ContentType;
 import org.docx4j.openpackaging.contenttype.ContentTypes;
@@ -39,12 +41,8 @@ import org.docx4j.template.io.WordprocessingMLPackageWriter;
 import org.docx4j.wml.CTAltChunk;
 
 /**
- * 
- * @className	： Docx4jUtils
- * @description	： TODO(描述这个类的作用)
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:27:30
- * @version 	V1.0
+ * TODO
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class Docx4jUtils {
 
@@ -161,5 +159,11 @@ public class Docx4jUtils {
         }  
     } 
     
+    public static void toP(WordprocessingMLPackage wordMLPackage,String outPath) throws Exception{
+        OutputStream os = new FileOutputStream(outPath);
+        FOSettings foSettings = Docx4J.createFOSettings();
+        foSettings.setWmlPackage(wordMLPackage);
+        Docx4J.toFO(foSettings, os, Docx4J.FLAG_EXPORT_PREFER_XSL);
+    }
 
 }

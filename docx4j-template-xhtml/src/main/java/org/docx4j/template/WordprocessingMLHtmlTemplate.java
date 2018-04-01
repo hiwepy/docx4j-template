@@ -28,11 +28,8 @@ import org.docx4j.template.io.WordprocessingMLPackageBuilder;
 import org.jsoup.nodes.Document;
 
 /**
- * @className	： WordprocessingMLHtmlTemplate
- * @description	： 该模板仅负责将原生的HTML元素转换成XHTML后，作为模板生成WordprocessingMLPackage对象
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:29:57
- * @version 	V1.0
+ * 该模板仅负责将原生的HTML元素转换成XHTML后，作为模板生成WordprocessingMLPackage对象
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class WordprocessingMLHtmlTemplate extends WordprocessingMLTemplate {
 	
@@ -83,7 +80,7 @@ public class WordprocessingMLHtmlTemplate extends WordprocessingMLTemplate {
 	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
 		WordprocessingMLPackage wordMLPackage = null;
 		if (htmlFile != null) {
-			wordMLPackage = wordMLPackageBuilder.buildWhithHtml(htmlFile, altChunk);
+			wordMLPackage = wordMLPackageBuilder.buildWhithXhtml(htmlFile, altChunk);
 		} else  if (url != null) {
 			wordMLPackage = wordMLPackageBuilder.buildWhithURL(url, altChunk);
 		} else  if (urlstr != null) {
@@ -97,7 +94,7 @@ public class WordprocessingMLHtmlTemplate extends WordprocessingMLTemplate {
 		} else  if (doc != null) {
 			wordMLPackage = wordMLPackageBuilder.buildWhithDoc(doc, altChunk);
 		} else {
-			wordMLPackage = wordMLPackageBuilder.buildWhithHtml(template, altChunk);
+			wordMLPackage = wordMLPackageBuilder.buildWhithXhtml(template, altChunk);
 		}
 		//返回WordprocessingMLPackage对象
 		return wordMLPackage;

@@ -45,11 +45,8 @@ import freemarker.template.utility.HtmlEscape;
 import freemarker.template.utility.XmlEscape;
 
 /**
- * @className	： WordprocessingMLFreemarkerTemplate
- * @description	：该模板仅负责使用Freemarker模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:29:45
- * @version 	V1.0
+ * 该模板仅负责使用Freemarker模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class WordprocessingMLFreemarkerTemplate extends WordprocessingMLTemplate {
 	

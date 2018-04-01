@@ -20,11 +20,8 @@ import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.wml.ObjectFactory;
 
 /**
- * @className	： ParagraphWmlRender
- * @description	： TODO(描述这个类的作用)
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:28:39
- * @version 	V1.0
+ * TODO
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class ParagraphWmlRender {
 

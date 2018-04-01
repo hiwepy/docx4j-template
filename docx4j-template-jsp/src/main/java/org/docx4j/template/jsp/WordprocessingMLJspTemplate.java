@@ -35,11 +35,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @className	： WordprocessingMLJspTemplate
- * @description	： 该模板仅负责使用Jsp模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:30:34
- * @version 	V1.0
+ * 该模板仅负责使用Jsp模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class WordprocessingMLJspTemplate extends WordprocessingMLTemplate {
 	

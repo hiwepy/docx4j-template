@@ -48,11 +48,8 @@ import org.docx4j.wml.Text;
 import org.docx4j.wml.Tr;
 
 /**
- * @className	： WMLPackageUtils
- * @description	： TODO(描述这个类的作用)
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:28:03
- * @version 	V1.0
+ * TODO
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 @SuppressWarnings("unchecked")
 public class WMLPackageUtils {

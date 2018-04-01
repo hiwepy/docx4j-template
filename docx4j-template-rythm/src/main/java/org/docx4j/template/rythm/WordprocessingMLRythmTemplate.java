@@ -30,11 +30,8 @@ import org.rythmengine.Rythm;
 import org.rythmengine.RythmEngine;
 
 /**
- * @className	： WordprocessingMLRythmTemplate
- * @description	： 该模板仅负责使用Rythm模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:30:49
- * @version 	V1.0
+ * 该模板仅负责使用Rythm模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class WordprocessingMLRythmTemplate extends WordprocessingMLTemplate {
 	

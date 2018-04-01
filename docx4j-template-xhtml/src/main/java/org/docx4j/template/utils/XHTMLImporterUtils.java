@@ -29,13 +29,6 @@ import org.docx4j.template.Docx4jConstants;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Entities;
 
-/**
- * @className	： XHTMLImporterUtils
- * @description	： TODO(描述这个类的作用)
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:28:27
- * @version 	V1.0
- */
 public class XHTMLImporterUtils {
 
 	public static WordprocessingMLPackage handle(WordprocessingMLPackage wmlPackage, Document doc,boolean fragment,boolean altChunk) throws IOException, Docx4JException {

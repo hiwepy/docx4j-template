@@ -29,12 +29,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 /**
- * 
- * @className	： WmlZipUtils
- * @description	： To change this template, choose Tools | Templates and open the template in the editor.
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:28:18
- * @version 	V1.0
+ * To change this template, choose Tools | Templates and open the template in the editor.
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class WmlZipUtils {
 
@@ -74,8 +70,11 @@ public class WmlZipUtils {
 	}
 
 	/**
-	 * @param zipFile
+	 * 
+	 * @param sourceFile
 	 * @param outputDir
+	 * @throws ZipException
+	 * @throws IOException
 	 */
 	public static void unzip(File sourceFile, File outputDir) throws ZipException, IOException {
 		FileUtils.deleteDirectory(outputDir);
