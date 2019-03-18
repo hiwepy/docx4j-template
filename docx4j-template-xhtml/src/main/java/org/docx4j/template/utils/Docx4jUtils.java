@@ -59,12 +59,9 @@ public class Docx4jUtils {
 	/**
 	 * docx文档转换为PDF
 	 * 
-	 * @param docx
-	 *            docx文档
-	 * @param pdfPath
-	 *            PDF文档存储路径
-	 * @throws Exception
-	 *             可能为Docx4JException, FileNotFoundException, IOException等
+	 * @param docx 		：docx文档
+	 * @param pdfPath	：PDF文档存储路径
+	 * @throws Exception： 可能为Docx4JException, FileNotFoundException, IOException等
 	 */
 	public static void docxToPdf(String docxPath, String pdfPath) throws Exception {
 		OutputStream output = null;
