@@ -25,8 +25,8 @@ import org.beetl.core.resource.ClasspathResourceLoader;
 import org.docx4j.Docx4jProperties;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.template.Docx4jConstants;
-import org.docx4j.template.WordprocessingMLHtmlTemplate;
 import org.docx4j.template.WordprocessingMLTemplate;
+import org.docx4j.template.xhtml.WordprocessingMLHtmlTemplate;
 
 /**
  * 该模板仅负责使用Beetl模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象

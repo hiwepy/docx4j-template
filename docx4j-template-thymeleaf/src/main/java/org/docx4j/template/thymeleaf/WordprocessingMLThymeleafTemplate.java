@@ -21,10 +21,10 @@ import java.util.Map;
 
 import org.docx4j.Docx4jProperties;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.docx4j.template.WordprocessingMLHtmlTemplate;
 import org.docx4j.template.WordprocessingMLTemplate;
 import org.docx4j.template.utils.ArrayUtils;
 import org.docx4j.template.utils.StringUtils;
+import org.docx4j.template.xhtml.WordprocessingMLHtmlTemplate;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templateresolver.AbstractConfigurableTemplateResolver;

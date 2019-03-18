@@ -51,6 +51,7 @@
 	<modules>
 		<module>docx4j-template-beetl</module>
 		<module>docx4j-template-bom</module>
+		<module>docx4j-template-core</module>
 		<module>docx4j-template-freemarker</module>
 		<module>docx4j-template-httl</module>
 		<module>docx4j-template-jetbrick</module>

@@ -23,9 +23,9 @@ import java.util.Properties;
 import org.docx4j.Docx4jProperties;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.template.Docx4jConstants;
-import org.docx4j.template.WordprocessingMLHtmlTemplate;
 import org.docx4j.template.WordprocessingMLTemplate;
 import org.docx4j.template.utils.ConfigUtils;
+import org.docx4j.template.xhtml.WordprocessingMLHtmlTemplate;
 
 import httl.Engine;
 

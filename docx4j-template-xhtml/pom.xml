@@ -22,12 +22,9 @@
 		</dependency>
     	
     	<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>docx4j-template-core</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		
 		<!-- ###################### HTML、CSS 解析工具包###################### -->
@@ -37,13 +34,6 @@
 			<artifactId>jsoup</artifactId>
 		</dependency>
 		
-		<!-- ###################### Docx4j ###################### -->
-		
-		<!-- Docx4j Core -->
-		<dependency>
-		    <groupId>org.docx4j</groupId>
-		    <artifactId>docx4j</artifactId>
-		</dependency>
  		<!-- Docx4j ImportXHTML -->
 		<dependency>
 		    <groupId>org.docx4j</groupId>
@@ -52,27 +42,6 @@
 		<dependency>
 		    <groupId>org.docx4j</groupId>
 		    <artifactId>docx4j-ImportXHTML</artifactId>
-		</dependency>
-		<!-- Docx4j MOXy -->
-		<dependency>
-		    <groupId>org.docx4j</groupId>
-		    <artifactId>docx4j-MOXy-JAXBContext</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.antlr</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.asm</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.moxy</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
