@@ -388,49 +388,54 @@
 		<antlr4.version>4.7.1</antlr4.version>
 		<beetl.version>2.7.26</beetl.version>
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>
-		<commons-lang3.version>3.4</commons-lang3.version>
+		<commons-lang3.version>3.8.1</commons-lang3.version>
 		<commons-logging.version>1.2</commons-logging.version>
 		<commons-io.version>2.6</commons-io.version>
 		<!-- Docx4j Core -->
-		<docx4j.version>3.3.7</docx4j.version>
+		<docx4j.version>6.1.2</docx4j.version>
+		<docx4j-export-fo.version>6.1.0</docx4j-export-fo.version>
 		<!-- Docx4j ImportXHTML -->
-		<docx4j-ImportXHTML.version>3.3.6-1</docx4j-ImportXHTML.version>
-		<docx4j-XhtmlRenderer.version>3.0.0</docx4j-XhtmlRenderer.version>
+		<docx4j-importxhtml.version>6.1.0</docx4j-importxhtml.version>
+		<docx4j-xhtmlrenderer.version>3.0.0</docx4j-xhtmlrenderer.version>
 		<!-- Docx4j MOXy -->
-		<docx4j-moxy-jaxbcontext.version>3.3.6</docx4j-moxy-jaxbcontext.version>
-		<freemarker.version>2.3.27-incubating</freemarker.version>
+		<docx4j-moxy-jaxbcontext.version>6.0.0</docx4j-moxy-jaxbcontext.version>
+		<freemarker.version>2.3.28</freemarker.version>
 		<httl.version>1.0.12</httl.version>
-		<jackson.version>2.6.4</jackson.version>
-		<java.version>1.7</java.version>
+		<jackson.version>2.9.8</jackson.version>
+		<java.version>1.8</java.version>
 		<javax-activation.version>1.1.1</javax-activation.version>
-		<javax.mail-api.version>1.6.1</javax.mail-api.version>
-		<jetbrick.version>2.1.5</jetbrick.version>
-		<jsoup.version>1.11.2</jsoup.version>
+		<javax.mail-api.version>1.6.2</javax.mail-api.version>
+		<jetbrick.version>2.1.10</jetbrick.version>
+		<jsoup.version>1.11.3</jsoup.version>
 		<junit.version>4.12</junit.version>
-		<persistence.version>2.7.1</persistence.version>
-		<rythm.version>1.2.2</rythm.version>
+		<persistence.version>2.7.4</persistence.version>
+		<rythm.version>1.3.0</rythm.version>
 		<servlet-api.version>3.0.1</servlet-api.version>
-		<slf4j.version>1.7.25</slf4j.version>
-		<thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
+		<slf4j.version>1.7.26</slf4j.version>
+		<thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
 		<velocity.version>1.7</velocity.version>
 		<velocity-tools.version>2.0</velocity-tools.version>
 		<webit-script.version>1.5.2</webit-script.version>
 
 		<maven.version>3.0</maven.version>
-		<maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
-		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-		<maven-dependency-plugin.version>3.0.1</maven-dependency-plugin.version>
+		<maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
+		<maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
+		<maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+		<maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
 		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
-		<maven-enforcer-plugin.version>3.0.0-M1</maven-enforcer-plugin.version>
+		<maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
 		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-		<maven-install-plugin.version>2.5.2</maven-install-plugin.version>
-		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
-		<maven-javadoc-plugin.version>3.0.0</maven-javadoc-plugin.version>
+		<maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
+		<maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
+		<maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
 		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
-		<maven-surefire-plugin.vertsion>2.21.0</maven-surefire-plugin.vertsion>
+		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+		<maven-surefire-plugin.vertsion>2.22.1</maven-surefire-plugin.vertsion>
 		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
 		<maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
+		<maven-nexus-yuicompressor-plugin.version>1.1.0</maven-nexus-yuicompressor-plugin.version>
+		<maven-war-plugin.version>3.2.2</maven-war-plugin.version>
 
 	</properties>
 
@@ -533,7 +538,13 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-
+			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-export-fo -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-export-fo</artifactId>
+			    <version>${docx4j-export-fo.version}</version>
+			</dependency>
+						
 			<!-- Docx4j ImportXHTML -->
 
 			<!-- docx4j-ImportXHTML converts XHTML to OpenXML WordML (docx) using 
@@ -541,14 +552,14 @@
 			<dependency>
 				<groupId>org.docx4j</groupId>
 				<artifactId>docx4j-ImportXHTML</artifactId>
-				<version>${docx4j-ImportXHTML.version}</version>
+				<version>${docx4j-importxhtml.version}</version>
 			</dependency>
 			<!-- Modified flyingsaucer XML/XHTML and CSS 2.1 renderer, to support 
 				docx (and eventually pptx) output -->
 			<dependency>
 				<groupId>org.docx4j</groupId>
 				<artifactId>xhtmlrenderer</artifactId>
-				<version>${docx4j-XhtmlRenderer.version}</version>
+				<version>${docx4j-xhtmlrenderer.version}</version>
 			</dependency>
 
 			<!-- Docx4j MOXy -->
