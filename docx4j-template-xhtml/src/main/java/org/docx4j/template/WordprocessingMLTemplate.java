@@ -20,17 +20,16 @@ import java.util.Map;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 
 /**
- * TODO
+ * 模板处理接口
  * @author <a href="https://github.com/vindell">vindell</a>
  */
 public abstract class WordprocessingMLTemplate {
 	
 	/**
-	 * 
-	 * @param template
-	 * @param variables
-	 * @return
-	 * @throws Exception
+	 * @param template ：模板内容
+	 * @param variables ：变量
+	 * @return {@link WordprocessingMLPackage} 对象
+	 * @throws Exception ：异常对象
 	 */
 	public abstract WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception;
 	

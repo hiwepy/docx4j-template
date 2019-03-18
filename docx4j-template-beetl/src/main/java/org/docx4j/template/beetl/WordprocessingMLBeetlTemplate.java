@@ -45,6 +45,13 @@ public class WordprocessingMLBeetlTemplate extends WordprocessingMLTemplate {
 		this.mlHtmlTemplate = template;
 	}
 
+	/**
+	 * 使用Beetl模板引擎渲染模板
+	 * @param template ：模板内容
+	 * @param variables ：变量
+	 * @return {@link WordprocessingMLPackage} 对象
+	 * @throws Exception ：异常对象
+	 */
 	@Override
 	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
 		//使用Beetl模板引擎渲染模板

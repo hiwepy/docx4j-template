@@ -50,11 +50,18 @@ public class WordprocessingMLJetbrickTemplate extends WordprocessingMLTemplate {
 		this.mlHtmlTemplate = template;
 	}
 
+	/**
+	 * 使用Jetbrick模板引擎渲染模板
+	 * @param template ：模板内容
+	 * @param variables ：变量
+	 * @return {@link WordprocessingMLPackage} 对象
+	 * @throws Exception ：异常对象
+	 */
 	@Override
 	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
 		// 创建模板输出内容接收对象
 		StringWriter output = new StringWriter();
-		// 使用Httl模板引擎渲染模板
+		// 使用Jetbrick模板引擎渲染模板
 		getEngine().getTemplate(template).render(variables, output);
 		//获取模板渲染后的结果
 		String html = output.toString();

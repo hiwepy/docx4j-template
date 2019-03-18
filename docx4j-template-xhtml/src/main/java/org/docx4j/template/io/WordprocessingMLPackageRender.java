@@ -90,7 +90,7 @@ public class WordprocessingMLPackageRender {
         tableRow.getContent().add(tableCell);  
     }
     
-	/** 
+	/*
      *  本方法创建单元格, 添加样式后添加到表格行中 
      */  
     public void addStyledTableCell(Tr tableRow, String content,boolean bold, String fontSize) {  
@@ -99,7 +99,7 @@ public class WordprocessingMLPackageRender {
         tableRow.getContent().add(tableCell);  
     }  
    
-    /** 
+    /* 
      *  这里我们添加实际的样式信息, 首先创建一个段落, 然后创建以单元格内容作为值的文本对象;  
      *  第三步, 创建一个被称为运行块的对象, 它是一块或多块拥有共同属性的文本的容器, 并将文本对象添加 
      *  到其中. 随后我们将运行块R添加到段落内容中. 
@@ -131,7 +131,7 @@ public class WordprocessingMLPackageRender {
         tableCell.getContent().add(paragraph);  
     }  
    
-    /** 
+    /*
      *  本方法为可运行块添加字体大小信息. 首先创建一个"半点"尺码对象, 然后设置fontSize 
      *  参数作为该对象的值, 最后我们分别设置sz和szCs的字体大小. 
      *  Finally we'll set the non-complex and complex script font sizes, sz and szCs respectively. 
@@ -143,7 +143,7 @@ public class WordprocessingMLPackageRender {
         runProperties.setSzCs(size);  
     }  
    
-    /** 
+    /* 
      *  本方法给可运行块属性添加粗体属性. BooleanDefaultTrue是设置b属性的Docx4j对象, 严格 
      *  来说我们不需要将值设置为true, 因为这是它的默认值. 
      */  
@@ -153,7 +153,7 @@ public class WordprocessingMLPackageRender {
         runProperties.setB(b);  
     }  
    
-    /** 
+    /* 
      *  本方法给表格添加边框 
      */  
     public void addBorders(Tbl table) {  
@@ -175,7 +175,7 @@ public class WordprocessingMLPackageRender {
     }  
 	
     
-    /** 
+    /* 
      *  本方法创建一行, 并向其中添加合并列, 然后添加再两个普通的单元格. 随后将该行添加到表格 
      */  
     public void addTableRowWithMergedCells(String mergedContent,  String field1Content, String field2Content, Tbl table) {  
@@ -189,7 +189,7 @@ public class WordprocessingMLPackageRender {
         table.getContent().add(tableRow1);  
     }  
    
-    /** 
+    /* 
      *  本方法添加一个合并了其它行单元格的列单元格. 如果传进来的内容是null, 传空字符串和一个为null的合并值. 
      */  
     public void addMergedColumn(Tr row, String content) {  
@@ -200,7 +200,7 @@ public class WordprocessingMLPackageRender {
         }  
     }  
    
-    /** 
+    /* 
      *  我们创建一个单元格和单元格属性对象. 
      *  也创建了一个纵向合并对象. 如果合并值不为null, 将它设置到合并对象中. 然后将该对象添加到 
      *  单元格属性并将属性添加到单元格中. 最后设置单元格内容并将单元格添加到行中. 
@@ -224,7 +224,7 @@ public class WordprocessingMLPackageRender {
         row.getContent().add(tableCell);  
     }  
    
-    /** 
+    /* 
      *  本方法创建一个单元格并将给定的内容添加进去. 
      *  如果给定的宽度大于0, 将这个宽度设置到单元格. 
      *  最后, 将单元格添加到行中. 
@@ -238,7 +238,7 @@ public class WordprocessingMLPackageRender {
         row.getContent().add(tableCell);  
     }
     
-    /** 
+    /*
      *  本方法创建一个单元格属性集对象和一个表格宽度对象. 将给定的宽度设置到宽度对象然后将其添加到 属性集对象. 最后将属性集对象设置到单元格中. 
      */  
     public void setCellWidth(Tc tableCell, int width) {  
@@ -250,7 +250,7 @@ public class WordprocessingMLPackageRender {
     }
     
     
-    /** 
+    /*
      *  Docx4j拥有一个由字节数组创建图片部件的工具方法, 随后将其添加到给定的包中. 为了能将图片添加 
      *  到一个段落中, 我们需要将图片转换成内联对象. 这也有一个方法, 方法需要文件名提示, 替换文本,  
      *  两个id标识符和一个是嵌入还是链接到的指示作为参数. 

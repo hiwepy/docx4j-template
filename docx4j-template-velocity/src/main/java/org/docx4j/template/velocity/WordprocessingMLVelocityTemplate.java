@@ -47,6 +47,13 @@ public class WordprocessingMLVelocityTemplate extends WordprocessingMLTemplate {
 		this.mlHtmlTemplate = template;
 	}
 	
+	/**
+	 * 使用Velocity模板引擎渲染模板
+	 * @param template ：模板内容
+	 * @param variables ：变量
+	 * @return {@link WordprocessingMLPackage} 对象
+	 * @throws Exception ：异常对象
+	 */
 	@Override
 	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
 		//设置Velocity上下文对象

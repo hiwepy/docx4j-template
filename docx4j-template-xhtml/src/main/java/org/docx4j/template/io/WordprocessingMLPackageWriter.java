@@ -53,6 +53,10 @@ public class WordprocessingMLPackageWriter  {
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 docx
+	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
+	 * @return {@link File} docx 文档
+	 * @throws IOException ：IO异常
+	 * @throws Docx4JException ： Docx4j异常
 	 */
 	public File writeToDocx(WordprocessingMLPackage wmlPackage) throws  IOException, Docx4JException{
 		Assert.notNull(wmlPackage, " wmlPackage is not specified!");
@@ -62,8 +66,13 @@ public class WordprocessingMLPackageWriter  {
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 docx
+	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
+	 * @param outPath 文件输出路径
+	 * @return {@link File} docx 文档
+	 * @throws IOException ：IO异常
+	 * @throws Docx4JException ： Docx4j异常
 	 */
-	public File writeToDocx(WordprocessingMLPackage wmlPackage,String outPath) throws  IOException, Docx4JException{
+	public File writeToDocx(WordprocessingMLPackage wmlPackage, String outPath) throws  IOException, Docx4JException{
 		Assert.notNull(wmlPackage, " wmlPackage is not specified!");
 		Assert.notNull(outPath, " outPath is not specified!");
 		return writeToDocx(wmlPackage, new File(outPath));
@@ -71,8 +80,13 @@ public class WordprocessingMLPackageWriter  {
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 docx
+	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
+	 * @param outFile 文件输出路径
+	 * @return {@link File} docx 文档
+	 * @throws IOException ：IO异常
+	 * @throws Docx4JException ： Docx4j异常
 	 */
-	public File writeToDocx(WordprocessingMLPackage wmlPackage,File outFile) throws IOException, Docx4JException {
+	public File writeToDocx(WordprocessingMLPackage wmlPackage, File outFile) throws IOException, Docx4JException {
 		Assert.isTrue( outFile.exists() , " outFile is not founded !");
 		writeToDocx(wmlPackage, new FileOutputStream(outFile));
 		return outFile;
@@ -80,6 +94,11 @@ public class WordprocessingMLPackageWriter  {
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 docx
+	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
+	 * @param output 文件输出流
+	 * @return {@link File} docx 文档
+	 * @throws IOException ：IO异常
+	 * @throws Docx4JException ： Docx4j异常
 	 */
 	public void writeToDocx(WordprocessingMLPackage wmlPackage,OutputStream output) throws IOException, Docx4JException {
 		Assert.notNull(wmlPackage, " wmlPackage is not specified!");
@@ -93,8 +112,12 @@ public class WordprocessingMLPackageWriter  {
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 html
+	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
+	 * @return {@link File} docx 文档
+	 * @throws IOException ：IO异常
+	 * @throws Docx4JException ： Docx4j异常
 	 */
-	public File writeToHtml(WordprocessingMLPackage wmlPackage) throws  IOException, Docx4JException{
+	public File writeToHtml(WordprocessingMLPackage wmlPackage) throws IOException, Docx4JException{
 		Assert.notNull(wmlPackage, " wmlPackage is not specified!");
 		File outFile = new File( Docx4jUtils.getTempPath() + PDF_SUFFIX );
 		return writeToHtml(wmlPackage, outFile);
@@ -102,8 +125,13 @@ public class WordprocessingMLPackageWriter  {
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 html
+	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
+	 * @param outPath 文件输出路径
+	 * @return {@link File} docx 文档
+	 * @throws IOException ：IO异常
+	 * @throws Docx4JException ： Docx4j异常
 	 */
-	public File writeToHtml(WordprocessingMLPackage wmlPackage,String outPath) throws  IOException, Docx4JException{
+	public File writeToHtml(WordprocessingMLPackage wmlPackage, String outPath) throws  IOException, Docx4JException{
 		Assert.notNull(wmlPackage, " wmlPackage is not specified!");
 		Assert.notNull(outPath, " outPath is not specified!");
 		return writeToHtml(wmlPackage, new File(outPath));
@@ -111,6 +139,11 @@ public class WordprocessingMLPackageWriter  {
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 html
+	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
+	 * @param outFile 文件输出路径
+	 * @return {@link File} docx 文档
+	 * @throws IOException ：IO异常
+	 * @throws Docx4JException ： Docx4j异常
 	 */
 	public File writeToHtml(WordprocessingMLPackage wmlPackage,File outFile) throws IOException, Docx4JException {
 		Assert.notNull(wmlPackage, " wmlPackage is not specified!");
@@ -153,6 +186,10 @@ public class WordprocessingMLPackageWriter  {
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 pdf
+	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
+	 * @return {@link File} docx 文档
+	 * @throws IOException ：IO异常
+	 * @throws Docx4JException ： Docx4j异常
 	 */
 	public File writeToPDF(WordprocessingMLPackage wmlPackage) throws  IOException, Docx4JException{
 		Assert.notNull(wmlPackage, " wmlPackage is not specified!");
@@ -162,6 +199,11 @@ public class WordprocessingMLPackageWriter  {
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 pdf
+	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
+	 * @param outPath 文件输出路径
+	 * @return {@link File} docx 文档
+	 * @throws IOException ：IO异常
+	 * @throws Docx4JException ： Docx4j异常
 	 */
 	public File writeToPDF(WordprocessingMLPackage wmlPackage,String outPath) throws  IOException, Docx4JException{
 		Assert.notNull(wmlPackage, " wmlPackage is not specified!");
@@ -171,6 +213,11 @@ public class WordprocessingMLPackageWriter  {
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 pdf
+	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
+	 * @param outFile 文件输出路径
+	 * @return {@link File} docx 文档
+	 * @throws IOException ：IO异常
+	 * @throws Docx4JException ： Docx4j异常
 	 */
 	public File writeToPDF(WordprocessingMLPackage wmlPackage,File outFile) throws IOException, Docx4JException {
 		Assert.isTrue( outFile.exists() , " outFile is not founded !");
@@ -180,6 +227,11 @@ public class WordprocessingMLPackageWriter  {
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 pdf
+	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
+	 * @param output 文件输出流
+	 * @return {@link File} docx 文档
+	 * @throws IOException ：IO异常
+	 * @throws Docx4JException ： Docx4j异常
 	 */
 	public void writeToPDF(WordprocessingMLPackage wmlPackage,OutputStream output) throws IOException, Docx4JException {
 		Assert.notNull(wmlPackage, " wmlPackage is not specified!");
@@ -194,8 +246,13 @@ public class WordprocessingMLPackageWriter  {
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 pdf
+	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
+	 * @param output 文件输出流
+	 * @return {@link File} docx 文档
+	 * @throws IOException ：IO异常
+	 * @throws Docx4JException ： Docx4j异常
 	 */
-	public void writeToPDFWhithFo(WordprocessingMLPackage wmlPackage,OutputStream output) throws IOException, Docx4JException {
+	public void writeToPDFWhithFo(WordprocessingMLPackage wmlPackage, OutputStream output) throws IOException, Docx4JException {
 		Assert.notNull(wmlPackage, " wmlPackage is not specified!");
 		Assert.notNull(output, " output is not specified!");
         try {
