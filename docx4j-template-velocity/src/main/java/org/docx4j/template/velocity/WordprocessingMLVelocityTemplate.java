@@ -39,8 +39,12 @@ public class WordprocessingMLVelocityTemplate extends WordprocessingMLTemplate {
 	protected DateTool dateTool = new DateTool();
 	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
 	
-	public WordprocessingMLVelocityTemplate(boolean altChunk) {
-		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	public WordprocessingMLVelocityTemplate() {
+		this(false, false);
+	}
+	
+	public WordprocessingMLVelocityTemplate(boolean landscape, boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(landscape, altChunk) ;
 	}
 	
 	public WordprocessingMLVelocityTemplate(WordprocessingMLHtmlTemplate template) {

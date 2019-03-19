@@ -61,8 +61,12 @@ public class WordprocessingMLFreemarkerTemplate extends WordprocessingMLTemplate
 	protected TemplateModel templateModel;
 	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
 
-	public WordprocessingMLFreemarkerTemplate(boolean altChunk) {
-		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	public WordprocessingMLFreemarkerTemplate() {
+		this(false, false);
+	}
+	
+	public WordprocessingMLFreemarkerTemplate(boolean landscape, boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(landscape, altChunk) ;
 	}
 	
 	public WordprocessingMLFreemarkerTemplate(WordprocessingMLHtmlTemplate template) {

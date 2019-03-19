@@ -35,7 +35,7 @@ public class WordprocessingMLFreemarkerTemplate_Test extends WordprocessingMLTem
 		//准备参数
         variables();
 		
-        freemarkerTemplate = new WordprocessingMLFreemarkerTemplate(false );
+        freemarkerTemplate = new WordprocessingMLFreemarkerTemplate();
         
         try {
         	File dirFile = new File(WordprocessingMLFreemarkerTemplate_Test.class.getResource("/tpl/").getPath());

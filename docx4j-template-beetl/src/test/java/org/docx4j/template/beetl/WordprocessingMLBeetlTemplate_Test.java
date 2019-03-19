@@ -32,7 +32,7 @@ public class WordprocessingMLBeetlTemplate_Test extends WordprocessingMLTemplate
 		//准备参数
         variables();
 		
-		beetlTemplate = new WordprocessingMLBeetlTemplate(false );
+		beetlTemplate = new WordprocessingMLBeetlTemplate();
 	}
 	
 	@Test

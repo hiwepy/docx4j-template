@@ -49,12 +49,16 @@ public class WordprocessingMLJspTemplate extends WordprocessingMLTemplate {
     protected JspEngine engine;
     protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
     
-	public WordprocessingMLJspTemplate(HttpServletRequest request,HttpServletResponse response,String name, String requestURL,boolean altChunk) {
+    public WordprocessingMLJspTemplate(HttpServletRequest request,HttpServletResponse response,String name, String requestURL) {
+		this(request, response, name, requestURL, false, false);
+	}
+    
+	public WordprocessingMLJspTemplate(HttpServletRequest request,HttpServletResponse response,String name, String requestURL, boolean landscape, boolean altChunk) {
 		this.request = request;
         this.response = response;
         this.name = name;
         this.requestURL = requestURL;
-        this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+        this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(landscape, altChunk) ;
 	}
 	
 	public WordprocessingMLJspTemplate(HttpServletRequest request,HttpServletResponse response,String name, String requestURL, WordprocessingMLHtmlTemplate template) {

@@ -42,8 +42,12 @@ public class WordprocessingMLThymeleafTemplate extends WordprocessingMLTemplate 
 	protected AbstractConfigurableTemplateResolver templateResolver;
 	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
 
-	public WordprocessingMLThymeleafTemplate(boolean altChunk) {
-		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	public WordprocessingMLThymeleafTemplate() {
+		this(false, false);
+	}
+	
+	public WordprocessingMLThymeleafTemplate(boolean landscape, boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(landscape, altChunk) ;
 	}
 	
 	public WordprocessingMLThymeleafTemplate(WordprocessingMLHtmlTemplate template) {

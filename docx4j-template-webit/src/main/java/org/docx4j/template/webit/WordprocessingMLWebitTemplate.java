@@ -37,8 +37,12 @@ public class WordprocessingMLWebitTemplate extends WordprocessingMLTemplate {
 	protected Engine engine;
 	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
 	
-	public WordprocessingMLWebitTemplate(boolean altChunk) {
-		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	public WordprocessingMLWebitTemplate() {
+		this(false, false);
+	}
+	
+	public WordprocessingMLWebitTemplate(boolean landscape, boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(landscape, altChunk) ;
 	}
 	
 	public WordprocessingMLWebitTemplate(WordprocessingMLHtmlTemplate template) {

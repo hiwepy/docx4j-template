@@ -32,7 +32,7 @@ public interface DocumentHandler {
 	
 	Document handle(File htmlFile) throws IOException;
 	
-	Document handle(String html,boolean fragment) throws IOException;
+	Document handle(String html, boolean fragment) throws IOException;
 	
 	Document handle(URL url) throws IOException;
 	

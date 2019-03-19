@@ -32,7 +32,7 @@ public class WordprocessingMLVelocityTemplate_Test extends WordprocessingMLTempl
 		//准备参数
         variables();
 		
-        velocityTemplate = new WordprocessingMLVelocityTemplate(false );
+        velocityTemplate = new WordprocessingMLVelocityTemplate();
         
 	}
 	

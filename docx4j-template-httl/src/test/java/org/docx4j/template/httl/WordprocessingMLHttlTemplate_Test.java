@@ -32,7 +32,7 @@ public class WordprocessingMLHttlTemplate_Test extends WordprocessingMLTemplate_
 		//准备参数
         variables();
 		
-        httlTemplate = new WordprocessingMLHttlTemplate(false);
+        httlTemplate = new WordprocessingMLHttlTemplate();
         
 	}
 	

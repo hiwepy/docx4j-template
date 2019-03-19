@@ -37,8 +37,12 @@ public class WordprocessingMLBeetlTemplate extends WordprocessingMLTemplate {
 	protected GroupTemplate engine;
 	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
 
-	public WordprocessingMLBeetlTemplate(boolean altChunk) {
-		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	public WordprocessingMLBeetlTemplate() {
+		this(false, false);
+	}
+	
+	public WordprocessingMLBeetlTemplate(boolean landscape, boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(landscape, altChunk) ;
 	}
 	
 	public WordprocessingMLBeetlTemplate(WordprocessingMLHtmlTemplate template) {

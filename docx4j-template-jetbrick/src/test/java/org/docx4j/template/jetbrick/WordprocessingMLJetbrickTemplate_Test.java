@@ -32,7 +32,7 @@ public class WordprocessingMLJetbrickTemplate_Test extends WordprocessingMLTempl
 		//准备参数
         variables();
 		
-        jetbrickTemplate = new WordprocessingMLJetbrickTemplate( false );
+        jetbrickTemplate = new WordprocessingMLJetbrickTemplate();
         
 	}
 	

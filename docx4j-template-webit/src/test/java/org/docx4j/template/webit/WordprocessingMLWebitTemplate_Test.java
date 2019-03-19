@@ -32,7 +32,7 @@ public class WordprocessingMLWebitTemplate_Test extends WordprocessingMLTemplate
 		//准备参数
         variables();
 		
-        webitTemplate = new WordprocessingMLWebitTemplate(false );
+        webitTemplate = new WordprocessingMLWebitTemplate();
         
 	}
 	

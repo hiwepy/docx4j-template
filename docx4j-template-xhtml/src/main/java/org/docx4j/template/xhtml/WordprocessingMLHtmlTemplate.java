@@ -21,6 +21,7 @@ import java.net.URL;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.docx4j.model.structure.PageSizePaper;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.template.WordprocessingMLTemplate;
 import org.docx4j.template.xhtml.handler.DocumentHandler;
@@ -36,42 +37,72 @@ public class WordprocessingMLHtmlTemplate extends WordprocessingMLTemplate {
 
 	protected DocumentHandler docHandler = XHTMLDocumentHandler.getDocumentHandler();
 	protected WordprocessingMLPackageBuilder wordMLPackageBuilder = WordprocessingMLPackageBuilder.getWMLPackageBuilder();
-	protected File htmlFile;
-	protected URL url;
-	protected String urlstr;
-	protected DataMap dataMap;
-	protected InputStream input;
-	protected Document doc;
 	protected boolean altChunk;
+	protected boolean landscape;
 
-	public WordprocessingMLHtmlTemplate(File htmlFile, boolean altChunk) {
-		this.htmlFile = htmlFile;
+	public WordprocessingMLHtmlTemplate() {
+		this(false, false);
+	}
+	
+	public WordprocessingMLHtmlTemplate(boolean landscape, boolean altChunk) {
+		this.landscape = landscape;
 		this.altChunk = altChunk;
 	}
 
-	public WordprocessingMLHtmlTemplate(boolean altChunk) {
-		this.altChunk = altChunk;
+	public WordprocessingMLPackage process(File htmlFile) throws Exception {
+		// 返回WordprocessingMLPackage对象
+		return wordMLPackageBuilder.buildWhithXhtml(htmlFile, landscape, altChunk);
+	}
+	
+	public WordprocessingMLPackage process(File htmlFile, PageSizePaper pageSize) throws Exception {
+		// 返回WordprocessingMLPackage对象
+		return wordMLPackageBuilder.buildWhithXhtml(htmlFile, pageSize, landscape, altChunk);
 	}
 
-	public WordprocessingMLHtmlTemplate(URL url, boolean altChunk) {
-		this.url = url;
-		this.altChunk = altChunk;
+	public WordprocessingMLPackage process( Document doc) throws Exception {
+		// 返回WordprocessingMLPackage对象
+		return wordMLPackageBuilder.buildWhithDoc(doc, landscape, altChunk);
 	}
-
-	public WordprocessingMLHtmlTemplate(String url, DataMap dataMap, boolean altChunk) {
-		this.urlstr = url;
-		this.dataMap = dataMap;
-		this.altChunk = altChunk;
+	
+	public WordprocessingMLPackage process( Document doc, PageSizePaper pageSize) throws Exception {
+		// 返回WordprocessingMLPackage对象
+		return wordMLPackageBuilder.buildWhithDoc(doc, pageSize, landscape, altChunk);
 	}
-
-	public WordprocessingMLHtmlTemplate(InputStream input, boolean altChunk) {
-		this.input = input;
-		this.altChunk = altChunk;
+	
+	@SuppressWarnings("deprecation")
+	public WordprocessingMLPackage process( InputStream input) throws Exception {
+		WordprocessingMLPackage wordMLPackage = null;
+		try {
+			wordMLPackage = wordMLPackageBuilder.buildWhithDoc(docHandler.handle(input), landscape, altChunk);
+		} finally {
+			IOUtils.closeQuietly(input);
+		}
+		// 返回WordprocessingMLPackage对象
+		return wordMLPackage;
 	}
-
-	public WordprocessingMLHtmlTemplate(Document doc, boolean altChunk) {
-		this.doc = doc;
-		this.altChunk = altChunk;
+	
+	@SuppressWarnings("deprecation")
+	public WordprocessingMLPackage process( InputStream input, PageSizePaper pageSize) throws Exception {
+		WordprocessingMLPackage wordMLPackage = null;
+		try {
+			wordMLPackage = wordMLPackageBuilder.buildWhithDoc(docHandler.handle(input), pageSize, landscape, altChunk);
+		} finally {
+			IOUtils.closeQuietly(input);
+		}
+		// 返回WordprocessingMLPackage对象
+		return wordMLPackage;
+	}
+	
+	public WordprocessingMLPackage process( URL url) throws Exception {
+		// 返回WordprocessingMLPackage对象
+		return wordMLPackageBuilder.buildWhithURL(url, landscape, altChunk);
+	}
+	
+	public WordprocessingMLPackage process( String url, Map<String, String> params, PageSizePaper pageSize) throws Exception {
+		DataMap dataMap = new DataMap();
+		dataMap.setData2(params);
+		// 返回WordprocessingMLPackage对象
+		return wordMLPackageBuilder.buildWhithURL(url, dataMap, pageSize, landscape, altChunk);
 	}
 
 	/**
@@ -83,26 +114,8 @@ public class WordprocessingMLHtmlTemplate extends WordprocessingMLTemplate {
 	 */
 	@Override
 	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
-		WordprocessingMLPackage wordMLPackage = null;
-		if (htmlFile != null) {
-			wordMLPackage = wordMLPackageBuilder.buildWhithXhtml(htmlFile, altChunk);
-		} else if (url != null) {
-			wordMLPackage = wordMLPackageBuilder.buildWhithURL(url, altChunk);
-		} else if (urlstr != null) {
-			wordMLPackage = wordMLPackageBuilder.buildWhithURL(urlstr, dataMap, altChunk);
-		} else if (input != null) {
-			try {
-				wordMLPackage = wordMLPackageBuilder.buildWhithDoc(docHandler.handle(input), altChunk);
-			} finally {
-				IOUtils.closeQuietly(input);
-			}
-		} else if (doc != null) {
-			wordMLPackage = wordMLPackageBuilder.buildWhithDoc(doc, altChunk);
-		} else {
-			wordMLPackage = wordMLPackageBuilder.buildWhithXhtml(template, altChunk);
-		}
 		// 返回WordprocessingMLPackage对象
-		return wordMLPackage;
+		return wordMLPackageBuilder.buildWhithXhtml(template, altChunk);
 	}
 
 	public DocumentHandler getDocHandler() {
@@ -121,53 +134,7 @@ public class WordprocessingMLHtmlTemplate extends WordprocessingMLTemplate {
 		this.wordMLPackageBuilder = wordMLPackageBuilder;
 	}
 
-	public File getHtmlFile() {
-		return htmlFile;
-	}
-
-	public void setHtmlFile(File htmlFile) {
-		this.htmlFile = htmlFile;
-	}
-
-	public URL getUrl() {
-		return url;
-	}
-
-	public void setUrl(URL url) {
-		this.url = url;
-	}
-
-	public String getUrlstr() {
-		return urlstr;
-	}
-
-	public void setUrlstr(String urlstr) {
-		this.urlstr = urlstr;
-	}
-
-	public DataMap getDataMap() {
-		return dataMap;
-	}
-
-	public void setDataMap(DataMap dataMap) {
-		this.dataMap = dataMap;
-	}
-
-	public InputStream getInput() {
-		return input;
-	}
-
-	public void setInput(InputStream input) {
-		this.input = input;
-	}
-
-	public Document getDoc() {
-		return doc;
-	}
-
-	public void setDoc(Document doc) {
-		this.doc = doc;
-	}
+	 
 
 	public boolean isAltChunk() {
 		return altChunk;

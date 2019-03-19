@@ -38,8 +38,12 @@ public class WordprocessingMLHttlTemplate extends WordprocessingMLTemplate {
 	protected Engine engine;
 	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
 
-	public WordprocessingMLHttlTemplate(boolean altChunk) {
-		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	public WordprocessingMLHttlTemplate() {
+		this(false, false);
+	}
+	
+	public WordprocessingMLHttlTemplate(boolean landscape, boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(landscape, altChunk) ;
 	}
 	
 	public WordprocessingMLHttlTemplate(WordprocessingMLHtmlTemplate template) {

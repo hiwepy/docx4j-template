@@ -38,8 +38,12 @@ public class WordprocessingMLRythmTemplate extends WordprocessingMLTemplate {
 	protected RythmEngine engine;
 	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
 
-	public WordprocessingMLRythmTemplate(boolean altChunk) {
-		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	public WordprocessingMLRythmTemplate() {
+		this(false, false);
+	}
+	
+	public WordprocessingMLRythmTemplate(boolean landscape, boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(landscape, altChunk) ;
 	}
 	
 	public WordprocessingMLRythmTemplate(WordprocessingMLHtmlTemplate template) {

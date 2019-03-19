@@ -32,7 +32,7 @@ public class WordprocessingMLThymeleafTemplate_Test extends WordprocessingMLTemp
 		//准备参数
         variables();
 		
-        thymeleafTemplate = new WordprocessingMLThymeleafTemplate(false );
+        thymeleafTemplate = new WordprocessingMLThymeleafTemplate();
         
 	}
 	

@@ -32,7 +32,7 @@ public class WordprocessingMLRythmTemplate_Test extends WordprocessingMLTemplate
 		//准备参数
         variables();
 		
-        rythmTemplate = new WordprocessingMLRythmTemplate(false );
+        rythmTemplate = new WordprocessingMLRythmTemplate();
         
 	}
 	

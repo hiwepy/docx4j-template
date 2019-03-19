@@ -42,8 +42,12 @@ public class WordprocessingMLJetbrickTemplate extends WordprocessingMLTemplate {
 	protected JetEngine engine;
 	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
 
-	public WordprocessingMLJetbrickTemplate(boolean altChunk) {
-		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(altChunk) ;
+	public WordprocessingMLJetbrickTemplate() {
+		this(false, false);
+	}
+	
+	public WordprocessingMLJetbrickTemplate(boolean landscape, boolean altChunk) {
+		this.mlHtmlTemplate = new WordprocessingMLHtmlTemplate(landscape, altChunk) ;
 	}
 	
 	public WordprocessingMLJetbrickTemplate(WordprocessingMLHtmlTemplate template) {
