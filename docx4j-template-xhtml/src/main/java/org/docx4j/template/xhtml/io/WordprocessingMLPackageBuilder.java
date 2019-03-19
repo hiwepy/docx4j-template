@@ -16,17 +16,16 @@
 package org.docx4j.template.xhtml.io;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 import org.docx4j.events.StartEvent;
 import org.docx4j.model.structure.PageSizePaper;
-import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.template.bus.event.BuildFinishedEvent;
 import org.docx4j.template.bus.event.BuildJobTypes;
 import org.docx4j.template.bus.event.BuildStartEvent;
 import org.docx4j.template.fonts.ChineseFont;
+import org.docx4j.template.fonts.FontMapperHolder;
 import org.docx4j.template.utils.PhysicalFontUtils;
 import org.docx4j.template.xhtml.DataMap;
 import org.docx4j.template.xhtml.handler.DocumentHandler;
@@ -55,7 +54,7 @@ public class WordprocessingMLPackageBuilder {
 	/*
 	 * 为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 配置中文字体;解决中文乱码问题
 	 */
-	public WordprocessingMLPackageBuilder configChineseFonts(WordprocessingMLPackage wmlPackage) throws IOException, Docx4JException {
+	public WordprocessingMLPackageBuilder configChineseFonts(WordprocessingMLPackage wmlPackage) throws Exception {
 		//初始化中文字体
 		PhysicalFontUtils.setWmlPackageFonts(wmlPackage);
         //返回WordprocessingMLPackage对象
@@ -65,7 +64,7 @@ public class WordprocessingMLPackageBuilder {
 	/*
 	 * 为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 配置默认字体
 	 */
-	public WordprocessingMLPackageBuilder configDefaultFont(WordprocessingMLPackage wmlPackage,String fontName) throws IOException, Docx4JException {
+	public WordprocessingMLPackageBuilder configDefaultFont(WordprocessingMLPackage wmlPackage,String fontName) throws Exception {
 		//设置文件默认字体
 		try {
 			PhysicalFontUtils.setDefaultFont(wmlPackage, fontName);
@@ -80,7 +79,7 @@ public class WordprocessingMLPackageBuilder {
 	/*
 	 * 为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 配置中文字体
 	 */
-	public WordprocessingMLPackageBuilder configSimSunFont(WordprocessingMLPackage wmlPackage) throws IOException, Docx4JException {
+	public WordprocessingMLPackageBuilder configSimSunFont(WordprocessingMLPackage wmlPackage) throws Exception {
 		//初始化中文字体，解决中文乱码问题
 		configChineseFonts(wmlPackage);
         //设置文件默认字体
@@ -104,7 +103,7 @@ public class WordprocessingMLPackageBuilder {
 		return wmlPackage;
 	}
 	
-	public WordprocessingMLPackage buildWhithDoc(Document doc, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithDoc(Document doc, boolean altChunk) throws Exception {
 		/*	
 		 * 	根据docx4j.properties配置文件中:
 		 * 	docx4j.PageSize = A4
@@ -116,19 +115,19 @@ public class WordprocessingMLPackageBuilder {
         return buildWhithDoc(wmlPackage , doc, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithDoc(Document doc, boolean landscape, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithDoc(Document doc, boolean landscape, boolean altChunk) throws Exception {
         //返回WordprocessingMLPackage对象
         return buildWhithDoc(doc, PageSizePaper.A4, landscape, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithDoc(Document doc,PageSizePaper pageSize,boolean landscape,boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithDoc(Document doc,PageSizePaper pageSize,boolean landscape,boolean altChunk) throws Exception {
 		//创建指定纸张大小和方向的WordprocessingMLPackage对象
         WordprocessingMLPackage wmlPackage = WordprocessingMLPackage.createPackage(pageSize, landscape); //A4纸，
         //返回WordprocessingMLPackage对象
         return buildWhithDoc(wmlPackage , doc , altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithDoc(WordprocessingMLPackage wmlPackage, Document doc,boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithDoc(WordprocessingMLPackage wmlPackage, Document doc,boolean altChunk) throws Exception {
 		//构建任务开始
 		StartEvent jobStartEvent = new BuildStartEvent(BuildJobTypes.DOC, wmlPackage);
 		jobStartEvent.publish();
@@ -139,13 +138,13 @@ public class WordprocessingMLPackageBuilder {
         //构建任务结束
         new BuildFinishedEvent(jobStartEvent).publish();
         //返回WordprocessingMLPackage对象
-        return wmlPackage;
+        return FontMapperHolder.useFontMapper(wmlPackage);
     }
 	
 	/*
 	 * 将 {@link org.jsoup.nodes.Document} 对象转为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage}
 	 */
-	public WordprocessingMLPackage buildWhithXhtml(File htmlFile, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithXhtml(File htmlFile, boolean altChunk) throws Exception {
 		/*	
 		 * 	根据docx4j.properties配置文件中:
 		 * 	docx4j.PageSize = A4
@@ -157,19 +156,19 @@ public class WordprocessingMLPackageBuilder {
 		return buildWhithXhtml(wmlPackage,htmlFile, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithXhtml(File htmlFile, boolean landscape, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithXhtml(File htmlFile, boolean landscape, boolean altChunk) throws Exception {
         //返回WordprocessingMLPackage对象
         return buildWhithXhtml(htmlFile, PageSizePaper.A4, landscape, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithXhtml(File htmlFile, PageSizePaper pageSize, boolean landscape ,boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithXhtml(File htmlFile, PageSizePaper pageSize, boolean landscape ,boolean altChunk) throws Exception {
 		//创建指定纸张大小和方向的WordprocessingMLPackage对象
         WordprocessingMLPackage wmlPackage = WordprocessingMLPackage.createPackage(pageSize, landscape); //A4纸，
         //返回WordprocessingMLPackage对象
         return buildWhithXhtml(wmlPackage, htmlFile , altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithXhtml(WordprocessingMLPackage wmlPackage,File htmlFile, boolean altChunk) throws IOException, Docx4JException{
+	public WordprocessingMLPackage buildWhithXhtml(WordprocessingMLPackage wmlPackage,File htmlFile, boolean altChunk) throws Exception{
 		//构建任务开始
   		StartEvent jobStartEvent = new BuildStartEvent(BuildJobTypes.HTML, wmlPackage);
   		jobStartEvent.publish();
@@ -180,13 +179,13 @@ public class WordprocessingMLPackageBuilder {
 		//构建任务结束
 		new BuildFinishedEvent(jobStartEvent).publish();
 		//返回WordprocessingMLPackage对象
-		return wmlPackage;
+		return FontMapperHolder.useFontMapper(wmlPackage);
     }
 	
 	/*
 	 * 将 {@link org.jsoup.nodes.Document} 对象转为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage}
 	 */
-	public WordprocessingMLPackage buildWhithXhtml(String html, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithXhtml(String html, boolean altChunk) throws Exception {
 		/*	
 		 * 	根据docx4j.properties配置文件中:
 		 * 	docx4j.PageSize = A4
@@ -198,19 +197,19 @@ public class WordprocessingMLPackageBuilder {
 		return buildWhithXhtml(wmlPackage,html, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithXhtml(String html, boolean landscape,boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithXhtml(String html, boolean landscape,boolean altChunk) throws Exception {
         //返回WordprocessingMLPackage对象
         return buildWhithXhtml(html, PageSizePaper.A4, landscape, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithXhtml(String html, PageSizePaper pageSize, boolean landscape, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithXhtml(String html, PageSizePaper pageSize, boolean landscape, boolean altChunk) throws Exception {
 		//创建指定纸张大小和方向的WordprocessingMLPackage对象
         WordprocessingMLPackage wmlPackage = WordprocessingMLPackage.createPackage(pageSize, landscape); //A4纸，
         //返回WordprocessingMLPackage对象
         return buildWhithXhtml(wmlPackage, html, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithXhtml(WordprocessingMLPackage wmlPackage, String html, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithXhtml(WordprocessingMLPackage wmlPackage, String html, boolean altChunk) throws Exception {
 		//构建任务开始
   		StartEvent jobStartEvent = new BuildStartEvent(BuildJobTypes.HTML, wmlPackage);
   		jobStartEvent.publish();
@@ -221,13 +220,13 @@ public class WordprocessingMLPackageBuilder {
 		//构建任务结束
 		new BuildFinishedEvent(jobStartEvent).publish();
 		//返回WordprocessingMLPackage对象
-		return wmlPackage;
+		return FontMapperHolder.useFontMapper(wmlPackage);
     }
 	
 	/*
 	 * 将 {@link org.jsoup.nodes.Document} 对象转为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage}
 	 */
-	public WordprocessingMLPackage buildWhithXhtmlFragment(String xhtml,boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithXhtmlFragment(String xhtml,boolean altChunk) throws Exception {
 		/*	
 		 * 	根据docx4j.properties配置文件中:
 		 * 	docx4j.PageSize = A4
@@ -239,19 +238,19 @@ public class WordprocessingMLPackageBuilder {
 		return buildWhithXhtmlFragment(wmlPackage, xhtml, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithXhtmlFragment(String html,boolean landscape, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithXhtmlFragment(String html,boolean landscape, boolean altChunk) throws Exception {
         //返回WordprocessingMLPackage对象
         return buildWhithXhtmlFragment(html, PageSizePaper.A4, landscape, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithXhtmlFragment(String xhtml,PageSizePaper pageSize,boolean landscape,boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithXhtmlFragment(String xhtml,PageSizePaper pageSize,boolean landscape,boolean altChunk) throws Exception {
 		//创建指定纸张大小和方向的WordprocessingMLPackage对象
         WordprocessingMLPackage wmlPackage = WordprocessingMLPackage.createPackage(pageSize, landscape); //A4纸，
         //返回WordprocessingMLPackage对象
         return buildWhithXhtmlFragment(wmlPackage, xhtml, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithXhtmlFragment(WordprocessingMLPackage wmlPackage,String xhtml, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithXhtmlFragment(WordprocessingMLPackage wmlPackage,String xhtml, boolean altChunk) throws Exception {
 		//构建任务开始
   		StartEvent jobStartEvent = new BuildStartEvent(BuildJobTypes.HTML, wmlPackage);
   		jobStartEvent.publish();
@@ -262,13 +261,13 @@ public class WordprocessingMLPackageBuilder {
 		//构建任务结束
 		new BuildFinishedEvent(jobStartEvent).publish();
 		//返回WordprocessingMLPackage对象
-		return wmlPackage;
+		return FontMapperHolder.useFontMapper(wmlPackage);
     }
 	
 	/*
 	 * 将 {@link org.jsoup.nodes.Document} 对象转为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage}
 	 */
-	public WordprocessingMLPackage buildWhithURL(URL url, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithURL(URL url, boolean altChunk) throws Exception {
 		/*	
 		 * 	根据docx4j.properties配置文件中:
 		 * 	docx4j.PageSize = A4
@@ -280,19 +279,19 @@ public class WordprocessingMLPackageBuilder {
 		return buildWhithURL(wmlPackage,url, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithURL(URL url, boolean landscape, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithURL(URL url, boolean landscape, boolean altChunk) throws Exception {
         //返回WordprocessingMLPackage对象
         return buildWhithURL(url, PageSizePaper.A4, landscape, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithURL(URL url,PageSizePaper pageSize,boolean landscape, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithURL(URL url,PageSizePaper pageSize,boolean landscape, boolean altChunk) throws Exception {
 		//创建指定纸张大小和方向的WordprocessingMLPackage对象
         WordprocessingMLPackage wmlPackage = WordprocessingMLPackage.createPackage(pageSize, landscape); //A4纸，
         //返回WordprocessingMLPackage对象
         return buildWhithURL(wmlPackage, url, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithURL(WordprocessingMLPackage wmlPackage, URL url, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithURL(WordprocessingMLPackage wmlPackage, URL url, boolean altChunk) throws Exception {
 		//构建任务开始
   		StartEvent jobStartEvent = new BuildStartEvent(BuildJobTypes.URL, wmlPackage);
   		jobStartEvent.publish();
@@ -303,10 +302,10 @@ public class WordprocessingMLPackageBuilder {
 		//构建任务结束
 		new BuildFinishedEvent(jobStartEvent).publish();
 		//返回WordprocessingMLPackage对象
-		return wmlPackage;
+		return FontMapperHolder.useFontMapper(wmlPackage);
     }
 	
-	public WordprocessingMLPackage buildWhithURL(String url, DataMap dataMap, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithURL(String url, DataMap dataMap, boolean altChunk) throws Exception {
 		/*	
 		 * 	根据docx4j.properties配置文件中:
 		 * 	docx4j.PageSize = A4
@@ -318,19 +317,19 @@ public class WordprocessingMLPackageBuilder {
 		return buildWhithURL(wmlPackage, url, dataMap, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithURL(String url, DataMap dataMap, boolean landscape, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithURL(String url, DataMap dataMap, boolean landscape, boolean altChunk) throws Exception {
         //返回WordprocessingMLPackage对象
         return buildWhithURL(url, dataMap, PageSizePaper.A4, landscape, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithURL(String url, DataMap dataMap, PageSizePaper pageSize, boolean landscape, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithURL(String url, DataMap dataMap, PageSizePaper pageSize, boolean landscape, boolean altChunk) throws Exception {
 		//创建指定纸张大小和方向的WordprocessingMLPackage对象
         WordprocessingMLPackage wmlPackage = WordprocessingMLPackage.createPackage(pageSize, landscape); //A4纸，
         //返回WordprocessingMLPackage对象
         return buildWhithURL(wmlPackage, url, dataMap, altChunk);
     }
 	
-	public WordprocessingMLPackage buildWhithURL(WordprocessingMLPackage wmlPackage, String url, DataMap dataMap, boolean altChunk) throws IOException, Docx4JException {
+	public WordprocessingMLPackage buildWhithURL(WordprocessingMLPackage wmlPackage, String url, DataMap dataMap, boolean altChunk) throws Exception {
 		//构建任务开始
   		StartEvent jobStartEvent = new BuildStartEvent(BuildJobTypes.URL, wmlPackage);
   		jobStartEvent.publish();
@@ -341,7 +340,7 @@ public class WordprocessingMLPackageBuilder {
 		//构建任务结束
 		new BuildFinishedEvent(jobStartEvent).publish();
 		//返回WordprocessingMLPackage对象
-		return wmlPackage;
+		return FontMapperHolder.useFontMapper(wmlPackage);
     }
 	
 }

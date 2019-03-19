@@ -24,6 +24,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.docx4j.Docx4jProperties;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.template.fonts.FontMapperHolder;
 import org.docx4j.template.utils.WmlZipUtils;
 
 /**
@@ -131,7 +132,7 @@ public class WordprocessingMLDocxTemplate extends WordprocessingMLTemplate {
 		//删除临时目录
 		FileUtils.deleteDirectory(tempDir);
         //返回WordprocessingMLPackage对象
-		return WordprocessingMLPackage.load(this.outputDocx);
+		return FontMapperHolder.useFontMapper(WordprocessingMLPackage.load(this.outputDocx));
 	}
 	
 	/** 

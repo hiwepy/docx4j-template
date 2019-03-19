@@ -16,6 +16,7 @@
 package org.docx4j.template.fonts;
 
 import org.docx4j.fonts.Mapper;
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 
 public class FontMapperHolder {
 
@@ -27,6 +28,13 @@ public class FontMapperHolder {
 
 	public static void setFontMapper(Mapper fontMapper) {
 		FontMapperHolder.fontMapper = fontMapper;
+	}
+	
+	public static WordprocessingMLPackage useFontMapper(WordprocessingMLPackage wmlPackage) throws Exception {
+		if(fontMapper != null) {
+			wmlPackage.setFontMapper(fontMapper);
+		}
+		return wmlPackage;
 	}
 	
 }
