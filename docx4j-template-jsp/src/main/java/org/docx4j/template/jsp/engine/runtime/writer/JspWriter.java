@@ -29,11 +29,8 @@ import org.docx4j.template.jsp.engine.runtime.OriginalStream;
 
 /**
  * 
- * @className	： JspWriter
- * @description	： TODO(描述这个类的作用)
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:24:59
- * @version 	V1.0
+ * TODO
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public abstract class JspWriter implements OriginalStream, Closeable, Flushable {
 

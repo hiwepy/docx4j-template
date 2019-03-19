@@ -24,11 +24,8 @@ import javax.servlet.ServletException;
 
 /**
  * 
- * @className	： JspTemplate
- * @description	： TODO(描述这个类的作用)
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:26:02
- * @version 	V1.0
+ * TODO
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public interface JspTemplate {
 

@@ -22,11 +22,8 @@ import org.docx4j.template.jsp.engine.runtime.OriginalStream;
 
 /**
  * 
- * @className	： TrimLeadingWhitespacesWriter
- * @description	： TODO(描述这个类的作用)
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:24:08
- * @version 	V1.0
+ * TODO
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class TrimLeadingWhitespacesWriter extends Writer implements OriginalStream {
     private final Writer out;

@@ -21,11 +21,8 @@ import java.nio.charset.Charset;
 
 /**
  * 
- * @className	： JspOutputStreamPrinterEx
- * @description	： TODO(描述这个类的作用)
- * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年5月24日 下午10:24:48
- * @version 	V1.0
+ * TODO
+ * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class JspOutputStreamPrinterEx extends JspWriter {
     private final OutputStream os;
