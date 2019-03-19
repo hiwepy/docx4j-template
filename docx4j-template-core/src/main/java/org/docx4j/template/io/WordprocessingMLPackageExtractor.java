@@ -26,6 +26,20 @@ import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 
 public class WordprocessingMLPackageExtractor {
 
+	private static final WordprocessingMLPackageExtractor WML_PACKAGE_EXTRACTOR = new WordprocessingMLPackageExtractor();
+
+	/**
+	 * Generate a WordprocessingMLPackageExtractor.
+	 * @return the WordprocessingMLPackageExtractor
+	 */
+	public static WordprocessingMLPackageExtractor getWMLPackageExtractor() {
+		return WML_PACKAGE_EXTRACTOR;
+	}
+	
+	protected WordprocessingMLPackageExtractor() {
+		
+	}
+	
 	public String extract(String inputfile) throws Exception {
 		return this.extract(new File(inputfile));
 	}

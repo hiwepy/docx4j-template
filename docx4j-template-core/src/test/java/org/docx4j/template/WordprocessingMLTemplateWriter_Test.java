@@ -28,7 +28,7 @@ public class WordprocessingMLTemplateWriter_Test {
 	
 	@Before
 	public void Before() {
-		wemplateWriter = new WordprocessingMLTemplateWriter();
+		wemplateWriter = WordprocessingMLTemplateWriter.getWMLTemplateWriter();
 		
 		//org.eclipse.persistence.jaxb.JAXBContextFactory
 	}

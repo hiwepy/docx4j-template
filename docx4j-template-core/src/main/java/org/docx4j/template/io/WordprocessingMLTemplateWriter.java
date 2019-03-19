@@ -36,6 +36,20 @@ import org.docx4j.template.utils.Assert;
 
 public class WordprocessingMLTemplateWriter {
 
+	private static final WordprocessingMLTemplateWriter WML_TEMPLATE_WRITER = new WordprocessingMLTemplateWriter();
+
+	/**
+	 * Generate a WordprocessingMLTemplateWriter.
+	 * @return the WordprocessingMLTemplateWriter
+	 */
+	public static WordprocessingMLTemplateWriter getWMLTemplateWriter() {
+		return WML_TEMPLATE_WRITER;
+	}
+	
+	protected WordprocessingMLTemplateWriter() {
+		
+	}
+	
 	public String writeToString(String docFile) throws Exception {
 		return this.writeToString(new File(docFile));
 	}
