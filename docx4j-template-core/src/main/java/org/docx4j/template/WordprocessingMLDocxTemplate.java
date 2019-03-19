@@ -43,11 +43,15 @@ public class WordprocessingMLDocxTemplate extends WordprocessingMLTemplate {
 	protected String outputEncoding = Docx4jConstants.DEFAULT_CHARSETNAME;
 	protected boolean sourceDel = false;
 	
-	public WordprocessingMLDocxTemplate(File sourceDocx,File outputDocx) {
+	public WordprocessingMLDocxTemplate() {
+	}
+	
+	public WordprocessingMLPackage process(String template, Map<String, Object> variables, File sourceDocx, File outputDocx) throws Exception {
 		this.sourceDocx = sourceDocx;
 		this.outputDocx = outputDocx;
+		return this.process(template, variables);
 	}
-
+	
 	/**
 	 * 变量替换方式实现（只能解决固定模板的word生成）
 	 * @param template ：模板内容

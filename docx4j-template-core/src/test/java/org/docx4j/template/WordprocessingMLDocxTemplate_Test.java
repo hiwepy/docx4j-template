@@ -29,9 +29,7 @@ public class WordprocessingMLDocxTemplate_Test {
 	
 	@Before
 	public void Before() {
-		File sourceDocx = new java.io.File("src/test/resources/tpl/template.docx");
-		File outputDocx = new java.io.File("src/test/resources/output/docxTemplate_output.docx");
-		docxTemplate = new WordprocessingMLDocxTemplate(sourceDocx,outputDocx);
+		docxTemplate = new WordprocessingMLDocxTemplate();
 	}
 	
 	@Test
@@ -41,7 +39,10 @@ public class WordprocessingMLDocxTemplate_Test {
 		variables.put("title", "变量替换测试");
 		variables.put("content", "测试效果不错");
 		
-		docxTemplate.process("", variables);
+		File sourceDocx = new java.io.File("src/test/resources/tpl/template.docx");
+		File outputDocx = new java.io.File("src/test/resources/output/docxTemplate_output.docx");
+		
+		docxTemplate.process("", variables, sourceDocx, outputDocx);
 		
 	}
 	
