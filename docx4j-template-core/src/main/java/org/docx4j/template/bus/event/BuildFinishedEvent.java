@@ -13,33 +13,39 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.docx4j.template.events;
+package org.docx4j.template.bus.event;
 
+import org.docx4j.events.EventFinished;
 import org.docx4j.events.JobIdentifier;
 import org.docx4j.events.PackageIdentifier;
 import org.docx4j.events.ProcessStep;
 import org.docx4j.events.StartEvent;
 
-public class BuildStartEvent extends StartEvent {
+public class BuildFinishedEvent extends EventFinished {
 
-	public BuildStartEvent(JobIdentifier job) {
+	public BuildFinishedEvent(StartEvent started) {
+		super(started);
+	}
+	
+	public BuildFinishedEvent(JobIdentifier job) {
 		super(job);
 	}
 
-	public BuildStartEvent(JobIdentifier job, PackageIdentifier pkgIdentifier) {
+	public BuildFinishedEvent(JobIdentifier job, PackageIdentifier pkgIdentifier) {
 		super(job, pkgIdentifier);
 	}
 
-	public BuildStartEvent(JobIdentifier job, PackageIdentifier pkgIdentifier, ProcessStep processStep) {
+	public BuildFinishedEvent(JobIdentifier job, PackageIdentifier pkgIdentifier, ProcessStep processStep) {
 		super(job, pkgIdentifier, processStep);
 	}
 
-	public BuildStartEvent(PackageIdentifier pkgIdentifier) {
+	public BuildFinishedEvent(PackageIdentifier pkgIdentifier) {
 		super(pkgIdentifier);
 	}
 
-	public BuildStartEvent(PackageIdentifier pkgIdentifier, ProcessStep processStep) {
+	public BuildFinishedEvent(PackageIdentifier pkgIdentifier, ProcessStep processStep) {
 		super(pkgIdentifier, processStep);
 	}
+	
 
 }

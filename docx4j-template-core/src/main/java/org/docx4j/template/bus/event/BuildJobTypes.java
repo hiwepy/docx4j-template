@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.docx4j.template.events;
+package org.docx4j.template.bus.event;
 
 import org.docx4j.events.JobIdentifier;
 
