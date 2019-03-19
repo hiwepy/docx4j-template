@@ -75,7 +75,7 @@ public class WordprocessingMLBeetlTemplate extends WordprocessingMLTemplate {
 		this.engine = engine;
 	}
 	
-	protected GroupTemplate getInternalEngine() throws IOException{
+	protected synchronized GroupTemplate getInternalEngine() throws IOException{
         ClasspathResourceLoader loader = new ClasspathResourceLoader();
         //加载默认参数
         Configuration cfg = Configuration.defaultConfiguration();
@@ -121,8 +121,10 @@ public class WordprocessingMLBeetlTemplate extends WordprocessingMLTemplate {
         //自定义标签文件后缀
         resourceMap.put("tagSuffix", Docx4jProperties.getProperty("docx4j.beetl.resource.tagSuffix", "tag"));
         cfg.setResourceMap(resourceMap);
-        
-        return new GroupTemplate(loader, cfg);
+        GroupTemplate engine = new GroupTemplate(loader, cfg);
+        // 设置模板引擎，减少重复初始化消耗
+        this.setEngine(engine);
+        return engine;
 	}
 
 }

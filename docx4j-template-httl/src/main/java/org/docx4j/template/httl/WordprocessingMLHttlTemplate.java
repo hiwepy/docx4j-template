@@ -77,7 +77,7 @@ public class WordprocessingMLHttlTemplate extends WordprocessingMLTemplate {
 		this.engine = engine;
 	}
 	
-	protected Engine getInternalEngine() throws IOException{
+	protected synchronized Engine getInternalEngine() throws IOException{
 		
 		Properties props = ConfigUtils.filterWithPrefix("docx4j.httl.", "docx4j.httl.", Docx4jProperties.getProperties(), false);
         //props.setProperty("filter", "null");
@@ -86,7 +86,10 @@ public class WordprocessingMLHttlTemplate extends WordprocessingMLTemplate {
 		props.setProperty("template.suffix", props.getProperty("template.suffix",".httl"));
 		props.setProperty("input.encoding", props.getProperty("input.encoding", Docx4jConstants.DEFAULT_CHARSETNAME));
 		props.setProperty("output.encoding", props.getProperty("output.encoding", Docx4jConstants.DEFAULT_CHARSETNAME));
-        return Engine.getEngine(props);
+		Engine engine = Engine.getEngine(props);
+		// 设置模板引擎，减少重复初始化消耗
+        this.setEngine(engine);
+        return engine;
 	}
 
 }

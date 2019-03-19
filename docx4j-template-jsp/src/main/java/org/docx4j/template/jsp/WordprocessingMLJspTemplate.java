@@ -96,13 +96,16 @@ public class WordprocessingMLJspTemplate extends WordprocessingMLTemplate {
 		this.engine = engine;
 	}
 	
-	protected JspEngine getInternalEngine() throws IOException{
+	protected synchronized JspEngine getInternalEngine() throws IOException{
 		Properties ps =  ConfigUtils.filterWithPrefix("docx4j.jsp.", "docx4j.jsp.", Docx4jProperties.getProperties(), false);
 		//设置默认的参数
 		ps.setProperty(JspConfig.TEMPLATE_SUFFIX, Docx4jProperties.getProperty("docx4j.jsp.template.suffix",".httl"));
 		ps.setProperty(JspConfig.INPUT_ENCODING, Docx4jProperties.getProperty("docx4j.jsp.input.encoding", Docx4jConstants.DEFAULT_CHARSETNAME));
 		ps.setProperty(JspConfig.OUTPUT_ENCODING, Docx4jProperties.getProperty("docx4j.jsp.output.encoding", Docx4jConstants.DEFAULT_CHARSETNAME));
-        return JspEngine.create(ps);
+		JspEngine engine = JspEngine.create(ps);
+        // 设置模板引擎，减少重复初始化消耗
+        this.setEngine(engine);
+        return engine;
 	}
 
 }

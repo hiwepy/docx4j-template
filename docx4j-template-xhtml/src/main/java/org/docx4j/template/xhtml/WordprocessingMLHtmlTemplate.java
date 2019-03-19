@@ -134,8 +134,6 @@ public class WordprocessingMLHtmlTemplate extends WordprocessingMLTemplate {
 		this.wordMLPackageBuilder = wordMLPackageBuilder;
 	}
 
-	 
-
 	public boolean isAltChunk() {
 		return altChunk;
 	}

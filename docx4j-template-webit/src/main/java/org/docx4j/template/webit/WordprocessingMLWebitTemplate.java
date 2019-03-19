@@ -76,7 +76,7 @@ public class WordprocessingMLWebitTemplate extends WordprocessingMLTemplate {
 		this.engine = engine;
 	}
 
-	protected Engine getInternalEngine() throws IOException{
+	protected synchronized Engine getInternalEngine() throws IOException{
 		
 		Map<String, Object> ps = new HashMap<String, Object>();
 		ps.put(CFG.APPEND_LOST_SUFFIX, Docx4jProperties.getProperty("docx4j.webit.engine.appendLostSuffix", false));
@@ -97,6 +97,9 @@ public class WordprocessingMLWebitTemplate extends WordprocessingMLTemplate {
         ps.put(CFG.TRIM_CODE_LINE, Docx4jProperties.getProperty("docx4j.webit.engine.trimCodeBlockBlankLine",true));
         ps.put(CFG.VARS, Docx4jProperties.getProperty("docx4j.webit.engine.vars"));
         
-        return Engine.create("", ps);
+        Engine engine = Engine.create("", ps);
+        // 设置模板引擎，减少重复初始化消耗
+        this.setEngine(engine);
+        return engine;
 	}
 }

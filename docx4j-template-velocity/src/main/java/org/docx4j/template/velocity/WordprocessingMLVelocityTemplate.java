@@ -81,7 +81,7 @@ public class WordprocessingMLVelocityTemplate extends WordprocessingMLTemplate {
 		this.engine = engine;
 	}
 
-	protected VelocityEngine getInternalEngine() throws IOException{
+	protected synchronized VelocityEngine getInternalEngine() throws IOException{
 		
 		VelocityEngine engine = new VelocityEngine();
         
@@ -104,7 +104,8 @@ public class WordprocessingMLVelocityTemplate extends WordprocessingMLTemplate {
         ps.setProperty("input.encoding", input_charset);
         ps.setProperty("output.encoding", output_charset);
         engine.init(ps);
-        
+        // 设置模板引擎，减少重复初始化消耗
+        this.setEngine(engine);
         return engine;
 	}
 

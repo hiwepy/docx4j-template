@@ -81,7 +81,7 @@ public class WordprocessingMLJetbrickTemplate extends WordprocessingMLTemplate {
 		this.engine = engine;
 	}
 	
-	protected JetEngine getInternalEngine() throws IOException{
+	protected synchronized JetEngine getInternalEngine() throws IOException{
 		Properties ps = new Properties();
 		ConfigLoader loader = new ConfigLoader();
 		try {
@@ -93,7 +93,10 @@ public class WordprocessingMLJetbrickTemplate extends WordprocessingMLTemplate {
 			LOG.warn("No default config file found: {}", JetConfig.DEFAULT_CONFIG_FILE);
 			ps = ConfigUtils.filterWithPrefix("docx4j.jetx.", "docx4j.", Docx4jProperties.getProperties(), true);
 		}
-         return JetEngine.create(ps);
+		JetEngine engine = JetEngine.create(ps);
+		// 设置模板引擎，减少重复初始化消耗
+        this.setEngine(engine);
+        return engine;
 	}
 
 }

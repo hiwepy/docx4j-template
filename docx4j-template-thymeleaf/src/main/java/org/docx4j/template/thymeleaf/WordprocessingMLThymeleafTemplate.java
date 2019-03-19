@@ -84,7 +84,7 @@ public class WordprocessingMLThymeleafTemplate extends WordprocessingMLTemplate 
 		this.engine = engine;
 	}
 	
-	protected TemplateEngine getInternalEngine() throws IOException{
+	protected synchronized TemplateEngine getInternalEngine() throws IOException{
 		//初始化模板解析器
 		AbstractConfigurableTemplateResolver templateResolver =  getTemplateResolver();
 		if( getTemplateResolver() == null){
@@ -121,10 +121,12 @@ public class WordprocessingMLThymeleafTemplate extends WordprocessingMLTemplate 
 		templateResolver.setUseDecoupledLogic(Docx4jProperties.getProperty("docx4j.thymeleaf.useDecoupledLogic", false ));
 		templateResolver.setXmlTemplateModePatterns(ArrayUtils.asSet(StringUtils.tokenizeToStringArray(Docx4jProperties.getProperty("docx4j.thymeleaf.newXmlTemplateModePatterns", ""))));
         //初始化引擎对象
-        TemplateEngine engine = new TemplateEngine();
-        engine.setTemplateResolver(templateResolver);
+		TemplateEngine engine = new TemplateEngine();
+		engine.setTemplateResolver(templateResolver);
         //调用getConfiguration初始化引擎
-        engine.getConfiguration();
+		engine.getConfiguration();
+		// 设置模板引擎，减少重复初始化消耗
+        this.setEngine(engine);
         return engine;
 	}
 

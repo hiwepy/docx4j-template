@@ -77,7 +77,7 @@ public class WordprocessingMLRythmTemplate extends WordprocessingMLTemplate {
 		this.engine = engine;
 	}
 	
-	protected RythmEngine getInternalEngine() throws IOException{
+	protected synchronized RythmEngine getInternalEngine() throws IOException{
 		Properties props =  ConfigUtils.filterWithPrefix("docx4j.rythm.", "docx4j.rythm.", Docx4jProperties.getProperties(), false);
 		
 		props.put("engine.mode", Rythm.Mode.valueOf(props.getProperty("engine.mode", "dev")));
@@ -95,8 +95,10 @@ public class WordprocessingMLRythmTemplate extends WordprocessingMLTemplate {
 		props.put("built_in.transformer", "false");
 		props.put("engine.file_write", "false");
 		props.put("codegen.compact.enabled", "false");
-        
-        return new RythmEngine(props);
+		RythmEngine engine = new RythmEngine(props);
+		// 设置模板引擎，减少重复初始化消耗
+        this.setEngine(engine);
+        return engine;
 	}
 
 }

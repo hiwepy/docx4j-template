@@ -158,6 +158,8 @@ public class WordprocessingMLFreemarkerTemplate extends WordprocessingMLTemplate
 		config.setSharedVariable("fmHtmlEscape", new HtmlEscape());
 		//config.setSharedVaribles(map);
 		
+		// 设置模板引擎，减少重复初始化消耗
+        this.setEngine(config);
         return config;
 	}
 
