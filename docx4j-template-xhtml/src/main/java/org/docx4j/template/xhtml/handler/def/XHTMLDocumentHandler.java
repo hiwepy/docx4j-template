@@ -36,6 +36,20 @@ import org.jsoup.safety.Whitelist;
  */
 public class XHTMLDocumentHandler implements DocumentHandler {
 
+	private static final XHTMLDocumentHandler XHTML_DOCUMENT_HANDLER = new XHTMLDocumentHandler();
+
+	/**
+	 * Generate a DocumentHandler.
+	 * @return the DocumentHandler
+	 */
+	public static DocumentHandler getDocumentHandler() {
+		return XHTML_DOCUMENT_HANDLER;
+	}
+	
+	protected XHTMLDocumentHandler() {
+		
+	}
+	
 	/**
 	 * <p>Jsoup.parse(File in, String charsetName) : 它使用文件的路径做为 baseUri。 这个方法适用于如果被解析文件位于网站的本地文件系统，且相关链接也指向该文件系统</p>
 	 * <p>Jsoup.parse(File in, String charsetName, String baseUri) : 这个方法用来加载和解析一个HTML文件。如在加载文件的时候发生错误，将抛出IOException，应作适当处理。

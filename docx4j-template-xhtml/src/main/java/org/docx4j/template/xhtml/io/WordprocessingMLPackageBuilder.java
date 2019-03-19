@@ -36,7 +36,21 @@ import org.jsoup.nodes.Document;
 
 public class WordprocessingMLPackageBuilder {
 
-	protected DocumentHandler docHandler = new XHTMLDocumentHandler();
+	protected DocumentHandler docHandler = XHTMLDocumentHandler.getDocumentHandler();
+	
+	private static final WordprocessingMLPackageBuilder WML_PACKAGE_BUILDER = new WordprocessingMLPackageBuilder();
+
+	/**
+	 * Generate a WordprocessingMLPackageBuilder.
+	 * @return the WordprocessingMLPackageBuilder
+	 */
+	public static WordprocessingMLPackageBuilder getWMLPackageBuilder() {
+		return WML_PACKAGE_BUILDER;
+	}
+	
+	protected WordprocessingMLPackageBuilder() {
+		
+	}
 	
 	/*
 	 * 为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 配置中文字体;解决中文乱码问题

@@ -31,6 +31,20 @@ import org.w3c.dom.Element;
 
 public class OutputConversionHTMLStyleElementHandler implements ConversionHTMLStyleElementHandler {
 
+	private static final OutputConversionHTMLStyleElementHandler OUTPUT_CONVERSION_HTMLSTYLE_ELEMENT_HANDLER = new OutputConversionHTMLStyleElementHandler();
+
+	/**
+	 * Generate a OutputConversionHTMLStyleElementHandler.
+	 * @return the OutputConversionHTMLStyleElementHandler
+	 */
+	public static OutputConversionHTMLStyleElementHandler getStyleElementHandler() {
+		return OUTPUT_CONVERSION_HTMLSTYLE_ELEMENT_HANDLER;
+	}
+	
+	protected OutputConversionHTMLStyleElementHandler() {
+		
+	}
+	
 	@Override
 	public Element createStyleElement(OpcPackage opcPackage, Document document, String styleDefinition) {
 		

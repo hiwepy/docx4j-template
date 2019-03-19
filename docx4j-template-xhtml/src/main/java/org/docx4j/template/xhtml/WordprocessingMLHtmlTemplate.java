@@ -34,8 +34,8 @@ import org.jsoup.nodes.Document;
  */
 public class WordprocessingMLHtmlTemplate extends WordprocessingMLTemplate {
 
-	protected DocumentHandler docHandler = new XHTMLDocumentHandler();
-	protected WordprocessingMLPackageBuilder wordMLPackageBuilder = new WordprocessingMLPackageBuilder();
+	protected DocumentHandler docHandler = XHTMLDocumentHandler.getDocumentHandler();
+	protected WordprocessingMLPackageBuilder wordMLPackageBuilder = WordprocessingMLPackageBuilder.getWMLPackageBuilder();
 	protected File htmlFile;
 	protected URL url;
 	protected String urlstr;

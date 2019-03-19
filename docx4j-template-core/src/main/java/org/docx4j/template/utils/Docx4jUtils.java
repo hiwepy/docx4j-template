@@ -36,7 +36,6 @@ import org.docx4j.openpackaging.parts.PartName;
 import org.docx4j.openpackaging.parts.WordprocessingML.AlternativeFormatInputPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.relationships.Relationship;
-import org.docx4j.template.io.WordprocessingMLPackageWriter;
 import org.docx4j.wml.CTAltChunk;
 
 /**
@@ -44,8 +43,6 @@ import org.docx4j.wml.CTAltChunk;
  * @author <a href="https://github.com/vindell">vindell</a>
  */
 public class Docx4jUtils {
-
-	protected static WordprocessingMLPackageWriter WMLPACKAGE_WRITER = new WordprocessingMLPackageWriter();
 
 	/**
 	 * 生成临时文件位置

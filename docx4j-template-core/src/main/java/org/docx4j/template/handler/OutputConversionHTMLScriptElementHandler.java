@@ -27,6 +27,20 @@ import org.w3c.dom.Element;
  */
 public class OutputConversionHTMLScriptElementHandler implements ConversionHTMLScriptElementHandler {
 
+	private static final OutputConversionHTMLScriptElementHandler OUTPUT_CONVERSION_HTML_SCRIPT_ELEMENT_HANDLER = new OutputConversionHTMLScriptElementHandler();
+
+	/**
+	 * Generate a OutputConversionHTMLScriptElementHandler.
+	 * @return the OutputConversionHTMLScriptElementHandler
+	 */
+	public static OutputConversionHTMLScriptElementHandler getScriptElementHandler() {
+		return OUTPUT_CONVERSION_HTML_SCRIPT_ELEMENT_HANDLER;
+	}
+	
+	protected OutputConversionHTMLScriptElementHandler() {
+		
+	}
+	
 	@Override
 	public Element createScriptElement(OpcPackage opcPackage, Document document, String scriptDefinition) {
 		Element ret = null;

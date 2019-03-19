@@ -17,7 +17,6 @@ package org.docx4j.template;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,13 +36,29 @@ public class WordprocessingMLDocxTemplate extends WordprocessingMLTemplate {
 	protected File sourceDocx;
 	protected File outputDocx;
 	protected File unzipDir;
+	/**
+	 * 变量占位符开始位，默认：${
+	 */
 	protected String placeholderStart = "${";
+	/**
+	 * 变量占位符结束位，默认：}
+	 */
 	protected String placeholderEnd = "}";
+	/**
+	 * 模板文档读取编码，默认： UTF-8
+	 */
 	protected String inputEncoding = Docx4jConstants.DEFAULT_CHARSETNAME;
+	/**
+	 * 渲染后的文档输出编码，默认： UTF-8
+	 */
 	protected String outputEncoding = Docx4jConstants.DEFAULT_CHARSETNAME;
+	/**
+	 * 是否自动删除模板文件
+	 */
 	protected boolean autoDelete = false;
 	
-	public WordprocessingMLDocxTemplate() throws IOException {
+	
+	public WordprocessingMLDocxTemplate() {
 		//初始化参数
 		this.inputEncoding = StringUtils.defaultString(this.inputEncoding,Docx4jProperties.getProperty("docx4j.docx.input.encoding", Docx4jConstants.DEFAULT_CHARSETNAME));
 		this.outputEncoding = StringUtils.defaultString(this.outputEncoding,Docx4jProperties.getProperty("docx4j.docx.output.encoding", Docx4jConstants.DEFAULT_CHARSETNAME));

@@ -47,9 +47,23 @@ public class WordprocessingMLPackageWriter  {
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	protected final String PDF_SUFFIX = ".pdf";
 	protected final String DOCX_SUFFIX = ".docx";
-	protected final ConversionHyperlinkHandler DEFAULT_HYPERLINK_HANDLER = new OutputConversionHyperlinkHandler();
-	protected final ConversionHTMLStyleElementHandler DEFAULT_STYLE_ELEMENT_HANDLER = new OutputConversionHTMLStyleElementHandler();
-	protected final ConversionHTMLScriptElementHandler DEFAULT_SCRIPT_ELEMENT_HANDLER = new OutputConversionHTMLScriptElementHandler();
+	protected ConversionHyperlinkHandler hyperlinkHandler = OutputConversionHyperlinkHandler.getHyperlinkHandler();
+	protected ConversionHTMLStyleElementHandler styleElementHandler = OutputConversionHTMLStyleElementHandler.getStyleElementHandler();
+	protected ConversionHTMLScriptElementHandler scriptElementHandler = OutputConversionHTMLScriptElementHandler.getScriptElementHandler();
+	
+	private static final WordprocessingMLPackageWriter WML_PACKAGE_WRITER = new WordprocessingMLPackageWriter();
+
+	/**
+	 * Generate a WordprocessingMLPackageWriter.
+	 * @return the WordprocessingMLPackageWriter
+	 */
+	public static WordprocessingMLPackageWriter getWMLPackageWriter() {
+		return WML_PACKAGE_WRITER;
+	}
+	
+	protected WordprocessingMLPackageWriter() {
+		
+	}
 	
 	/**
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 docx
@@ -167,9 +181,9 @@ public class WordprocessingMLPackageWriter  {
             htmlSettings.setWmlPackage(wmlPackage);
           
             //d
-            htmlSettings.setHyperlinkHandler(DEFAULT_HYPERLINK_HANDLER);
-            htmlSettings.setScriptElementHandler(DEFAULT_SCRIPT_ELEMENT_HANDLER);
-            htmlSettings.setStyleElementHandler(DEFAULT_STYLE_ELEMENT_HANDLER);
+            htmlSettings.setHyperlinkHandler(getHyperlinkHandler());
+            htmlSettings.setScriptElementHandler(getScriptElementHandler());
+            htmlSettings.setStyleElementHandler(getStyleElementHandler());
             
             Docx4jProperties.setProperty(Docx4jConstants.DOCX4J_PARAM_04, true);  
 
@@ -314,4 +328,28 @@ public class WordprocessingMLPackageWriter  {
         }
 	}
 
+	public ConversionHyperlinkHandler getHyperlinkHandler() {
+		return hyperlinkHandler;
+	}
+
+	public void setHyperlinkHandler(ConversionHyperlinkHandler hyperlinkHandler) {
+		this.hyperlinkHandler = hyperlinkHandler;
+	}
+
+	public ConversionHTMLStyleElementHandler getStyleElementHandler() {
+		return styleElementHandler;
+	}
+
+	public void setStyleElementHandler(ConversionHTMLStyleElementHandler styleElementHandler) {
+		this.styleElementHandler = styleElementHandler;
+	}
+
+	public ConversionHTMLScriptElementHandler getScriptElementHandler() {
+		return scriptElementHandler;
+	}
+
+	public void setScriptElementHandler(ConversionHTMLScriptElementHandler scriptElementHandler) {
+		this.scriptElementHandler = scriptElementHandler;
+	}
+	
 }

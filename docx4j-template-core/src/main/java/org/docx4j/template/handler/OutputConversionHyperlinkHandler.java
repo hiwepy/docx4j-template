@@ -22,6 +22,20 @@ import org.docx4j.openpackaging.parts.Part;
 
 public class OutputConversionHyperlinkHandler implements ConversionHyperlinkHandler {
 
+	private static final OutputConversionHyperlinkHandler OUTPUT_CONVERSION_HYPERLINK_HANDLER = new OutputConversionHyperlinkHandler();
+
+	/**
+	 * Generate a OutputConversionHyperlinkHandler.
+	 * @return the OutputConversionHyperlinkHandler
+	 */
+	public static OutputConversionHyperlinkHandler getHyperlinkHandler() {
+		return OUTPUT_CONVERSION_HYPERLINK_HANDLER;
+	}
+	
+	protected OutputConversionHyperlinkHandler() {
+		
+	}
+	
 	@Override
 	public void handleHyperlink(Model hyperlinkModel, OpcPackage opcPackage, Part currentPart) throws Docx4JException {
 		//do nothing

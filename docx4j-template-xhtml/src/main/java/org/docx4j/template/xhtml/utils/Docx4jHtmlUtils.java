@@ -30,8 +30,8 @@ import org.docx4j.template.xhtml.io.WordprocessingMLPackageBuilder;
  */
 public class Docx4jHtmlUtils {
 
-	protected static WordprocessingMLPackageBuilder WMLPACKAGE_BUILDER = new WordprocessingMLPackageBuilder();
-	protected static WordprocessingMLPackageWriter WMLPACKAGE_WRITER = new WordprocessingMLPackageWriter();
+	protected static WordprocessingMLPackageBuilder WMLPACKAGE_BUILDER = WordprocessingMLPackageBuilder.getWMLPackageBuilder();
+	protected static WordprocessingMLPackageWriter WMLPACKAGE_WRITER = WordprocessingMLPackageWriter.getWMLPackageWriter();
 
 	/**
 	 * docx文档转换为PDF
