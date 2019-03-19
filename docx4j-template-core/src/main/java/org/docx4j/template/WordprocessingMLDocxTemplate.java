@@ -41,12 +41,18 @@ public class WordprocessingMLDocxTemplate extends WordprocessingMLTemplate {
 	protected String placeholderEnd = "}";
 	protected String inputEncoding = Docx4jConstants.DEFAULT_CHARSETNAME;
 	protected String outputEncoding = Docx4jConstants.DEFAULT_CHARSETNAME;
-	protected boolean sourceDel = false;
+	protected boolean autoDelete = false;
 	
-	public WordprocessingMLDocxTemplate() {
+	public WordprocessingMLDocxTemplate() throws IOException {
+		//初始化参数
+		this.inputEncoding = StringUtils.defaultString(this.inputEncoding,Docx4jProperties.getProperty("docx4j.docx.input.encoding", Docx4jConstants.DEFAULT_CHARSETNAME));
+		this.outputEncoding = StringUtils.defaultString(this.outputEncoding,Docx4jProperties.getProperty("docx4j.docx.output.encoding", Docx4jConstants.DEFAULT_CHARSETNAME));
+		this.placeholderStart = StringUtils.defaultString(this.placeholderStart,Docx4jProperties.getProperty("docx4j.docx.placeholderStart", "${"));
+		this.placeholderEnd = StringUtils.defaultString(this.placeholderEnd,Docx4jProperties.getProperty("docx4j.docx.placeholderEnd", "}"));
+		this.autoDelete = Docx4jProperties.getProperty("docx4j.docx.source.delete", false);
 	}
 	
-	public WordprocessingMLPackage process(String template, Map<String, Object> variables, File sourceDocx, File outputDocx) throws Exception {
+	public WordprocessingMLPackage process( File sourceDocx, String template, Map<String, Object> variables, File outputDocx) throws Exception {
 		this.sourceDocx = sourceDocx;
 		this.outputDocx = outputDocx;
 		return this.process(template, variables);
@@ -61,8 +67,15 @@ public class WordprocessingMLDocxTemplate extends WordprocessingMLTemplate {
 	 */
 	@Override
 	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
-		//初始化参数
-		configuration();
+		
+		//初始化解压目录
+		this.unzipDir = new File(this.sourceDocx.getParentFile(), Docx4jProperties.getProperty("docx4j.docx.tmpdir", "unzip_tmpdir"));
+		if(!this.unzipDir.exists() || this.unzipDir.isFile()){
+			this.unzipDir.setReadable(true);
+			this.unzipDir.setWritable(true);
+			this.unzipDir.mkdir();
+		}
+		
 		/*
 		WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(sourceDocx);
 		MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();  
@@ -106,21 +119,6 @@ public class WordprocessingMLDocxTemplate extends WordprocessingMLTemplate {
 		return WordprocessingMLPackage.load(this.outputDocx);
 	}
 	
-	protected void configuration() throws IOException{
-		//初始化解压目录
-		this.unzipDir = new File(this.sourceDocx.getParentFile(), Docx4jProperties.getProperty("docx4j.docx.tmpdir", "unzip_tmpdir"));
-		if(!this.unzipDir.exists() || this.unzipDir.isFile()){
-			this.unzipDir.setReadable(true);
-			this.unzipDir.setWritable(true);
-			this.unzipDir.mkdir();
-		}
-		this.inputEncoding = Docx4jProperties.getProperty("docx4j.docx.input.encoding", Docx4jConstants.DEFAULT_CHARSETNAME);
-		this.outputEncoding = Docx4jProperties.getProperty("docx4j.docx.output.encoding", Docx4jConstants.DEFAULT_CHARSETNAME);
-		this.placeholderStart = Docx4jProperties.getProperty("docx4j.docx.placeholderStart", "${");
-		this.placeholderEnd = Docx4jProperties.getProperty("docx4j.docx.placeholderEnd", "}");
-		this.sourceDel = Docx4jProperties.getProperty("docx4j.docx.source.delete", false);
-	}
-	
 	/** 
      * 获取静态数据
      */
@@ -134,6 +132,62 @@ public class WordprocessingMLDocxTemplate extends WordprocessingMLTemplate {
 			}
 		}
         return dataMap;  
-    }  
+    }
+
+	public File getSourceDocx() {
+		return sourceDocx;
+	}
+
+	public void setSourceDocx(File sourceDocx) {
+		this.sourceDocx = sourceDocx;
+	}
+
+	public File getOutputDocx() {
+		return outputDocx;
+	}
+
+	public void setOutputDocx(File outputDocx) {
+		this.outputDocx = outputDocx;
+	}
+
+	public String getPlaceholderStart() {
+		return placeholderStart;
+	}
+
+	public void setPlaceholderStart(String placeholderStart) {
+		this.placeholderStart = placeholderStart;
+	}
+
+	public String getPlaceholderEnd() {
+		return placeholderEnd;
+	}
+
+	public void setPlaceholderEnd(String placeholderEnd) {
+		this.placeholderEnd = placeholderEnd;
+	}
+
+	public String getInputEncoding() {
+		return inputEncoding;
+	}
+
+	public void setInputEncoding(String inputEncoding) {
+		this.inputEncoding = inputEncoding;
+	}
+
+	public String getOutputEncoding() {
+		return outputEncoding;
+	}
+
+	public void setOutputEncoding(String outputEncoding) {
+		this.outputEncoding = outputEncoding;
+	}
+
+	public boolean isAutoDelete() {
+		return autoDelete;
+	}
+
+	public void setAutoDelete(boolean autoDelete) {
+		this.autoDelete = autoDelete;
+	}
 
 }

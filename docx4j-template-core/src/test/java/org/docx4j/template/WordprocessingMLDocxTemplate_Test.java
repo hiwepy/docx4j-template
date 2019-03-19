@@ -16,6 +16,7 @@
 package org.docx4j.template;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class WordprocessingMLDocxTemplate_Test {
 	protected WordprocessingMLDocxTemplate docxTemplate = null;
 	
 	@Before
-	public void Before() {
+	public void Before() throws IOException {
 		docxTemplate = new WordprocessingMLDocxTemplate();
 	}
 	
@@ -42,7 +43,7 @@ public class WordprocessingMLDocxTemplate_Test {
 		File sourceDocx = new java.io.File("src/test/resources/tpl/template.docx");
 		File outputDocx = new java.io.File("src/test/resources/output/docxTemplate_output.docx");
 		
-		docxTemplate.process("", variables, sourceDocx, outputDocx);
+		docxTemplate.process(sourceDocx, "", variables, outputDocx);
 		
 	}
 	
