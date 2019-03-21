@@ -69,13 +69,6 @@ public class WmlZipUtils {
 		unzip(new File(sourceFile), new File(outputDir));
 	}
 
-	/**
-	 * 
-	 * @param sourceFile
-	 * @param outputDir
-	 * @throws ZipException
-	 * @throws IOException
-	 */
 	public static void unzip(File sourceFile, File outputDir) throws ZipException, IOException {
 		FileUtils.deleteDirectory(outputDir);
 		ZipFile zipFile = new ZipFile(sourceFile);

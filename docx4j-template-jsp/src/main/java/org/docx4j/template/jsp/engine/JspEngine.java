@@ -24,37 +24,36 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 
  * TODO
+ * 
  * @author <a href="https://github.com/vindell">vindell</a>
  */
 public abstract class JspEngine {
 
-	/**
-     * 获取全局配置信息.
-     * @return 配置信息
-     */
-    public abstract JspConfig getConfig();
-    
-	 /**
-     * 使用用户指定的配置信息，创建 #{link JetEngine} 对象.
-     *
-     * @param config    配置信息
-     * @return          模板引擎对象
-     */
-    public static JspEngine create(Properties config) {
-        return new JspEngineImpl(new JspConfig(config));
-    }
-    
+	/*
+	 * 获取全局配置信息.
+	 * @return 配置信息
+	 */
+	public abstract JspConfig getConfig();
 
-    /**
-     * 获取模板对象.
-     *
-     * @param name  模板名称
-     * @return      模板对象
-     *
-     * @throws ResourceNotFoundException 如果模板不存在，抛出该异常
-     */
-    public abstract JspTemplate getTemplate(HttpServletRequest request,HttpServletResponse response,String name) throws IOException;
-    
-    public abstract JspTemplate createTemplate(HttpServletRequest request,HttpServletResponse response,String name) throws IOException;
-	
+	/*
+	 * 使用用户指定的配置信息，创建 #{link JetEngine} 对象.
+	 * @param config 配置信息
+	 * @return 模板引擎对象
+	 */
+	public static JspEngine create(Properties config) {
+		return new JspEngineImpl(new JspConfig(config));
+	}
+
+	/*
+	 * 获取模板对象.
+	 * @param name 模板名称
+	 * @return 模板对象
+	 * @throws IOException  如果模板不存在，抛出该异常
+	 */
+	public abstract JspTemplate getTemplate(HttpServletRequest request, HttpServletResponse response, String name)
+			throws IOException;
+
+	public abstract JspTemplate createTemplate(HttpServletRequest request, HttpServletResponse response, String name)
+			throws IOException;
+
 }

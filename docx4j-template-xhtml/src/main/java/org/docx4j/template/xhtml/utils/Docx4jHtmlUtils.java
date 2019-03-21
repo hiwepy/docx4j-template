@@ -33,7 +33,7 @@ public class Docx4jHtmlUtils {
 	protected static WordprocessingMLPackageBuilder WMLPACKAGE_BUILDER = WordprocessingMLPackageBuilder.getWMLPackageBuilder();
 	protected static WordprocessingMLPackageWriter WMLPACKAGE_WRITER = WordprocessingMLPackageWriter.getWMLPackageWriter();
 
-	/**
+	/*
 	 * docx文档转换为PDF
 	 * 
 	 * @param docx 		：docx文档
@@ -50,18 +50,16 @@ public class Docx4jHtmlUtils {
 			WMLPACKAGE_BUILDER.configChineseFonts(wmlPackage).configSimSunFont(wmlPackage);
 			WMLPACKAGE_WRITER.writeToPDF(wmlPackage, output);
 
-		} catch (Exception ex) {
-			ex.printStackTrace();
 		} finally {
 			IOUtils.closeQuietly(output);
 		}
 	}
 
-	/**
+	/*
 	 * 把docx转成html
-	 * @param docxFilePath
-	 * @param htmlPath
-	 * @throws Exception
+	 * @param docxFilePath	：docx文档路径
+	 * @param htmlPath		：html输出路径
+	 * @throws Exceptionn： 可能为Docx4JException, FileNotFoundException, IOException等
 	 */
 	public static void docxToHtml(String docxFilePath, String htmlPath) throws Exception {
 		OutputStream output = null;
@@ -73,8 +71,6 @@ public class Docx4jHtmlUtils {
 			
 			WMLPACKAGE_WRITER.writeToHtml(wmlPackage, htmlPath);
 
-		} catch (Exception ex) {
-			ex.printStackTrace();
 		} finally {
 			IOUtils.closeQuietly(output);
 		}

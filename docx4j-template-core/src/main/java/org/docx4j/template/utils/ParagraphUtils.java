@@ -27,7 +27,7 @@ import org.docx4j.wml.R;
  */
 public class ParagraphUtils {
 
-	/**
+	/*
      *  向新的段落中添加内联图片并返回这个段落.
      *  这个方法与前面例子中的方法没有区别.
      * @param inline

@@ -56,7 +56,7 @@ public class WMLPackageUtils {
 	
 	protected static String CONTENT_TYPE = "";
 	
-	/**
+	/*
 	 * 首先，我们创建一个可用作模版的简单的word文档。对于此只需打开Word，创建新文档然后保存为template.docx，这就是我们将要用于添加内容的word文档。
 	 * 我们需要做的第一件事是使用docx4j将这个文档加载进来，你可以使用下面的几行代码做这件事：
 	 */
@@ -82,7 +82,7 @@ public class WMLPackageUtils {
         return result;  
     }
 	
-	/**
+	/*
 	 * 这样会返回一个表示完整的空白（在此时）文档Java对象。现在我们可以使用Docx4J API添加、删除以及更新这个word文档的内容，Docx4J有一些你可以用于遍历该文档的工具类。
 	 * 我自己写了几个助手方法使查找指定占位符并用真实内容进行替换的操作变地很简单。让我们来看一下其中的一个，这个计算是几个JAXB计算的包装器，
 	 * 允许你针对一个特定的类来搜索指定元素以及它所有的孩子，例如，你可以用它获取文档中所有的表格、表格中所有的行以及其它类似的操作。 
@@ -103,7 +103,7 @@ public class WMLPackageUtils {
         return result;  
     }  
 	
-	/**
+	/*
 	 * 例如你动态设置一个文档的标题。首先，在前面创建的模版文档中添加一个自定义占位符，我使用SJ_EX1作为占位符，我们将要用name参数来替换这个值。
 	 * 在docx4j中基本的文本元素用org.docx4j.wml.Text类来表示，替换这个简单的占位符我们需要做的就是调用这个方法： 
 	 */
@@ -124,7 +124,7 @@ public class WMLPackageUtils {
         template.save(f);  
     }  
 	
-	/**
+	/*
 	 *  向模版文档添加段落
 		你可能想知道为什么我们需要添加段落？我们已经可以添加文本，难道段落不就是一大段的文本吗？好吧，既是也不是，一个段落确实看起来像是一大段文本，但你需要考虑的是换行符，如果你像前面一样添加一个Text元素并且在文本中添加换行符，它们并不会出现，当你想要换行符时，你就需要创建一个新的段落。然而，幸运的是这对于Docx4j来说也非常地容易。
 		做这个需要下面的几步：
@@ -177,7 +177,7 @@ public class WMLPackageUtils {
       
     }  
 	
-	/**
+	/*
 	 * 该方法找到表格，获取第一行并且遍历提供的map向表格添加新行，在将其返回之前删除模版行。这个方法用到了两个助手方法：addRowToTable 和 getTemplateTable。我们首先看一下后面的那个： 
 	 */
 	public static Tbl getTable(List<Tbl> tables, String placeholder) throws Docx4JException {  
@@ -281,7 +281,7 @@ public class WMLPackageUtils {
         }  
     } 
     
-	/** 
+	/*
      * 将图片从文件对象转换成字节数组. 
      * @param file  将要转换的文件 
      * @return      包含图片字节数据的字节数组 

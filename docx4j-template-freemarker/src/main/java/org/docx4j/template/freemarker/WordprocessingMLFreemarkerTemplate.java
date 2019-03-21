@@ -188,6 +188,7 @@ public class WordprocessingMLFreemarkerTemplate extends WordprocessingMLTemplate
 	/**
 	 * Set properties that contain well-known FreeMarker keys which will be
 	 * passed to FreeMarker's {@code Configuration.setSettings} method.
+	 * @param settings properties
 	 * @see freemarker.template.Configuration#setSettings
 	 */
 	public void setFreemarkerSettings(Properties settings) {
@@ -197,6 +198,7 @@ public class WordprocessingMLFreemarkerTemplate extends WordprocessingMLTemplate
 	/**
 	 * Set a Map that contains well-known FreeMarker objects which will be passed
 	 * to FreeMarker's {@code Configuration.setAllSharedVariables()} method.
+	 * @param variables   variables
 	 * @see freemarker.template.Configuration#setAllSharedVariables
 	 */
 	public void setFreemarkerVariables(Map<String, Object> variables) {
@@ -208,8 +210,8 @@ public class WordprocessingMLFreemarkerTemplate extends WordprocessingMLTemplate
 	 * If not specified, FreeMarker will use the platform file encoding.
 	 * <p>Used for template rendering unless there is an explicit encoding specified
 	 * for the rendering process (for example, on Spring's FreeMarkerView).
+	 * @param defaultEncoding Default Encoding
 	 * @see freemarker.template.Configuration#setDefaultEncoding
-	 * @see org.springframework.web.servlet.view.freemarker.FreeMarkerView#setEncoding
 	 */
 	public void setDefaultEncoding(String defaultEncoding) {
 		this.defaultEncoding = defaultEncoding;
@@ -223,7 +225,8 @@ public class WordprocessingMLFreemarkerTemplate extends WordprocessingMLTemplate
 	 * registered <i>before</i> the default template loaders that this factory
 	 * registers (such as loaders for specified "templateLoaderPaths" or any
 	 * loaders registered in {@link #postProcessTemplateLoaders}).
-	 * @see #setTemplateLoaderPaths
+	 * @param preTemplateLoaders the Array of TemplateLoader instances,
+	 * to be modified by a subclass
 	 * @see #postProcessTemplateLoaders
 	 */
 	public void setPreTemplateLoaders(TemplateLoader... preTemplateLoaders) {
@@ -238,7 +241,8 @@ public class WordprocessingMLFreemarkerTemplate extends WordprocessingMLTemplate
 	 * registered <i>after</i> the default template loaders that this factory
 	 * registers (such as loaders for specified "templateLoaderPaths" or any
 	 * loaders registered in {@link #postProcessTemplateLoaders}).
-	 * @see #setTemplateLoaderPaths
+	 * @param postTemplateLoaders the Array of TemplateLoader instances,
+	 * to be modified by a subclass
 	 * @see #postProcessTemplateLoaders
 	 */
 	public void setPostTemplateLoaders(TemplateLoader... postTemplateLoaders) {
@@ -255,7 +259,6 @@ public class WordprocessingMLFreemarkerTemplate extends WordprocessingMLTemplate
 	 * included in the given List.
 	 * @param templateLoaders the current List of TemplateLoader instances,
 	 * to be modified by a subclass
-	 * @see #createConfiguration()
 	 * @see #setPostTemplateLoaders
 	 */
 	protected void postProcessTemplateLoaders(List<TemplateLoader> templateLoaders) {

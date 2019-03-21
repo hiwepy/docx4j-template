@@ -32,7 +32,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 	 */
 	public static String CONFIG_LOCATION_DELIMITERS = ",; \t\n";
 	
-	/**
+	/*
 	 * 
 	 * @description	： 获得以 ",; \t\n"分割的字符数组
 	 * @author 		： <a href="https://github.com/vindell">vindell</a>
@@ -44,7 +44,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 		return tokenizeToStringArray(str, CONFIG_LOCATION_DELIMITERS, true, true);
 	}
 	
-	/**
+	/*
 	 * Tokenize the given String into a String array via a StringTokenizer.
 	 * Trims tokens and omits empty tokens.
 	 * <p>The given delimiters string is supposed to consist of any number of
@@ -63,7 +63,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 		return tokenizeToStringArray(str, delimiters, true, true);
 	}
 
-	/**
+	/*
 	 * Tokenize the given String into a String array via a StringTokenizer.
 	 * <p>The given delimiters string is supposed to consist of any number of
 	 * delimiter characters. Each of those characters can be used to separate
@@ -102,7 +102,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 		return toStringArray(tokens);
 	}
 	
-	/**
+	/*
 	 * Copy the given Collection into a String array.
 	 * The Collection must contain String elements only.
 	 * @param collection the Collection to copy

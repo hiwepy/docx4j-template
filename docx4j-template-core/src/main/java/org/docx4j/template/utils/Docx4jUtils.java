@@ -44,7 +44,7 @@ import org.docx4j.wml.CTAltChunk;
  */
 public class Docx4jUtils {
 
-	/**
+	/*
 	 * 生成临时文件位置
 	 */
 	public static String getTempPath() {

@@ -38,13 +38,12 @@ import org.slf4j.LoggerFactory;
  * 关于文件操作的工具类 （来自：https://blog.csdn.net/qq_35598240/article/details/84439929）
  * 备注：该工具只能解决固定模板的word生成
  * @author kaizen
- * @date 2018-10-23 17:21:36
  */
 public final class Docx4jTemplateUtils {
  
     private static final Logger logger = LoggerFactory.getLogger(Docx4jUtils.class);
  
-    /**
+    /*
      * 替换变量并下载word文档
      *
      * @param inputStream
@@ -71,7 +70,7 @@ public final class Docx4jTemplateUtils {
         }
     }
  
-    /**
+    /*
      * 替换变量并输出word文档
      * @param inputStream
      * @param map
@@ -98,7 +97,7 @@ public final class Docx4jTemplateUtils {
     }
  
  
-    /**
+    /*
      * cleanDocumentPart
      *
      * @param documentPart
@@ -115,7 +114,7 @@ public final class Docx4jTemplateUtils {
         return true;
     }
  
-    /**
+    /*
      * 清扫 docx4j 模板变量字符,通常以${variable}形式
      * <p>
      * XXX: 主要在上传模板时处理一下, 后续
@@ -175,7 +174,7 @@ public final class Docx4jTemplateUtils {
         private static final int RIGHT_BRACE_STATUS = 3;
  
  
-        /**
+        /*
          * doCleanDocumentPart
          *
          * @param wmlTemplate

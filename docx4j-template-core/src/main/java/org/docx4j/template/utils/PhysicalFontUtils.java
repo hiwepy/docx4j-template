@@ -94,7 +94,7 @@ public class PhysicalFontUtils {
         return fontMapper;
 	}
 	
-	/**
+	/*
 	 * 为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 配置中文字体;解决中文乱码问题
 	 */
 	public static void setWmlPackageFonts(WordprocessingMLPackage wmlPackage) throws Docx4JException {
@@ -108,7 +108,7 @@ public class PhysicalFontUtils {
 		}
     }
 	
-	/**
+	/*
 	 * 为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 配置默认字体
 	 */
 	public static void setDefaultFont(WordprocessingMLPackage wmlPackage,String fontName) throws Docx4JException {
@@ -122,7 +122,7 @@ public class PhysicalFontUtils {
         rpr.setRFonts(rfonts);
     }
 	
-	/**
+	/*
 	 * 为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 配置中文字体
 	 */
 	public static void setSimSunFont(WordprocessingMLPackage wmlPackage) throws Docx4JException {
@@ -130,7 +130,7 @@ public class PhysicalFontUtils {
 		setDefaultFont(wmlPackage, ChineseFont.SIMSUM.getFontName());
     }
 	
-	/**
+	/*
 	 * 为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 增加新的字体
 	 */
 	public static void setPhysicalFont(WordprocessingMLPackage wmlPackage,PhysicalFont physicalFont) throws Exception {
@@ -141,7 +141,7 @@ public class PhysicalFontUtils {
 		wmlPackage.setFontMapper(fontMapper, true);
     }
 	
-	/**
+	/*
 	 * 为 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 增加新的字体
 	 */
 	public static void setPhysicalFont(WordprocessingMLPackage wmlPackage,String fontName) throws Exception {

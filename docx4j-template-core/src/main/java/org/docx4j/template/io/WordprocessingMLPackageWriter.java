@@ -110,7 +110,6 @@ public class WordprocessingMLPackageWriter  {
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 docx
 	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
 	 * @param output 文件输出流
-	 * @return {@link File} docx 文档
 	 * @throws IOException ：IO异常
 	 * @throws Docx4JException ： Docx4j异常
 	 */
@@ -243,7 +242,6 @@ public class WordprocessingMLPackageWriter  {
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 pdf
 	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
 	 * @param output 文件输出流
-	 * @return {@link File} docx 文档
 	 * @throws IOException ：IO异常
 	 * @throws Docx4JException ： Docx4j异常
 	 */
@@ -262,7 +260,6 @@ public class WordprocessingMLPackageWriter  {
 	 * 将 {@link org.docx4j.openpackaging.packages.WordprocessingMLPackage} 存为 pdf
 	 * @param wmlPackage {@link WordprocessingMLPackage} 对象
 	 * @param output 文件输出流
-	 * @return {@link File} docx 文档
 	 * @throws IOException ：IO异常
 	 * @throws Docx4JException ： Docx4j异常
 	 */

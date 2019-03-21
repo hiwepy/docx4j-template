@@ -135,7 +135,7 @@ public class WordprocessingMLDocxTemplate extends WordprocessingMLTemplate {
 		return FontMapperHolder.useFontMapper(WordprocessingMLPackage.load(this.outputDocx));
 	}
 	
-	/** 
+	/*
      * 获取静态数据
      */
 	protected HashMap<String, String> getStaticData(Map<String, Object> variables) { 

@@ -20,11 +20,6 @@ import org.docx4j.convert.out.html.HTMLConversionImageHandler;
 
 public class OutputConversionImageHandler extends HTMLConversionImageHandler {
 
-	/**
-	 * @param imageDirPath
-	 * @param targetUri
-	 * @param includeUUID
-	 */
 	public OutputConversionImageHandler(String imageDirPath, String targetUri, boolean includeUUID) {
 		super(imageDirPath, targetUri, includeUUID);
 	}

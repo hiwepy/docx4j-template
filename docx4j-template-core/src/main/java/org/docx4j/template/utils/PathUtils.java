@@ -38,7 +38,7 @@ public final class PathUtils {
         }
     }
 
-    /**
+    /*
      * Returns normalized <code>path</code> (or simply the <code>path</code> if
      * it is already in normalized form). Normalized path does not contain any
      * empty or "." segments or ".." segments preceded by other segment than
@@ -109,7 +109,7 @@ public final class PathUtils {
         return path;
     }
 
-    /**
+    /*
      * 组合路径.
      */
     public static String concat(final String parent, final String child) {
@@ -122,7 +122,7 @@ public final class PathUtils {
         return normalize(parent + '/' + child);
     }
 
-    /**
+    /*
      * 计算相对路径.
      */
     public static String getRelativePath(final String baseFile, final String file) {
@@ -138,7 +138,7 @@ public final class PathUtils {
         }
     }
 
-    /**
+    /*
      * 转为 Unix 样式的路径.
      */
     public static String separatorsToUnix(String path) {
@@ -148,7 +148,7 @@ public final class PathUtils {
         return path.replace('\\', '/');
     }
 
-    /**
+    /*
      * 转为 Windows 样式的路径.
      */
     public static String separatorsToWindows(String path) {
@@ -158,7 +158,7 @@ public final class PathUtils {
         return path.replace('/', '\\');
     }
 
-    /**
+    /*
      * 转为系统默认样式的路径.
      */
     public static String separatorsToSystem(String path) {

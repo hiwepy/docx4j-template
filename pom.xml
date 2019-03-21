@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.vindell</groupId>
 	<artifactId>docx4j-template</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0.RELEASE</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Building doc documents based on xhtml templates using docx4j</description>
 	<url>https://github.com/vindell/${project.artifactId}</url>
@@ -47,6 +47,20 @@
 		    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		  </repository>
 	</distributionManagement>
+	<!-- 
+	<distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://192.168.1.50:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://192.168.1.50:8081/repository/maven-snapshots/</url>
+			<uniqueVersion>true</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement> -->
 	
 	<modules>
 		<module>docx4j-template-beetl</module>
