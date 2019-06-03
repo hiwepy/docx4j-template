@@ -43,11 +43,11 @@
 		    <groupId>org.docx4j</groupId>
 		    <artifactId>docx4j-ImportXHTML</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>eclipselink</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 
 	</dependencies>
 	
