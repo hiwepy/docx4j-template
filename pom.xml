@@ -408,13 +408,15 @@
 		<commons-logging.version>1.2</commons-logging.version>
 		<commons-io.version>2.6</commons-io.version>
 		<!-- Docx4j Core -->
-		<docx4j.version>6.1.2</docx4j.version>
-		<docx4j-export-fo.version>6.1.0</docx4j-export-fo.version>
+		<docx4j.version>11.1.0</docx4j.version>
+		<docx4j-export-fo.version>${docx4j.version}</docx4j-export-fo.version>
 		<!-- Docx4j ImportXHTML -->
-		<docx4j-importxhtml.version>6.1.0</docx4j-importxhtml.version>
+		<docx4j-importxhtml.version>8.0.0</docx4j-importxhtml.version>
 		<docx4j-xhtmlrenderer.version>3.0.0</docx4j-xhtmlrenderer.version>
-		<!-- Docx4j MOXy -->
-		<docx4j-moxy-jaxbcontext.version>6.0.0</docx4j-moxy-jaxbcontext.version>
+		<!-- Docx4j JAXB -->
+		<docx4j-jaxb.version>${docx4j.version}</docx4j-jaxb.version>
+		<!-- Docx4j OpenXML -->
+		<docx4j-openxml.version>${docx4j.version}</docx4j-openxml.version>
 		<freemarker.version>2.3.28</freemarker.version>
 		<httl.version>1.0.12</httl.version>
 		<jackson.version>2.9.8</jackson.version>
@@ -521,7 +523,9 @@
 			</dependency>
 
 			<!-- ###################### Docx4j ###################### -->
-
+			
+			<!-- https://www.docx4java.org/downloads.html -->
+			
 			<!-- docx4j是一个开源的(Apache许可证v2)Java库，专门用来创建、编辑和保存Microsoft Open XML文档（包括Word 
 				docx, Powerpoint pptx和Excel xlsx）的Java类库。 docx4j最初是由Plutext Pty Ltd于2008年创建。 
 				docx4j与微软的OpenXML SDK类似，但是是面向Java的。它使用JAXB在内存中创建Java对象。它的功能强大，对于支持的文档的格式，你可以用docx4j做出你想要的效果。它的功能有： 
@@ -533,11 +537,10 @@
 
 			<!-- Docx4j Core -->
 
-			<!-- docx4j is a library which helps you to work with the Office Open 
-				XML file format as used in docx documents, pptx presentations, and xlsx spreadsheets. -->
+			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-core -->
 			<dependency>
 				<groupId>org.docx4j</groupId>
-				<artifactId>docx4j</artifactId>
+				<artifactId>docx4j-core</artifactId>
 				<version>${docx4j.version}</version>
 				<exclusions>
 					<exclusion>
@@ -554,76 +557,97 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			 
 			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-export-fo -->
 			<dependency>
 			    <groupId>org.docx4j</groupId>
 			    <artifactId>docx4j-export-fo</artifactId>
 			    <version>${docx4j-export-fo.version}</version>
 			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-docx-anon -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-docx-anon</artifactId>
+			    <version>${docx4j.version}</version>
+			</dependency>
 						
+			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-diffx -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-diffx</artifactId>
+			    <version>${docx4j.version}</version>
+			</dependency>
+									
 			<!-- Docx4j ImportXHTML -->
 
-			<!-- docx4j-ImportXHTML converts XHTML to OpenXML WordML (docx) using 
-				docx4j -->
+			<!-- docx4j-ImportXHTML converts XHTML to OpenXML WordML (docx) using  docx4j -->
 			<dependency>
 				<groupId>org.docx4j</groupId>
 				<artifactId>docx4j-ImportXHTML</artifactId>
 				<version>${docx4j-importxhtml.version}</version>
 			</dependency>
-			<!-- Modified flyingsaucer XML/XHTML and CSS 2.1 renderer, to support 
-				docx (and eventually pptx) output -->
+			<!-- Modified flyingsaucer XML/XHTML and CSS 2.1 renderer, to support docx (and eventually pptx) output -->
 			<dependency>
 				<groupId>org.docx4j</groupId>
 				<artifactId>xhtmlrenderer</artifactId>
 				<version>${docx4j-xhtmlrenderer.version}</version>
 			</dependency>
-
-			<!-- Docx4j MOXy -->
-
-			<!-- jaxb.properties files specifying that docx4j should use the EclipseLink 
-				MOXy (JAXB) runtime -->
+			
+			<!-- Docx4j JAXB -->
+			
+			<!-- 
+		    	docx4j-JAXB-Internal (available for docx4j 8.1.x only),
+		    	docx4j-JAXB-MOXy (for docx4j 8 or 11),
+		    	docx4j-JAXB-ReferenceImpl (for docx4j 8 or 11), 
+		    	You should use one and only one of docx4j-JAXB-*
+		    -->
+			
+			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-JAXB-Internal -->
 			<dependency>
-				<groupId>org.docx4j</groupId>
-				<artifactId>docx4j-MOXy-JAXBContext</artifactId>
-				<version>${docx4j-moxy-jaxbcontext.version}</version>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-JAXB-Internal</artifactId>
+			    <version>${docx4j-jaxb.version}</version>
 			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-JAXB-MOXy -->
 			<dependency>
-				<groupId>javax.activation</groupId>
-				<artifactId>activation</artifactId>
-				<version>${javax-activation.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.mail</groupId>
-				<artifactId>javax.mail-api</artifactId>
-				<version>${javax.mail-api.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.persistence</groupId>
-				<artifactId>org.eclipse.persistence.antlr</artifactId>
-				<version>${persistence.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.persistence</groupId>
-				<artifactId>org.eclipse.persistence.asm</artifactId>
-				<version>${persistence.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.persistence</groupId>
-				<artifactId>org.eclipse.persistence.core</artifactId>
-				<version>${persistence.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.eclipse.persistence</groupId>
-				<artifactId>org.eclipse.persistence.moxy</artifactId>
-				<version>${persistence.version}</version>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-JAXB-MOXy</artifactId>
+			    <version>${docx4j-jaxb.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.persistence</groupId>
 				<artifactId>eclipselink</artifactId>
 				<version>${persistence.version}</version>
-				<scope>test</scope>
 			</dependency>
-
+			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-JAXB-ReferenceImpl -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-JAXB-ReferenceImpl</artifactId>
+			    <version>${docx4j-jaxb.version}</version>
+			</dependency>
+			
+			<!-- Docx4j OpenXML -->
+			
+			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-openxml-objects -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-openxml-objects</artifactId>
+			    <version>${docx4j-openxml.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-openxml-objects-pml -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-openxml-objects-pml</artifactId>
+			    <version>${docx4j-openxml.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-openxml-objects-sml -->
+			<dependency>
+			    <groupId>org.docx4j</groupId>
+			    <artifactId>docx4j-openxml-objects-sml</artifactId>
+			    <version>${docx4j-openxml.version}</version>
+			</dependency>
+			
 			<!-- beetl模板 -->
 			<!-- https://mvnrepository.com/artifact/com.ibeetl/beetl -->
 			<dependency>

@@ -35,28 +35,12 @@
 		<!-- Docx4j Core -->
 		<dependency>
 		    <groupId>org.docx4j</groupId>
-		    <artifactId>docx4j</artifactId>
+		    <artifactId>docx4j-core</artifactId>
 		</dependency>
-		<!-- Docx4j MOXy -->
 		<dependency>
 		    <groupId>org.docx4j</groupId>
-		    <artifactId>docx4j-MOXy-JAXBContext</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.antlr</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.asm</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.moxy</artifactId>
+		    <artifactId>docx4j-JAXB-MOXy</artifactId>
+		    <scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
