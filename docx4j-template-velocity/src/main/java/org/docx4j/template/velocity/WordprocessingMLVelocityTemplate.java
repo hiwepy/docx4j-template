@@ -60,7 +60,7 @@ public class WordprocessingMLVelocityTemplate extends WordprocessingMLTemplate {
 	 */
 	@Override
 	public WordprocessingMLPackage process(String template, Map<String, Object> variables) throws Exception {
-		//设置Velocity上下文对象
+		// 设置Velocity上下文对象
 		VelocityContext ctx = new VelocityContext(variables);
 		ctx.put("dateTool", dateTool);
 		// 创建模板输出内容接收对象
