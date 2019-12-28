@@ -3,7 +3,7 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.github.vindell</groupId>
+		<groupId>com.github.hiwepy</groupId>
 		<artifactId>docx4j-template</artifactId>
 		<version>1.0.0.RELEASE</version>
 	</parent>
