@@ -66,6 +66,12 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
+				<plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-clean-plugin</artifactId>
+				    <version>${maven-clean-plugin.version}</version>
+				</plugin>
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -77,10 +83,6 @@
 						<target>${java.version}</target>
 						<encoding>${project.build.sourceEncoding}</encoding>
 						<maxmem>512M</maxmem>
-						<compilerArguments>
-							<Xlint:unchecked/>
-							<Xlint:deprecation/>
-						</compilerArguments>
 					</configuration>
 				</plugin>
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
@@ -417,7 +419,7 @@
 		<servlet-api.version>3.0.1</servlet-api.version>
 		<slf4j.version>1.7.26</slf4j.version>
 		<thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
-		<velocity.version>1.7</velocity.version>
+		<velocity.version>2.2</velocity.version>
 		<velocity-tools.version>2.0</velocity-tools.version>
 		<webit-script.version>1.5.2</webit-script.version>
 
@@ -684,9 +686,14 @@
 			</dependency>
 			<!-- velocity模板 -->
 			<dependency>
-				<groupId>org.apache.velocity</groupId>
-				<artifactId>velocity</artifactId>
-				<version>${velocity.version}</version>
+			    <groupId>org.apache.velocity</groupId>
+			    <artifactId>velocity-engine-core</artifactId>
+			    <version>${velocity.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.velocity</groupId>
+			    <artifactId>velocity-engine-scripting</artifactId>
+			    <version>${velocity.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.velocity</groupId>
