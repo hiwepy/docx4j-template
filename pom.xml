@@ -80,6 +80,12 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
+				<plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-clean-plugin</artifactId>
+				    <version>${maven-clean-plugin.version}</version>
+				</plugin>
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -91,10 +97,6 @@
 						<target>${java.version}</target>
 						<encoding>${project.build.sourceEncoding}</encoding>
 						<maxmem>512M</maxmem>
-						<compilerArguments>
-							<Xlint:unchecked/>
-							<Xlint:deprecation/>
-						</compilerArguments>
 					</configuration>
 				</plugin>
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
