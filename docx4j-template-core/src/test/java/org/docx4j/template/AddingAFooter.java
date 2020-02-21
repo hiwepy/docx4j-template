@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, vindell (https://github.com/vindell).
+ * Copyright (c) 2018, hiwepy (https://github.com/hiwepy).
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -36,7 +36,7 @@ import org.docx4j.wml.SectPr;
  * @className	： AddingAFooter
  * @description	： 添加页脚或页眉
  *	添加页脚或页眉（或二者兼具）是一个很多客户都想要的特性。幸运的是，做这个并不是很难。这个例子是docx4j示例的一部分，但是我删掉了添加图像的部分只展示最基本的添加页脚部分。添加页眉，你需要做的仅仅是用header来替换footer（或者hdr替换ftr）。
- * @author 		： <a href="https://github.com/vindell">vindell</a>
+ * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
  * @date		： 2017年5月24日 下午10:32:22
  * @version 	V1.0
  */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, vindell (https://github.com/vindell).
+ * Copyright (c) 2018, hiwepy (https://github.com/hiwepy).
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,7 +22,7 @@ import java.util.StringTokenizer;
 
 /**
  * TODO
- * @author <a href="https://github.com/vindell">vindell</a>
+ * @author <a href="https://github.com/hiwepy">hiwepy</a>
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
 	
@@ -35,7 +35,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 	/*
 	 * 
 	 * @description	： 获得以 ",; \t\n"分割的字符数组
-	 * @author 		： <a href="https://github.com/vindell">vindell</a>
+	 * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
 	 * @date 		：2017年5月24日 下午10:27:51
 	 * @param str
 	 * @return

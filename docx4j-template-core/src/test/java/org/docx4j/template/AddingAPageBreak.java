@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, vindell (https://github.com/vindell).
+ * Copyright (c) 2018, hiwepy (https://github.com/hiwepy).
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -29,7 +29,7 @@ import org.docx4j.wml.STBrType;
  * @className	： AddingAPageBreak
  * @description	： 添加换页符
 	添加换页符相当地简单。Docx4j拥有一个叫作Br的break对象，这个对象有一个type属性，这种情况下我们需要将其设置为page，type其它可选的值为column和textWrapping。这个break可以很简单地添加到段落中。
- * @author 		： <a href="https://github.com/vindell">vindell</a>
+ * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
  * @date		： 2017年5月24日 下午10:34:01
  * @version 	V1.0
  */

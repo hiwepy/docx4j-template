@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, vindell (https://github.com/vindell).
+ * Copyright (c) 2018, hiwepy (https://github.com/hiwepy).
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -33,7 +33,7 @@ import org.docx4j.wml.UnderlineEnumeration;
  * @className	： ChangingTheStyleSheet
  * @description	： 更改默认样式
 	几乎所有的客户都想要他们自己的风格。Word提供了一些默认的样式但它们不够好（注意一下我没有更改两个图像之间的文本，因此图像中的文本并不反映实际的风格）：
- * @author 		： <a href="https://github.com/vindell">vindell</a>
+ * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
  * @date		： 2017年5月24日 下午10:35:52
  * @version 	V1.0
  */
