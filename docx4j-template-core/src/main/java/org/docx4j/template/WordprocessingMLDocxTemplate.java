@@ -15,7 +15,6 @@
  */
 package org.docx4j.template;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -71,63 +70,5 @@ public class WordprocessingMLDocxTemplate implements WordprocessingMLTemplate {
 		}
         return dataMap;  
     }
-
-	
-
-	public File getSourceDocx() {
-		return sourceDocx;
-	}
-
-	public void setSourceDocx(File sourceDocx) {
-		this.sourceDocx = sourceDocx;
-	}
-
-	public File getOutputDocx() {
-		return outputDocx;
-	}
-
-	public void setOutputDocx(File outputDocx) {
-		this.outputDocx = outputDocx;
-	}
-
-	public String getPlaceholderStart() {
-		return placeholderStart;
-	}
-
-	public void setPlaceholderStart(String placeholderStart) {
-		this.placeholderStart = placeholderStart;
-	}
-
-	public String getPlaceholderEnd() {
-		return placeholderEnd;
-	}
-
-	public void setPlaceholderEnd(String placeholderEnd) {
-		this.placeholderEnd = placeholderEnd;
-	}
-
-	public String getInputEncoding() {
-		return inputEncoding;
-	}
-
-	public void setInputEncoding(String inputEncoding) {
-		this.inputEncoding = inputEncoding;
-	}
-
-	public String getOutputEncoding() {
-		return outputEncoding;
-	}
-
-	public void setOutputEncoding(String outputEncoding) {
-		this.outputEncoding = outputEncoding;
-	}
-
-	public boolean isAutoDelete() {
-		return autoDelete;
-	}
-
-	public void setAutoDelete(boolean autoDelete) {
-		this.autoDelete = autoDelete;
-	}
 
 }
