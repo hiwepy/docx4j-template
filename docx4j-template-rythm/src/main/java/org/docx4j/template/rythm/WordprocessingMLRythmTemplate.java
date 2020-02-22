@@ -15,12 +15,17 @@
  */
 package org.docx4j.template.rythm;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.docx4j.Docx4jProperties;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.template.WordprocessingMLTemplate;
@@ -33,7 +38,7 @@ import org.rythmengine.RythmEngine;
  * 该模板仅负责使用Rythm模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
  * @author <a href="https://github.com/hiwepy">hiwepy</a>
  */
-public class WordprocessingMLRythmTemplate extends WordprocessingMLTemplate {
+public class WordprocessingMLRythmTemplate implements WordprocessingMLTemplate {
 	
 	protected RythmEngine engine;
 	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
@@ -48,6 +53,16 @@ public class WordprocessingMLRythmTemplate extends WordprocessingMLTemplate {
 	
 	public WordprocessingMLRythmTemplate(WordprocessingMLHtmlTemplate template) {
 		this.mlHtmlTemplate = template;
+	}
+
+	@Override
+	public WordprocessingMLPackage process(File template, Map<String, Object> variables) throws Exception {
+		return this.process(FileUtils.readFileToString(template, StandardCharsets.UTF_8), variables);
+	}
+	
+	@Override
+	public WordprocessingMLPackage process(InputStream template, Map<String, Object> variables) throws Exception {
+		return this.process(IOUtils.toString(template, StandardCharsets.UTF_8), variables);
 	}
 
 	/**

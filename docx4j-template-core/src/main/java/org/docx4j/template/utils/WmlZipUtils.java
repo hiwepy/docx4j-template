@@ -26,7 +26,6 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 
 /**
  * To change this template, choose Tools | Templates and open the template in the editor.
@@ -50,13 +49,9 @@ public class WmlZipUtils {
 	}
 
 	public static void zipDir(File dirToZip, File destFile, boolean includeInitialFolder) throws Exception {
-		OutputStream output = null;
-		try {
-			output = new FileOutputStream(destFile);
+		try (OutputStream output = new FileOutputStream(destFile);){
 			helper.setIncludeInitialFolder(includeInitialFolder);
 			helper.process(dirToZip, output);
-		} finally {
-			IOUtils.closeQuietly(output);
 		}
 	}
 	
@@ -69,6 +64,7 @@ public class WmlZipUtils {
 		unzip(new File(sourceFile), new File(outputDir));
 	}
 
+	@SuppressWarnings("resource")
 	public static void unzip(File sourceFile, File outputDir) throws ZipException, IOException {
 		FileUtils.deleteDirectory(outputDir);
 		ZipFile zipFile = new ZipFile(sourceFile);

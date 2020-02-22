@@ -16,6 +16,7 @@
 package org.docx4j.template.utils;
 
 import org.docx4j.dml.wordprocessingDrawing.Inline;
+import org.docx4j.jaxb.Context;
 import org.docx4j.wml.Drawing;
 import org.docx4j.wml.ObjectFactory;
 import org.docx4j.wml.P;
@@ -26,7 +27,9 @@ import org.docx4j.wml.R;
  * @author <a href="https://github.com/hiwepy">hiwepy</a>
  */
 public class ParagraphUtils {
-
+	
+	protected static ObjectFactory factory = Context.getWmlObjectFactory();
+    
 	/*
      *  向新的段落中添加内联图片并返回这个段落.
      *  这个方法与前面例子中的方法没有区别.
@@ -35,7 +38,6 @@ public class ParagraphUtils {
      */
 	public static P addInlineImageToParagraph(Inline inline) {
         // Now add the in-line image to a paragraph
-        ObjectFactory factory = new ObjectFactory();
         P paragraph = factory.createP();
         R run = factory.createR();
         paragraph.getContent().add(run);

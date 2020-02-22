@@ -15,9 +15,14 @@
  */
 package org.docx4j.template.beetl;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
@@ -32,7 +37,7 @@ import org.docx4j.template.xhtml.WordprocessingMLHtmlTemplate;
  * 该模板仅负责使用Beetl模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
  * @author <a href="https://github.com/hiwepy">hiwepy</a>
  */
-public class WordprocessingMLBeetlTemplate extends WordprocessingMLTemplate {
+public class WordprocessingMLBeetlTemplate implements WordprocessingMLTemplate {
 	
 	protected GroupTemplate engine;
 	protected WordprocessingMLHtmlTemplate mlHtmlTemplate;
@@ -47,6 +52,16 @@ public class WordprocessingMLBeetlTemplate extends WordprocessingMLTemplate {
 	
 	public WordprocessingMLBeetlTemplate(WordprocessingMLHtmlTemplate template) {
 		this.mlHtmlTemplate = template;
+	}
+
+	@Override
+	public WordprocessingMLPackage process(File template, Map<String, Object> variables) throws Exception {
+		return this.process(FileUtils.readFileToString(template, StandardCharsets.UTF_8), variables);
+	}
+	
+	@Override
+	public WordprocessingMLPackage process(InputStream template, Map<String, Object> variables) throws Exception {
+		return this.process(IOUtils.toString(template, StandardCharsets.UTF_8), variables);
 	}
 
 	/**
