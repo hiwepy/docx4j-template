@@ -154,12 +154,4 @@ public class WordprocessingMLDocxTemplate2 implements WordprocessingMLTemplate {
 		this.outputEncoding = outputEncoding;
 	}
 
-	public boolean isAutoDelete() {
-		return autoDelete;
-	}
-
-	public void setAutoDelete(boolean autoDelete) {
-		this.autoDelete = autoDelete;
-	}
-
 }

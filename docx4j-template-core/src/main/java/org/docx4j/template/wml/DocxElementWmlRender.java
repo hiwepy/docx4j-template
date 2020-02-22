@@ -20,7 +20,7 @@ import java.util.List;
 import org.docx4j.jaxb.Context;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.docx4j.template.utils.WMLPackageUtils;
+import org.docx4j.template.utils.WmlElementUtils;
 import org.docx4j.wml.ObjectFactory;
 import org.docx4j.wml.P;
 import org.docx4j.wml.Tbl;
@@ -51,9 +51,9 @@ public class DocxElementWmlRender {
 	
 	public Tbl getTable(String placeholder) throws Docx4JException {
 		//从文档中搜索执行类型的对象
-		List<Tbl> tables = WMLPackageUtils.getTargetElements(wmlPackage.getMainDocumentPart(), Tbl.class);
+		List<Tbl> tables = WmlElementUtils.getTargetElements(wmlPackage.getMainDocumentPart(), Tbl.class);
 		//返回包含制定占位符的第一个表格对象
-    	return WMLPackageUtils.getTable(tables, placeholder);
+    	return WmlElementUtils.getTable(tables, placeholder);
 	}
 	
 	public Tc newCell(Tbl table,int row,String content) {
