@@ -15,11 +15,16 @@
  */
 package org.docx4j.template.velocity;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.tools.generic.DateTool;
@@ -33,7 +38,7 @@ import org.docx4j.template.xhtml.WordprocessingMLHtmlTemplate;
  * 该模板仅负责使用Velocity模板引擎将指定模板生成HTML并将HTML转换成XHTML后，作为模板生成WordprocessingMLPackage对象
  * @author <a href="https://github.com/hiwepy">hiwepy</a>
  */
-public class WordprocessingMLVelocityTemplate extends WordprocessingMLTemplate {
+public class WordprocessingMLVelocityTemplate implements WordprocessingMLTemplate {
 	
 	protected VelocityEngine engine;
 	protected DateTool dateTool = new DateTool();
@@ -49,6 +54,16 @@ public class WordprocessingMLVelocityTemplate extends WordprocessingMLTemplate {
 	
 	public WordprocessingMLVelocityTemplate(WordprocessingMLHtmlTemplate template) {
 		this.mlHtmlTemplate = template;
+	}
+
+	@Override
+	public WordprocessingMLPackage process(File template, Map<String, Object> variables) throws Exception {
+		return this.process(FileUtils.readFileToString(template, StandardCharsets.UTF_8), variables);
+	}
+	
+	@Override
+	public WordprocessingMLPackage process(InputStream template, Map<String, Object> variables) throws Exception {
+		return this.process(IOUtils.toString(template, StandardCharsets.UTF_8), variables);
 	}
 	
 	/**

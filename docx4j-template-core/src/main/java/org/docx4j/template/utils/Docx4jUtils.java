@@ -44,6 +44,8 @@ import org.docx4j.wml.CTAltChunk;
  */
 public class Docx4jUtils {
 
+	protected static String CONTENT_TYPE = "";
+	
 	/*
 	 * 生成临时文件位置
 	 */
@@ -108,5 +110,5 @@ public class Docx4jUtils {
         foSettings.setWmlPackage(wordMLPackage);
         Docx4J.toFO(foSettings, os, Docx4J.FLAG_EXPORT_PREFER_XSL);
     }
-
+    
 }
