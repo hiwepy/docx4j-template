@@ -15,6 +15,11 @@
  */
 package org.docx4j.template.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -35,7 +40,6 @@ import org.docx4j.wml.Text;
  * TODO
  * @author <a href="https://github.com/hiwepy">hiwepy</a>
  */
-@SuppressWarnings("unchecked")
 public class WMLPackageUtils {
 	
 	protected static ObjectFactory factory = Context.getWmlObjectFactory();
@@ -200,5 +204,33 @@ public class WMLPackageUtils {
 			//Log.error(cce);
 		}
 	}
+	
+	/** 
+     * 将图片从文件对象转换成字节数组. 
+     * @param file  将要转换的文件 
+     * @return      包含图片字节数据的字节数组 
+     * @throws FileNotFoundException 
+     * @throws IOException 
+     */  
+	public static byte[] imageToByteArray(File file) throws FileNotFoundException, IOException {  
+        InputStream is = new FileInputStream(file );  
+        long length = file.length();  
+        // 不能使用long类型创建数组, 需要用int类型.  
+        if (length > Integer.MAX_VALUE) {  
+            System.out.println("File too large!!");  
+        }  
+        byte[] bytes = new byte[(int)length];  
+        int offset = 0;  
+        int numRead = 0;  
+        while (offset < bytes.length && (numRead=is.read(bytes, offset, bytes.length-offset)) >= 0) {  
+            offset += numRead;  
+        }  
+        // 确认所有的字节都没读取  
+        if (offset < bytes.length) {  
+            System.out.println("Could not completely read file " +file.getName());  
+        }  
+        is.close();  
+        return bytes;  
+    }  
     
 }
