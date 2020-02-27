@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Map;
 
+import org.docx4j.Docx4J;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 
 /**
@@ -35,7 +36,18 @@ public interface WordprocessingMLTemplate {
 	 * @throws Exception ：异常对象
 	 */
 	default WordprocessingMLPackage process(File template, Map<String, Object> variables) throws Exception{
-		return this.process(new FileInputStream(template), variables);
+		// Document loading (required)
+		WordprocessingMLPackage wordMLPackage;
+		if (template == null || !template.exists() || !template.isFile() ) {
+			// Create a docx
+			System.out.println("No imput path passed, creating dummy document");
+			wordMLPackage = WordprocessingMLPackage.createPackage();
+			SampleDocument.createContent(wordMLPackage.getMainDocumentPart());	
+		} else {
+			System.out.println("Loading file from " + template.getAbsolutePath());
+			wordMLPackage = Docx4J.load(template);
+		}
+		return wordMLPackage;
 	}
 	
 	/**
@@ -45,7 +57,18 @@ public interface WordprocessingMLTemplate {
 	 * @throws Exception ：异常对象
 	 */
 	default WordprocessingMLPackage process(InputStream template, Map<String, Object> variables) throws Exception{
-		return WordprocessingMLPackage.load(template);
+		// Document loading (required)
+		WordprocessingMLPackage wordMLPackage;
+		if (template == null) {
+			// Create a docx
+			System.out.println("No imput path passed, creating dummy document");
+			wordMLPackage = WordprocessingMLPackage.createPackage();
+			SampleDocument.createContent(wordMLPackage.getMainDocumentPart());	
+		} else {
+			System.out.println("Loading file from InputStream");
+			wordMLPackage = Docx4J.load(template);
+		}
+		return wordMLPackage;
 	}
 	
 	/**
