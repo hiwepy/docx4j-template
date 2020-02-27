@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.docx4j.Docx4J;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.junit.After;
 import org.junit.Before;
@@ -46,8 +47,6 @@ public class WordprocessingMLDocxTemplate_Test {
 
 		WordprocessingMLPackage wmlPackage = docxTemplate.process(sourceDocx, variables);
 		wmlPackage.save(outputDocx);
-		
-		
 	}
 	
 	@After
