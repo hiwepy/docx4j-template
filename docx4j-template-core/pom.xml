@@ -40,16 +40,16 @@
 			<artifactId>docx4j-docx-anon</artifactId>
 		</dependency>
 		<!-- Docx4j JAXB -->
-		<dependency>
+		<!-- <dependency>
 		    <groupId>org.docx4j</groupId>
 		    <artifactId>docx4j-JAXB-Internal</artifactId>
 		   	<scope>test</scope>
-		</dependency>
-		<dependency>
+		</dependency> -->
+		<!-- <dependency>
 		    <groupId>org.docx4j</groupId>
 		    <artifactId>docx4j-JAXB-MOXy</artifactId>
 		    <scope>test</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>eclipselink</artifactId>

@@ -7,9 +7,10 @@ package org.docx4j.template.handler;
 import java.util.Map;
 
 import org.docx4j.openpackaging.parts.SAXHandler;
+import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 
-public class VariableReplaceSAXHandler extends SAXHandler {
+public class VariableReplaceSAXHandler extends SAXHandler implements ContentHandler {
 	/**
 	 * 变量占位符开始位，默认：${
 	 */
@@ -22,7 +23,6 @@ public class VariableReplaceSAXHandler extends SAXHandler {
 
 	public VariableReplaceSAXHandler(Map<String, Object> variables) throws SAXException {
 		super();
-		this.variables = variables;
 	}
 	
 	public VariableReplaceSAXHandler(String placeholderStart, String placeholderEnd ,Map<String, Object> variables) throws SAXException {
@@ -42,6 +42,7 @@ public class VariableReplaceSAXHandler extends SAXHandler {
 //		System.out.println(wmlString);
 
 		char[] charOut = wmlString.toCharArray();
+		
 		this.getContentHandler().characters(charOut, 0, charOut.length);
 
 	}
