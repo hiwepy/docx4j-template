@@ -396,7 +396,7 @@
 		<commons-logging.version>1.2</commons-logging.version>
 		<commons-io.version>2.6</commons-io.version>
 		<!-- Docx4j Core -->
-		<docx4j.version>8.1.4</docx4j.version>
+		<docx4j.version>8.1.5</docx4j.version>
 		<docx4j-export-fo.version>${docx4j.version}</docx4j-export-fo.version>
 		<!-- Docx4j ImportXHTML -->
 		<docx4j-importxhtml.version>8.0.0</docx4j-importxhtml.version>
@@ -407,6 +407,7 @@
 		<docx4j-openxml.version>${docx4j.version}</docx4j-openxml.version>
 		<freemarker.version>2.3.28</freemarker.version>
 		<httl.version>1.0.12</httl.version>
+		<jaxb-impl.version>2.4.0-b180830.0438</jaxb-impl.version>
 		<jackson.version>2.9.9</jackson.version>
 		<java.version>1.8</java.version>
 		<javax-activation.version>1.1.1</javax-activation.version>
@@ -633,6 +634,18 @@
 			    <groupId>org.docx4j</groupId>
 			    <artifactId>docx4j-JAXB-ReferenceImpl</artifactId>
 			    <version>${docx4j-jaxb.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.googlecode.jaxb-namespaceprefixmapper-interfaces/JAXBNamespacePrefixMapper -->
+			<dependency>
+			    <groupId>com.googlecode.jaxb-namespaceprefixmapper-interfaces</groupId>
+			    <artifactId>JAXBNamespacePrefixMapper</artifactId>
+			    <version>6.1.0</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
+			<dependency>
+			    <groupId>com.sun.xml.bind</groupId>
+			    <artifactId>jaxb-impl</artifactId>
+			    <version>${jaxb-impl.version}</version>
 			</dependency>
 			
 			<!-- Docx4j OpenXML -->

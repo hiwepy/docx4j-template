@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,8 +43,10 @@ public class WordprocessingMLDocxTemplate_Test {
 		
 		File sourceDocx = new java.io.File("src/test/resources/tpl/template.docx");
 		File outputDocx = new java.io.File("src/test/resources/output/docxTemplate_output.docx");
+
+		WordprocessingMLPackage wmlPackage = docxTemplate.process(sourceDocx, variables);
+		wmlPackage.save(outputDocx);
 		
-		docxTemplate.process(sourceDocx, "", variables, outputDocx);
 		
 	}
 	
