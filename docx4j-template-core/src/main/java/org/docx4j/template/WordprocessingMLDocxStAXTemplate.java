@@ -15,6 +15,7 @@
  */
 package org.docx4j.template;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.Map;
 
@@ -39,6 +40,35 @@ public class WordprocessingMLDocxStAXTemplate implements WordprocessingMLTemplat
 	 * 变量占位符结束位，默认：}
 	 */
 	protected String placeholderEnd = "}";
+	
+	/**
+	 * @param template ：模板文件
+	 * @param variables ：变量
+	 * @return {@link WordprocessingMLPackage} 对象
+	 * @throws Exception ：异常对象
+	 */
+	@Override
+	public WordprocessingMLPackage process(File template, Map<String, Object> variables) throws Exception{
+		// Document loading (required)
+		WordprocessingMLPackage wordMLPackage;
+		if (template == null || !template.exists() || !template.isFile() ) {
+			// Create a docx
+			System.out.println("No imput path passed, creating dummy document");
+			wordMLPackage = WordprocessingMLPackage.createPackage();
+			SampleDocument.createContent(wordMLPackage.getMainDocumentPart());	
+		} else {
+			System.out.println("Loading file from " + template.getAbsolutePath());
+			wordMLPackage = Docx4J.load(template);
+		}
+		if (null != variables && !variables.isEmpty()) {
+        	// 替换变量并输出Word文档 
+        	MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();  
+        	// 替换变量
+        	documentPart.pipe( new VariableReplaceSaTXHandler( this.getPlaceholderStart() , this.getPlaceholderEnd(), variables) );
+         }
+        // 返回WordprocessingMLPackage对象
+		return FontMapperHolder.useFontMapper(wordMLPackage);
+	}
 	
 	/**
 	 * 变量替换方式实现（只能解决固定模板的word生成）
