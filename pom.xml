@@ -562,6 +562,7 @@
 			</dependency>
 			 
 			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-export-fo -->
+			<!-- Export docx to PDF via XSL FO, using Apache FOP -->
 			<dependency>
 			    <groupId>org.docx4j</groupId>
 			    <artifactId>docx4j-export-fo</artifactId>
@@ -584,7 +585,7 @@
 									
 			<!-- Docx4j ImportXHTML -->
 
-			<!-- docx4j-ImportXHTML converts XHTML to OpenXML WordML (docx) using  docx4j -->
+			<!-- docx4j-ImportXHTML converts XHTML to OpenXML WordML (docx) using docx4j  -->
 			<dependency>
 				<groupId>org.docx4j</groupId>
 				<artifactId>docx4j-ImportXHTML</artifactId>
@@ -600,19 +601,22 @@
 			<!-- Docx4j JAXB -->
 			
 			<!-- 
-		    	docx4j-JAXB-Internal (available for docx4j 8.1.x only),
+		    	docx4j-JAXB-Internal (which is available but deprecated in Java 9 and 10) ,
 		    	docx4j-JAXB-MOXy (for docx4j 8 or 11),
 		    	docx4j-JAXB-ReferenceImpl (for docx4j 8 or 11), 
 		    	You should use one and only one of docx4j-JAXB-*
 		    -->
 			
 			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-JAXB-Internal -->
+			<!-- config specifying that docx4j should use the JAXB Internal implementation
+				 (which is available but deprecated in Java 9 and 10)  -->
 			<dependency>
 			    <groupId>org.docx4j</groupId>
 			    <artifactId>docx4j-JAXB-Internal</artifactId>
-			    <version>8.1.3</version>
+			    <version>${docx4j-jaxb.version}</version>
 			</dependency>
 			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-JAXB-MOXy -->
+			<!-- config specifying that docx4j should use the EclipseLink MOXy (JAXB) runtime   -->
 			<dependency>
 			    <groupId>org.docx4j</groupId>
 			    <artifactId>docx4j-JAXB-MOXy</artifactId>
@@ -644,10 +648,23 @@
 				<version>${persistence.version}</version>
 			</dependency>
 			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-JAXB-ReferenceImpl -->
+			<!-- config specifying that docx4j should use the JAXB reference impls  -->
 			<dependency>
 			    <groupId>org.docx4j</groupId>
 			    <artifactId>docx4j-JAXB-ReferenceImpl</artifactId>
 			    <version>${docx4j-jaxb.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.googlecode.jaxb-namespaceprefixmapper-interfaces/JAXBNamespacePrefixMapper -->
+			<dependency>
+			    <groupId>com.googlecode.jaxb-namespaceprefixmapper-interfaces</groupId>
+			    <artifactId>JAXBNamespacePrefixMapper</artifactId>
+			    <version>6.1.0</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
+			<dependency>
+			    <groupId>com.sun.xml.bind</groupId>
+			    <artifactId>jaxb-impl</artifactId>
+			    <version>${jaxb-impl.version}</version>
 			</dependency>
 			
 			<!-- Docx4j OpenXML -->
@@ -659,12 +676,14 @@
 			    <version>${docx4j-openxml.version}</version>
 			</dependency>
 			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-openxml-objects-pml -->
+			<!-- Our JAXB representation of OpenXML Presentation Markup Language (pml)  -->
 			<dependency>
 			    <groupId>org.docx4j</groupId>
 			    <artifactId>docx4j-openxml-objects-pml</artifactId>
 			    <version>${docx4j-openxml.version}</version>
 			</dependency>
 			<!-- https://mvnrepository.com/artifact/org.docx4j/docx4j-openxml-objects-sml -->
+			<!-- Our JAXB representation of OpenXML Spreadsheet Markup Language (sml)  -->
 			<dependency>
 			    <groupId>org.docx4j</groupId>
 			    <artifactId>docx4j-openxml-objects-sml</artifactId>

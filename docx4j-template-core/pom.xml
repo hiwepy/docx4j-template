@@ -37,6 +37,9 @@
 		    <groupId>org.docx4j</groupId>
 		    <artifactId>docx4j-core</artifactId>
 		</dependency>
+		
+		
+		
 		<dependency>
 		    <groupId>org.docx4j</groupId>
 		    <artifactId>docx4j-JAXB-MOXy</artifactId>
