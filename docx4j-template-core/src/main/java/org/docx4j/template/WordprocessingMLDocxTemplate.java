@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.docx4j.Docx4J;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.template.fonts.FontMapperHolder;
@@ -40,17 +41,26 @@ public class WordprocessingMLDocxTemplate implements WordprocessingMLTemplate {
 	 */
 	@Override
 	public WordprocessingMLPackage process(InputStream template, Map<String, Object> variables) throws Exception {
-		
-		WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(template);
+		// Document loading (required)
+		WordprocessingMLPackage wordMLPackage;
+		if (template == null) {
+			// Create a docx
+			System.out.println("No imput path passed, creating dummy document");
+			wordMLPackage = WordprocessingMLPackage.createPackage();
+			SampleDocument.createContent(wordMLPackage.getMainDocumentPart());	
+		} else {
+			System.out.println("Loading file from InputStream");
+			wordMLPackage = Docx4J.load(template);
+		}
         if (null != variables && !variables.isEmpty()) {
         	// 替换变量并输出Word文档 
         	MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();  
-        	 // 将${}里的内容结构层次替换为一层
-        	 WMLPackageUtils.cleanDocumentPart(documentPart);
-             // 获取静态变量集合
-             HashMap<String, String> staticMap = getStaticData(variables);
-             // 替换普通变量  
-             documentPart.variableReplace(staticMap);  
+        	// 将${}里的内容结构层次替换为一层
+        	WMLPackageUtils.cleanDocumentPart(documentPart);
+            // 获取静态变量集合
+            HashMap<String, String> staticMap = getStaticData(variables);
+            // 替换普通变量  
+            documentPart.variableReplace(staticMap);  
          }
         // 返回WordprocessingMLPackage对象
 		return FontMapperHolder.useFontMapper(wordMLPackage);
