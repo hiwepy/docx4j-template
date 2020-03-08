@@ -17,8 +17,10 @@ import org.xml.sax.SAXException;
 
 public class VariableReplaceSAXHandler extends SAXHandler implements ContentHandler {
 	
+	/**
+	 * ExpressionParser对象，用于解析表达式
+	 */
 	protected ExpressionParser parser = new SpelExpressionParser();
-	
 	/**
 	 * 变量占位符开始位，默认：${
 	 */
