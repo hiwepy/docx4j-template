@@ -24,6 +24,7 @@ import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.template.fonts.FontMapperHolder;
 import org.docx4j.template.handler.VariableReplaceSAXHandler;
+import org.docx4j.template.utils.WMLPackageUtils;
 
 /**
  * 该模板负责对WordprocessingMLPackage进行普通变量替换和复杂变量替换并返回处理后的WordprocessingMLPackage对象
@@ -92,7 +93,9 @@ public class WordprocessingMLDocxSaxTemplate implements WordprocessingMLTemplate
 		}
         if (null != variables && !variables.isEmpty()) {
         	// 替换变量并输出Word文档 
-        	MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();  
+        	MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
+        	// 将${}里的内容结构层次替换为一层
+        	WMLPackageUtils.cleanDocumentPart(documentPart);
         	// 替换变量
         	documentPart.pipe( new VariableReplaceSAXHandler( this.getPlaceholderStart() , this.getPlaceholderEnd(), variables) );
          }

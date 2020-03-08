@@ -72,9 +72,10 @@
 		    <artifactId>docx4j-JAXB-ReferenceImpl</artifactId>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/ognl/ognl -->
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-expression</artifactId>
+		    <groupId>ognl</groupId>
+		    <artifactId>ognl</artifactId>
 		</dependency>
 		
 	</dependencies>

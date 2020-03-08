@@ -5,22 +5,19 @@
 package org.docx4j.template.handler;
 
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.docx4j.openpackaging.parts.SAXHandler;
-import org.springframework.expression.EvaluationContext;
-import org.springframework.expression.ExpressionParser;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
+import org.docx4j.template.ognl.DefaultMemberAccess;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 
+import ognl.DefaultClassResolver;
+import ognl.DefaultTypeConverter;
+import ognl.Ognl;
+import ognl.OgnlContext;
+
 public class VariableReplaceSAXHandler extends SAXHandler implements ContentHandler {
 	
-	/**
-	 * ExpressionParser对象，用于解析表达式
-	 */
-	protected ExpressionParser parser = new SpelExpressionParser();
 	/**
 	 * 变量占位符开始位，默认：${
 	 */
@@ -42,9 +39,9 @@ public class VariableReplaceSAXHandler extends SAXHandler implements ContentHand
 	 */
 	protected Map<String, Object> variables;
 	/**
-	 * 表达式上下文对象
+	 * Ognl上下文对象
 	 */
-	protected EvaluationContext context;
+	protected OgnlContext context;
 
 	public VariableReplaceSAXHandler(Map<String, Object> variables) throws SAXException {
 		super();
@@ -60,10 +57,14 @@ public class VariableReplaceSAXHandler extends SAXHandler implements ContentHand
 	}
 	
 	protected void initContext() {
-		context = new StandardEvaluationContext();  
-        for (Entry<String, Object> entry : variables.entrySet()) {
-        	context.setVariable(entry.getKey(), entry.getValue());
-		}
+		// 构建一个OgnlContext对象
+		context = (OgnlContext) Ognl.createDefaultContext(this, 
+		        new DefaultMemberAccess(true), 
+		        new DefaultClassResolver(),
+		        new DefaultTypeConverter());
+		// 设置根节点，以及初始化一些实例对象
+		context.setRoot(variables);
+		context.putAll(variables);
 	}
 
 	@Override
@@ -93,12 +94,18 @@ public class VariableReplaceSAXHandler extends SAXHandler implements ContentHand
 			String key = wmlTemplateString.substring(startKey + 2, keyEnd);
 			Object val = mappings.get(key);
 			if (val == null) {
-				String expression = spelExpressionStart + key + spelExpressionEnd;
-				String value = parser.parseExpression(expression).getValue(context, String.class);
-				if(value != null) {
-					strB.append(value);
-				} else {
-					System.out.println("Invalid key '" + key + "' or key not mapped to a value");
+				try {
+					// 先构建一个Ognl表达式，再解析表达式
+			        Object ognl = Ognl.parseExpression(key);//构建Ognl表达式
+			        Object value = Ognl.getValue(ognl, context, context.getRoot()); //解析表达式
+					if(value != null) {
+						strB.append(value.toString());
+					} else {
+						System.out.println("Invalid key '" + key + "' or key not mapped to a value");
+						strB.append(key);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
 					strB.append(key);
 				}
 			} else {

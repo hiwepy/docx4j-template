@@ -5,25 +5,22 @@
 package org.docx4j.template.handler;
 
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.docx4j.openpackaging.parts.StAXHandlerAbstract;
-import org.springframework.expression.EvaluationContext;
-import org.springframework.expression.ExpressionParser;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
+import org.docx4j.template.ognl.DefaultMemberAccess;
 import org.xml.sax.SAXException;
+
+import ognl.DefaultClassResolver;
+import ognl.DefaultTypeConverter;
+import ognl.Ognl;
+import ognl.OgnlContext;
 
 public class VariableReplaceSaTXHandler extends StAXHandlerAbstract {
 	
-	/**
-	 * ExpressionParser对象，用于解析表达式
-	 */
-	protected ExpressionParser parser = new SpelExpressionParser();
 	/**
 	 * 变量占位符开始位，默认：${
 	 */
@@ -33,21 +30,13 @@ public class VariableReplaceSaTXHandler extends StAXHandlerAbstract {
 	 */
 	protected String placeholderEnd = "}";
 	/**
-	 * SPEL表达式占位符开始位，默认：#{
-	 */
-	protected String spelExpressionStart = "#{";
-	/**
-	 * SPEL表达式占位符结束位，默认：}
-	 */
-	protected String spelExpressionEnd = "}";
-	/**
 	 * 变量集合
 	 */
 	protected Map<String, Object> variables;
 	/**
-	 * 表达式上下文对象
+	 * Ognl上下文对象
 	 */
-	protected EvaluationContext context;
+	protected OgnlContext context;
 	
 	public VariableReplaceSaTXHandler(Map<String, Object> variables) throws SAXException {
 		super();
@@ -65,10 +54,14 @@ public class VariableReplaceSaTXHandler extends StAXHandlerAbstract {
 	}
 
 	protected void initContext() {
-		context = new StandardEvaluationContext();  
-        for (Entry<String, Object> entry : variables.entrySet()) {
-        	context.setVariable(entry.getKey(), entry.getValue());
-		}
+		// 构建一个OgnlContext对象
+		context = (OgnlContext) Ognl.createDefaultContext(this, 
+		        new DefaultMemberAccess(true), 
+		        new DefaultClassResolver(),
+		        new DefaultTypeConverter());
+		// 设置根节点，以及初始化一些实例对象
+		context.setRoot(variables);
+		context.putAll(variables);
 	}
 	
 	@Override
@@ -102,12 +95,18 @@ public class VariableReplaceSaTXHandler extends StAXHandlerAbstract {
 				String key = wmlTemplateString.substring(startKey + 2, keyEnd);
 				Object val = mappings.get(key);
 				if (val == null) {
-					String expression = spelExpressionStart + key + spelExpressionEnd;
-					String value = parser.parseExpression(expression).getValue(context, String.class);
-					if(value != null) {
-						strB.append(value);
-					} else {
-						System.out.println("Invalid key '" + key + "' or key not mapped to a value");
+					try {
+						// 先构建一个Ognl表达式，再解析表达式
+				        Object ognl = Ognl.parseExpression(key);//构建Ognl表达式
+				        Object value = Ognl.getValue(ognl, context, context.getRoot()); //解析表达式
+						if(value != null) {
+							strB.append(value.toString());
+						} else {
+							System.out.println("Invalid key '" + key + "' or key not mapped to a value");
+							strB.append(key);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
 						strB.append(key);
 					}
 				} else {
