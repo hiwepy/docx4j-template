@@ -427,7 +427,7 @@
 		<javax-activation.version>1.1.1</javax-activation.version>
 		<javax.mail-api.version>1.6.2</javax.mail-api.version>
 		<jetbrick.version>2.1.10</jetbrick.version>
-		<jsoup.version>1.12.1</jsoup.version>
+		<jsoup.version>1.13.1</jsoup.version>
 		<junit.version>4.12</junit.version>
 		<persistence.version>2.7.6</persistence.version>
 		<rythm.version>1.3.0</rythm.version>
