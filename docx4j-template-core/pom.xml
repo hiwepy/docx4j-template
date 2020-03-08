@@ -72,6 +72,11 @@
 		    <artifactId>docx4j-JAXB-ReferenceImpl</artifactId>
 		</dependency>
 		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-expression</artifactId>
+		</dependency>
+		
 	</dependencies>
 	
 </project>
