@@ -42,6 +42,10 @@ public class WordprocessingMLDocxSaxTemplate_Test {
 		variables.put("title", "变量替换测试");
 		variables.put("content", "测试效果不错");
 		
+		Map<String, String> map = new HashMap<>();
+		map.put("title", "Spring Expression Language（SpEL）测试！ ");
+		variables.put("map", map);
+		
 		File sourceDocx = new java.io.File("src/test/resources/tpl/template.docx");
 		File outputDocx = new java.io.File("src/test/resources/output/docxTemplate_output2.docx");
 
