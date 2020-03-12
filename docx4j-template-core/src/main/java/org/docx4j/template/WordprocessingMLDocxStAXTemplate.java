@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 import org.docx4j.Docx4J;
+import org.docx4j.model.datastorage.migration.VariablePrepare;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.template.fonts.FontMapperHolder;
@@ -64,6 +65,9 @@ public class WordprocessingMLDocxStAXTemplate implements WordprocessingMLTemplat
 		if (null != variables && !variables.isEmpty()) {
         	// 替换变量并输出Word文档 
         	MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();  
+        	// 将${}里的内容结构层次替换为一层
+        	VariablePrepare.prepare(wordMLPackage);
+        	WMLPackageUtils.cleanDocumentPart(documentPart);
         	// 替换变量
         	documentPart.pipe( new VariableReplaceSaTXHandler( this.getPlaceholderStart() , this.getPlaceholderEnd(), variables) );
          }
@@ -95,6 +99,7 @@ public class WordprocessingMLDocxStAXTemplate implements WordprocessingMLTemplat
         	// 替换变量并输出Word文档 
         	MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
         	// 将${}里的内容结构层次替换为一层
+        	VariablePrepare.prepare(wordMLPackage);
         	WMLPackageUtils.cleanDocumentPart(documentPart);
         	// 替换变量
         	documentPart.pipe( new VariableReplaceSaTXHandler( this.getPlaceholderStart() , this.getPlaceholderEnd(), variables) );
