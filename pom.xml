@@ -405,7 +405,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<antlr4.version>4.7.1</antlr4.version>
-		<beetl.version>2.7.26</beetl.version>
+		<beetl.version>3.1.3.RELEASE</beetl.version>
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>
 		<commons-lang3.version>3.8.1</commons-lang3.version>
 		<commons-logging.version>1.2</commons-logging.version>
