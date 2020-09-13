@@ -107,7 +107,7 @@ import org.docx4j.wml.TrPr;
 import org.docx4j.wml.U;
 import org.docx4j.wml.UnderlineEnumeration;
 
-/**
+/*
  * TODO
  * @author <a href="https://github.com/hiwepy">hiwepy</a>
  */
@@ -253,7 +253,7 @@ public final class WmlElementUtils {
         return paragraph;  
     } 
 
-    /**
+    /*
      * 插入图片
      * @param wPackage
      * @param bm
@@ -321,8 +321,8 @@ public final class WmlElementUtils {
 
 
     /*------------------------------------other--------------------------------------------------- */
-    /**
-     * @Description:新增超链接
+    /*
+     * 新增超链接
      */
     public void createHyperlink(WordprocessingMLPackage wordMLPackage, MainDocumentPart mainPart, ObjectFactory factory,
             P paragraph, String url, String value, String cnFontName, String enFontName, String fontSize)
@@ -374,8 +374,8 @@ public final class WmlElementUtils {
         return stringWriter.toString();
     }
 
-    /**
-     * @Description:得到指定类型的元素
+    /*
+     * 得到指定类型的元素
      */
     public static List<Object> getAllElementFromObject(Object obj, Class<?> toSearch) {
         List<Object> result = new ArrayList<Object>();
@@ -392,22 +392,22 @@ public final class WmlElementUtils {
         return result;
     }
 
-    /**
-     * @Description:保存WordprocessingMLPackage
+    /*
+     * 保存WordprocessingMLPackage
      */
     public void saveWordPackage(WordprocessingMLPackage wordPackage, File file) throws Exception {
         wordPackage.save(file);
     }
 
-    /**
-     * @Description:新建WordprocessingMLPackage
+    /*
+     * 新建WordprocessingMLPackage
      */
     public static WordprocessingMLPackage createWordprocessingMLPackage() throws Exception {
         return WordprocessingMLPackage.createPackage();
     }
 
-    /**
-     * @Description:加载带密码WordprocessingMLPackage
+    /*
+     * 加载带密码WordprocessingMLPackage
      */
     public static WordprocessingMLPackage loadWordprocessingMLPackageWithPwd(String filePath, String password)
             throws Exception {
@@ -416,8 +416,8 @@ public final class WmlElementUtils {
         return wordMLPackage;
     }
 
-    /**
-     * @Description:加载WordprocessingMLPackage
+    /*
+     * 加载WordprocessingMLPackage
      */
     public static WordprocessingMLPackage loadWordprocessingMLPackage(String filePath) throws Exception {
         WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(new java.io.File(filePath));
@@ -425,8 +425,8 @@ public final class WmlElementUtils {
     }
 
     /*------------------------------------Word 表格相关--------------------------------------------------- */
-    /**
-     * @Description: 跨列合并
+    /*
+     *  跨列合并
      */
     public static void mergeCellsHorizontalByGridSpan(Tbl tbl, int row, int fromCell, int toCell) {
         if (row < 0 || fromCell < 0 || toCell < 0) {
@@ -454,8 +454,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 跨列合并
+    /*
+     *  跨列合并
      */
     public static void mergeCellsHorizontal(Tbl tbl, int row, int fromCell, int toCell) {
         if (row < 0 || fromCell < 0 || toCell < 0) {
@@ -483,8 +483,8 @@ public final class WmlElementUtils {
         }
     }
  
-    /**
-     * @Description: 跨行合并
+    /*
+     *  跨行合并
      */
     public static void mergeCellsVertically(Tbl tbl, int col, int fromRow, int toRow) {
         if (col < 0 || fromRow < 0 || toRow < 0) {
@@ -509,8 +509,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description:得到指定位置的单元格
+    /*
+     * 得到指定位置的单元格
      */
     public static Tc getTc(Tbl tbl, int row, int cell) {
         if (row < 0 || cell < 0) {
@@ -527,8 +527,8 @@ public final class WmlElementUtils {
         return tcList.get(cell);
     }
 
-    /**
-     * @Description:得到所有表格
+    /*
+     * 得到所有表格
      */
     public static List<Tbl> getAllTbl(WordprocessingMLPackage wordMLPackage) {
         MainDocumentPart mainDocPart = wordMLPackage.getMainDocumentPart();
@@ -546,8 +546,8 @@ public final class WmlElementUtils {
         return tblList;
     }
 
-    /**
-     * @Description:删除指定位置的表格,删除后表格数量减一
+    /*
+     * 删除指定位置的表格,删除后表格数量减一
      */
     public static boolean removeTableByIndex(WordprocessingMLPackage wordMLPackage, int index) throws Exception {
         boolean flag = false;
@@ -573,15 +573,15 @@ public final class WmlElementUtils {
         return flag;
     }
 
-    /**
-     * @Description: 获取单元格内容,无分割符
+    /*
+     *  获取单元格内容,无分割符
      */
     public static String getTblContentStr(Tbl tbl) throws Exception {
         return getElementContent(tbl);
     }
 
-    /**
-     * @Description: 获取表格内容
+    /*
+     *  获取表格内容
      */
     public static List<String> getTblContentList(Tbl tbl) throws Exception {
         List<String> resultList = new ArrayList<String>();
@@ -606,8 +606,8 @@ public final class WmlElementUtils {
         return tblPr;
     }
 
-    /**
-     * @Description: 设置表格总宽度
+    /*
+     *  设置表格总宽度
      */
     public static void setTableWidth(Tbl tbl, String width) {
         if (StringUtils.isNotBlank(width)) {
@@ -622,8 +622,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description:创建表格(默认水平居中,垂直居中)
+    /*
+     * 创建表格(默认水平居中,垂直居中)
      */
     public static Tbl createTable(WordprocessingMLPackage wordPackage, int rowNum, int colsNum) throws Exception {
         colsNum = Math.max(1, colsNum);
@@ -637,8 +637,8 @@ public final class WmlElementUtils {
         return createTable(rowNum, colsNum, widthArr);
     }
  
-    /**
-     * @Description:创建表格(默认水平居中,垂直居中)
+    /*
+     * 创建表格(默认水平居中,垂直居中)
      */
     public static Tbl createTable(int rowNum, int colsNum, int[] widthArr) throws Exception {
         colsNum = Math.max(1, Math.min(colsNum, widthArr.length));
@@ -708,8 +708,8 @@ public final class WmlElementUtils {
         return tbl;
     }
 
-    /**
-     * @Description:表格增加边框 可以设置上下左右四个边框样式以及横竖水平线样式
+    /*
+     * 表格增加边框 可以设置上下左右四个边框样式以及横竖水平线样式
      */
     public void setTblBorders(TblPr tblPr, CTBorder topBorder, CTBorder rightBorder, CTBorder bottomBorder,
             CTBorder leftBorder, CTBorder hBorder, CTBorder vBorder) {
@@ -738,8 +738,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置表格水平对齐方式(仅对表格起作用,单元格不一定水平对齐)
+    /*
+     *  设置表格水平对齐方式(仅对表格起作用,单元格不一定水平对齐)
      */
     public void setTblJcAlign(Tbl tbl, JcEnumeration jcType) {
         if (jcType != null) {
@@ -753,8 +753,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置表格水平对齐方式(包括单元格),只对该方法前面产生的单元格起作用
+    /*
+     *  设置表格水平对齐方式(包括单元格),只对该方法前面产生的单元格起作用
      */
     public void setTblAllJcAlign(Tbl tbl, JcEnumeration jcType) {
         if (jcType != null) {
@@ -769,8 +769,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置表格垂直对齐方式(包括单元格),只对该方法前面产生的单元格起作用
+    /*
+     *  设置表格垂直对齐方式(包括单元格),只对该方法前面产生的单元格起作用
      */
     public void setTblAllVAlign(Tbl tbl, STVerticalJc vAlignType) {
         if (vAlignType != null) {
@@ -784,8 +784,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置单元格Margin
+    /*
+     *  设置单元格Margin
      */
     public void setTableCellMargin(Tbl tbl, String top, String right, String bottom, String left) {
         TblPr tblPr = getTblPr(tbl);
@@ -820,8 +820,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 得到表格所有的行
+    /*
+     *  得到表格所有的行
      */
     public static List<Tr> getTblAllTr(Tbl tbl) {
         List<Object> objList = getAllElementFromObject(tbl, Tr.class);
@@ -839,8 +839,8 @@ public final class WmlElementUtils {
 
     }
 
-    /**
-     * @Description:设置tr高度
+    /*
+     * 设置tr高度
      */
     public static void setTrHeight(Tr tr, String heigth) {
         TrPr trPr = getTrPr(tr);
@@ -850,15 +850,15 @@ public final class WmlElementUtils {
         trHeight.set(trPr);
     }
 
-    /**
-     * @Description: 在表格指定位置新增一行,默认居中
+    /*
+     *  在表格指定位置新增一行,默认居中
      */
     public static void addTrByIndex(Tbl tbl, int index) {
         addTrByIndex(tbl, index, STVerticalJc.CENTER, JcEnumeration.CENTER);
     }
 
-    /**
-     * @Description: 在表格指定位置新增一行(默认按表格定义的列数添加)
+    /*
+     *  在表格指定位置新增一行(默认按表格定义的列数添加)
      */
     public static void addTrByIndex(Tbl tbl, int index, STVerticalJc vAlign, JcEnumeration hAlign) {
         TblGrid tblGrid = tbl.getTblGrid();
@@ -918,8 +918,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 得到行的列数
+    /*
+     *  得到行的列数
      */
     public static int getTcCellSizeWithMergeNum(Tr tr) {
         int cellSize = 1;
@@ -938,8 +938,8 @@ public final class WmlElementUtils {
         return cellSize;
     }
 
-    /**
-     * @Description: 删除指定行 删除后行数减一
+    /*
+     *  删除指定行 删除后行数减一
      */
     public static boolean removeTrByIndex(Tbl tbl, int index) {
         boolean flag = false;
@@ -974,8 +974,8 @@ public final class WmlElementUtils {
         return trPr;
     }
 
-    /**
-     * @Description:隐藏行(只对表格中间的部分起作用,不包括首尾行)
+    /*
+     * 隐藏行(只对表格中间的部分起作用,不包括首尾行)
      */
     public static void setTrHidden(Tr tr, boolean hidden) {
         List<Tc> tcList = getTrAllCell(tr);
@@ -984,8 +984,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置单元格宽度
+    /*
+     *  设置单元格宽度
      */
     public static void setTcWidth(Tc tc, String width) {
         if (StringUtils.isNotBlank(width)) {
@@ -1000,8 +1000,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 隐藏单元格内容
+    /*
+     *  隐藏单元格内容
      */
     public static void setTcHidden(Tc tc, boolean hidden) {
         List<P> pList = getTcAllP(tc);
@@ -1046,8 +1046,8 @@ public final class WmlElementUtils {
         return tcPr;
     }
 
-    /**
-     * @Description: 设置单元格垂直对齐方式
+    /*
+     *  设置单元格垂直对齐方式
      */
     public static void setTcVAlign(Tc tc, STVerticalJc vAlignType) {
         if (vAlignType != null) {
@@ -1058,8 +1058,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置单元格水平对齐方式
+    /*
+     *  设置单元格水平对齐方式
      */
     public static void setTcJcAlign(Tc tc, JcEnumeration jcType) {
         if (jcType != null) {
@@ -1079,8 +1079,8 @@ public final class WmlElementUtils {
         return rpr;
     }
 
-    /**
-     * @Description: 获取所有的单元格
+    /*
+     *  获取所有的单元格
      */
     public static List<Tc> getTrAllCell(Tr tr) {
         List<Object> objList = getAllElementFromObject(tr, Tc.class);
@@ -1097,15 +1097,15 @@ public final class WmlElementUtils {
         return tcList;
     }
 
-    /**
-     * @Description: 获取单元格内容
+    /*
+     *  获取单元格内容
      */
     public static String getTcContent(Tc tc) throws Exception {
         return getElementContent(tc);
     }
 
-    /**
-     * @Description:设置单元格内容,content为null则清除单元格内容
+    /*
+     * 设置单元格内容,content为null则清除单元格内容
      */
     public void setTcContent(Tc tc, RPr rpr, String content) {
         List<Object> pList = tc.getContent();
@@ -1148,8 +1148,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description:设置单元格内容,content为null则清除单元格内容
+    /*
+     * 设置单元格内容,content为null则清除单元格内容
      */
     public void removeTcContent(Tc tc) {
         List<Object> pList = tc.getContent();
@@ -1170,8 +1170,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description:删除指定位置的表格
+    /*
+     * 删除指定位置的表格
      * @deprecated
      */
     public void deleteTableByIndex2(WordprocessingMLPackage wordMLPackage, int index) throws Exception {
@@ -1185,8 +1185,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description:获取NodeList
+    /*
+     * 获取NodeList
      * @deprecated
      */
     public List<Object> getObjectByXpath(WordprocessingMLPackage wordMLPackage, String xpath) throws Exception {
@@ -1195,8 +1195,8 @@ public final class WmlElementUtils {
     }
 
     /*------------------------------------Word 段落相关--------------------------------------------------- */
-    /**
-     * @Description: 只删除单独的段落，不包括表格内或其他内的段落
+    /*
+     *  只删除单独的段落，不包括表格内或其他内的段落
      */
     public boolean removeParaByIndex(WordprocessingMLPackage wordMLPackage, int index) {
         boolean flag = false;
@@ -1221,8 +1221,8 @@ public final class WmlElementUtils {
         return flag;
     }
 
-    /**
-     * @Description: 设置段落水平对齐方式
+    /*
+     *  设置段落水平对齐方式
      */
     public static void setParaJcAlign(P paragraph, JcEnumeration hAlign) {
         if (hAlign != null) {
@@ -1237,8 +1237,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置段落内容
+    /*
+     *  设置段落内容
      */
     public static void setParaRContent(P p, RPr runProperties, String content) {
         R run = null;
@@ -1271,8 +1271,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 添加段落内容
+    /*
+     *  添加段落内容
      */
     public static void appendParaRContent(P p, RPr runProperties, String content) {
         if (content != null) {
@@ -1297,8 +1297,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 添加图片到段落
+    /*
+     *  添加图片到段落
      */
     public static void addImageToPara(WordprocessingMLPackage wordMLPackage, ObjectFactory factory, P paragraph,
             String filePath, String content, RPr rpr, String altText, int id1, int id2) throws Exception {
@@ -1321,8 +1321,8 @@ public final class WmlElementUtils {
         paragraph.getContent().add(run);
     }
 
-    /**
-     * @Description: 段落添加Br 页面Break(分页符)
+    /*
+     *  段落添加Br 页面Break(分页符)
      */
     public static void addPageBreak(P para, STBrType sTBrType) {
         Br breakObj = new Br();
@@ -1330,8 +1330,8 @@ public final class WmlElementUtils {
         para.getContent().add(breakObj);
     }
 
-    /**
-     * @Description: 设置段落是否禁止行号(禁止用于当前行号)
+    /*
+     *  设置段落是否禁止行号(禁止用于当前行号)
      */
     public static void setParagraphSuppressLineNum(P p) {
         PPr ppr = getPPr(p);
@@ -1343,8 +1343,8 @@ public final class WmlElementUtils {
         ppr.setSuppressLineNumbers(line);
     }
 
-    /**
-     * @Description: 设置段落底纹(对整段文字起作用)
+    /*
+     *  设置段落底纹(对整段文字起作用)
      */
     public static void setParagraphShdStyle(P p, STShd shdType, String shdColor) {
         PPr ppr = getPPr(p);
@@ -1361,7 +1361,7 @@ public final class WmlElementUtils {
         ppr.setShd(ctShd);
     }
 
-    /**
+    /*
      * @param isSpace
      *            是否设置段前段后值
      * @param before
@@ -1415,8 +1415,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置段落缩进信息 1厘米≈567
+    /*
+     *  设置段落缩进信息 1厘米≈567
      */
     public void setParagraphIndInfo(P p, String firstLine, String firstLineChar, String hanging, String hangingChar,
             String right, String rigthChar, String left, String leftChar) {
@@ -1483,8 +1483,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置段落边框样式
+    /*
+     *  设置段落边框样式
      */
     public static void setParagraghBorders(P p, CTBorder topBorder, CTBorder bottomBorder, CTBorder leftBorder,
             CTBorder rightBorder) {
@@ -1505,8 +1505,8 @@ public final class WmlElementUtils {
         ppr.setPBdr(pBdr);
     }
 
-    /**
-     * @Description: 设置字体信息
+    /*
+     *  设置字体信息
      */
     public static void setFontStyle(RPr runProperties, String cnFontFamily, String enFontFamily, String fontSize,
             String color) {
@@ -1515,8 +1515,8 @@ public final class WmlElementUtils {
         setFontColor(runProperties, color);
     }
 
-    /**
-     * @Description: 设置字体大小
+    /*
+     *  设置字体大小
      */
     public static void setFontSize(RPr runProperties, String fontSize) {
         if (StringUtils.isNotBlank(fontSize)) {
@@ -1527,8 +1527,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置字体
+    /*
+     *  设置字体
      */
     public static void setFontFamily(RPr runProperties, String cnFontFamily, String enFontFamily) {
         if (StringUtils.isNotBlank(cnFontFamily) || StringUtils.isNotBlank(enFontFamily)) {
@@ -1546,8 +1546,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置字体颜色
+    /*
+     *  设置字体颜色
      */
     public static void setFontColor(RPr runProperties, String color) {
         if (color != null) {
@@ -1557,8 +1557,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置字符边框
+    /*
+     *  设置字符边框
      */
     public static void addRPrBorderStyle(RPr runProperties, String size, STBorder bordType, String space, String color) {
         CTBorder value = new CTBorder();
@@ -1577,8 +1577,8 @@ public final class WmlElementUtils {
         runProperties.setBdr(value);
     }
 
-    /**
-     * @Description:着重号
+    /*
+     * 着重号
      */
     public static void addRPrEmStyle(RPr runProperties, STEm emType) {
         if (emType != null) {
@@ -1588,8 +1588,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 空心
+    /*
+     *  空心
      */
     public static void addRPrOutlineStyle(RPr runProperties) {
         BooleanDefaultTrue outline = new BooleanDefaultTrue();
@@ -1597,8 +1597,8 @@ public final class WmlElementUtils {
         runProperties.setOutline(outline);
     }
 
-    /**
-     * @Description: 设置上标下标
+    /*
+     *  设置上标下标
      */
     public static void addRPrcaleStyle(RPr runProperties, STVerticalAlignRun vAlign) {
         if (vAlign != null) {
@@ -1608,8 +1608,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置字符间距缩进
+    /*
+     *  设置字符间距缩进
      */
     public static void addRPrScaleStyle(RPr runProperties, int indent) {
         CTTextScale value = new CTTextScale();
@@ -1617,8 +1617,8 @@ public final class WmlElementUtils {
         runProperties.setW(value);
     }
 
-    /**
-     * @Description: 设置字符间距信息
+    /*
+     *  设置字符间距信息
      */
     public static void addRPrtSpacingStyle(RPr runProperties, int spacing) {
         CTSignedTwipsMeasure value = new CTSignedTwipsMeasure();
@@ -1626,8 +1626,8 @@ public final class WmlElementUtils {
         runProperties.setSpacing(value);
     }
 
-    /**
-     * @Description: 设置文本位置
+    /*
+     *  设置文本位置
      */
     public static void addRPrtPositionStyle(RPr runProperties, int position) {
         CTSignedHpsMeasure ctPosition = new CTSignedHpsMeasure();
@@ -1635,8 +1635,8 @@ public final class WmlElementUtils {
         runProperties.setPosition(ctPosition);
     }
 
-    /**
-     * @Description: 阴文
+    /*
+     *  阴文
      */
     public static void addRPrImprintStyle(RPr runProperties) {
         BooleanDefaultTrue imprint = new BooleanDefaultTrue();
@@ -1644,8 +1644,8 @@ public final class WmlElementUtils {
         runProperties.setImprint(imprint);
     }
 
-    /**
-     * @Description: 阳文
+    /*
+     *  阳文
      */
     public static void addRPrEmbossStyle(RPr runProperties) {
         BooleanDefaultTrue emboss = new BooleanDefaultTrue();
@@ -1653,8 +1653,8 @@ public final class WmlElementUtils {
         runProperties.setEmboss(emboss);
     }
 
-    /**
-     * @Description: 设置隐藏
+    /*
+     *  设置隐藏
      */
     public static void setRPrVanishStyle(RPr runProperties, boolean isVanish) {
         BooleanDefaultTrue vanish = runProperties.getVanish();
@@ -1667,8 +1667,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置阴影
+    /*
+     *  设置阴影
      */
     public static void addRPrShadowStyle(RPr runProperties) {
         BooleanDefaultTrue shadow = new BooleanDefaultTrue();
@@ -1676,8 +1676,8 @@ public final class WmlElementUtils {
         runProperties.setShadow(shadow);
     }
 
-    /**
-     * @Description: 设置底纹
+    /*
+     *  设置底纹
      */
     public static void addRPrShdStyle(RPr runProperties, STShd shdtype) {
         if (shdtype != null) {
@@ -1687,8 +1687,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置突出显示文本
+    /*
+     *  设置突出显示文本
      */
     public static void addRPrHightLightStyle(RPr runProperties, String hightlight) {
         if (StringUtils.isNotBlank(hightlight)) {
@@ -1698,8 +1698,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置删除线样式
+    /*
+     *  设置删除线样式
      */
     public static void addRPrStrikeStyle(RPr runProperties, boolean isStrike, boolean isDStrike) {
         // 删除线
@@ -1716,8 +1716,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 加粗
+    /*
+     *  加粗
      */
     public static void addRPrBoldStyle(RPr runProperties) {
         BooleanDefaultTrue b = new BooleanDefaultTrue();
@@ -1725,8 +1725,8 @@ public final class WmlElementUtils {
         runProperties.setB(b);
     }
 
-    /**
-     * @Description: 倾斜
+    /*
+     *  倾斜
      */
     public static void addRPrItalicStyle(RPr runProperties) {
         BooleanDefaultTrue b = new BooleanDefaultTrue();
@@ -1734,8 +1734,8 @@ public final class WmlElementUtils {
         runProperties.setI(b);
     }
 
-    /**
-     * @Description: 添加下划线
+    /*
+     *  添加下划线
      */
     public static void addRPrUnderlineStyle(RPr runProperties, UnderlineEnumeration enumType) {
         U val = new U();
@@ -1744,8 +1744,8 @@ public final class WmlElementUtils {
     }
 
     /*------------------------------------Word 相关--------------------------------------------------- */
-    /**
-     * @Description: 设置分节符 nextPage:下一页 continuous:连续 evenPage:偶数页 oddPage:奇数页
+    /*
+     *  设置分节符 nextPage:下一页 continuous:连续 evenPage:偶数页 oddPage:奇数页
      */
     public static void setDocSectionBreak(WordprocessingMLPackage wordPackage, String sectValType) {
         if (StringUtils.isNotBlank(sectValType)) {
@@ -1759,8 +1759,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置页面背景色
+    /*
+     *  设置页面背景色
      */
     public static void setDocumentBackGround(WordprocessingMLPackage wordPackage, ObjectFactory factory, String color)
             throws Exception {
@@ -1775,8 +1775,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置页面边框
+    /*
+     *  设置页面边框
      */
     public static void setDocumentBorders(WordprocessingMLPackage wordPackage, ObjectFactory factory, CTBorder top,
             CTBorder right, CTBorder bottom, CTBorder left) {
@@ -1800,8 +1800,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置页面大小及纸张方向 landscape横向
+    /*
+     *  设置页面大小及纸张方向 landscape横向
      */
     public static void setDocumentSize(WordprocessingMLPackage wordPackage, ObjectFactory factory, String width, String height,
             STPageOrientation stValue) {
@@ -1827,8 +1827,8 @@ public final class WmlElementUtils {
         return sectPr;
     }
 
-    /**
-     * @Description：设置页边距
+    /*
+     * 设置页边距
      */
     public static void setDocMarginSpace(WordprocessingMLPackage wordPackage, ObjectFactory factory, String top, String left,
             String bottom, String right) {
@@ -1852,8 +1852,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description: 设置行号
+    /*
+     *  设置行号
      * @param distance
      *            :距正文距离 1厘米=567
      * @param start
@@ -1887,8 +1887,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description：设置文字方向 tbRl 垂直
+    /*
+     * 设置文字方向 tbRl 垂直
      */
     public static void setDocTextDirection(WordprocessingMLPackage wordPackage, String textDirection) {
         if (StringUtils.isNotBlank(textDirection)) {
@@ -1902,8 +1902,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description：设置word 垂直对齐方式(Word默认方式都是"顶端对齐")
+    /*
+     * 设置word 垂直对齐方式(Word默认方式都是"顶端对齐")
      */
     public static void setDocVAlign(WordprocessingMLPackage wordPackage, STVerticalJc valignType) {
         if (valignType != null) {
@@ -1917,8 +1917,8 @@ public final class WmlElementUtils {
         }
     }
 
-    /**
-     * @Description：获取文档的可用宽度
+    /*
+     * 获取文档的可用宽度
      */
     public static int getWritableWidth(WordprocessingMLPackage wordPackage) throws Exception {
         return wordPackage.getDocumentModel().getSections().get(0).getPageDimensions().getWritableWidthTwips();

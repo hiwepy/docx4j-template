@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.hiwepy</groupId>
 	<artifactId>docx4j-template</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.1.RELEASE</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Building doc documents based on xhtml templates using docx4j</description>
 	<url>https://github.com/hiwepy/${project.artifactId}</url>

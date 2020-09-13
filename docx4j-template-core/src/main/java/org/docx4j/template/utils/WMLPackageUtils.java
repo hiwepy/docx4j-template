@@ -36,7 +36,7 @@ import org.docx4j.wml.PPr;
 import org.docx4j.wml.ParaRPr;
 import org.docx4j.wml.Text;
 
-/**
+/*
  * TODO
  * @author <a href="https://github.com/hiwepy">hiwepy</a>
  */
@@ -129,7 +129,7 @@ public class WMLPackageUtils {
       
     }  
 
-	/**
+	/*
 	 * 在标签处插入内容
 	 * 
 	 * @param bm
@@ -205,7 +205,7 @@ public class WMLPackageUtils {
 		}
 	}
     
-	/** 
+	/* 
      * 将图片从文件对象转换成字节数组. 
      * @param file  将要转换的文件 
      * @return      包含图片字节数据的字节数组 
