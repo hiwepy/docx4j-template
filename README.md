@@ -7,3 +7,4 @@ https://www.docx4java.org/trac/docx4j
 http://53873039oycg.iteye.com/category/334859
 http://53873039oycg.iteye.com/category/302596
 
+1.0.1.RELEASE
