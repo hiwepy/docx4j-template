@@ -1013,7 +1013,6 @@
             </activation>
             <properties>
                 <lombok.version>1.18.46</lombok.version>
-                <additionalparam>-Xdoclint:none -Xlint:unchecked</additionalparam>
             </properties>
         </profile>
 
