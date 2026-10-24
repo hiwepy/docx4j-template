@@ -93,7 +93,7 @@
         <jsoup.version>1.23.1</jsoup.version>
         <!-- fastjson：v1 兼容构建（内核 fastjson2），锁定 rythm-engine 传递依赖 -->
         <fastjson.version>2.0.57</fastjson.version>
-        <ognl.version>3.4.2</ognl.version>
+        <ognl.version>3.4.13</ognl.version>
         <tomcat-jasper.version>10.1.54</tomcat-jasper.version>
 
         <!-- ═══ 第六段: 测试框架版本 ═══ -->
